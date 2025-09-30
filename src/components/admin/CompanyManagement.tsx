@@ -1,0 +1,341 @@
+import { useState } from "react";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "@/components/ui/alert-dialog";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { Building2, Plus, Trash2, Edit, Mail, Phone, MapPin } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
+
+interface Company {
+  id: string;
+  name: string;
+  email: string;
+  phone: string;
+  address: string;
+  status: 'active' | 'pending' | 'suspended';
+  users: number;
+  orders: number;
+  createdAt: string;
+}
+
+export function CompanyManagement() {
+  const { toast } = useToast();
+  const [companies, setCompanies] = useState<Company[]>([
+    {
+      id: '1',
+      name: 'PureWater Solutions',
+      email: 'contact@purewater.com',
+      phone: '+1 (555) 123-4567',
+      address: '123 Water Street, City, State 12345',
+      status: 'active',
+      users: 45,
+      orders: 234,
+      createdAt: '2024-01-15'
+    },
+    {
+      id: '2',
+      name: 'AquaFresh Delivery',
+      email: 'info@aquafresh.com',
+      phone: '+1 (555) 987-6543',
+      address: '456 Fresh Ave, City, State 67890',
+      status: 'pending',
+      users: 12,
+      orders: 0,
+      createdAt: '2024-03-20'
+    },
+    {
+      id: '3',
+      name: 'Crystal Clear Water',
+      email: 'hello@crystalclear.com',
+      phone: '+1 (555) 456-7890',
+      address: '789 Crystal Blvd, City, State 13579',
+      status: 'active',
+      users: 78,
+      orders: 456,
+      createdAt: '2023-11-10'
+    },
+    {
+      id: '4',
+      name: 'Blue Drop Services',
+      email: 'support@bluedrop.com',
+      phone: '+1 (555) 321-0987',
+      address: '321 Blue Lane, City, State 24680',
+      status: 'suspended',
+      users: 23,
+      orders: 89,
+      createdAt: '2024-02-05'
+    }
+  ]);
+
+  const [isAddDialogOpen, setIsAddDialogOpen] = useState(false);
+  const [newCompany, setNewCompany] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    address: ''
+  });
+
+  const handleAddCompany = () => {
+    if (!newCompany.name || !newCompany.email || !newCompany.phone || !newCompany.address) {
+      toast({
+        title: "Error",
+        description: "Please fill in all fields",
+        variant: "destructive"
+      });
+      return;
+    }
+
+    const company: Company = {
+      id: Date.now().toString(),
+      ...newCompany,
+      status: 'pending',
+      users: 0,
+      orders: 0,
+      createdAt: new Date().toISOString().split('T')[0]
+    };
+
+    setCompanies([...companies, company]);
+    setNewCompany({ name: '', email: '', phone: '', address: '' });
+    setIsAddDialogOpen(false);
+    
+    toast({
+      title: "Success",
+      description: "Company added successfully"
+    });
+  };
+
+  const handleRemoveCompany = (id: string) => {
+    setCompanies(companies.filter(company => company.id !== id));
+    toast({
+      title: "Success",
+      description: "Company removed successfully"
+    });
+  };
+
+  const getStatusBadge = (status: string) => {
+    switch (status) {
+      case 'active':
+        return <Badge variant="default">Active</Badge>;
+      case 'pending':
+        return <Badge variant="secondary">Pending</Badge>;
+      case 'suspended':
+        return <Badge variant="destructive">Suspended</Badge>;
+      default:
+        return <Badge variant="outline">{status}</Badge>;
+    }
+  };
+
+  return (
+    <div className="space-y-6">
+      <div className="flex items-center justify-between">
+        <div>
+          <h2 className="text-3xl font-bold tracking-tight">Company Management</h2>
+          <p className="text-muted-foreground">
+            Manage water delivery companies on your platform
+          </p>
+        </div>
+        
+        <Dialog open={isAddDialogOpen} onOpenChange={setIsAddDialogOpen}>
+          <DialogTrigger asChild>
+            <Button className="gap-2">
+              <Plus className="h-4 w-4" />
+              Add Company
+            </Button>
+          </DialogTrigger>
+          <DialogContent className="sm:max-w-[425px]">
+            <DialogHeader>
+              <DialogTitle>Add New Company</DialogTitle>
+              <DialogDescription>
+                Enter the details for the new water delivery company.
+              </DialogDescription>
+            </DialogHeader>
+            <div className="grid gap-4 py-4">
+              <div className="grid gap-2">
+                <Label htmlFor="name">Company Name</Label>
+                <Input
+                  id="name"
+                  value={newCompany.name}
+                  onChange={(e) => setNewCompany({ ...newCompany, name: e.target.value })}
+                  placeholder="Enter company name"
+                />
+              </div>
+              <div className="grid gap-2">
+                <Label htmlFor="email">Email</Label>
+                <Input
+                  id="email"
+                  type="email"
+                  value={newCompany.email}
+                  onChange={(e) => setNewCompany({ ...newCompany, email: e.target.value })}
+                  placeholder="Enter contact email"
+                />
+              </div>
+              <div className="grid gap-2">
+                <Label htmlFor="phone">Phone</Label>
+                <Input
+                  id="phone"
+                  value={newCompany.phone}
+                  onChange={(e) => setNewCompany({ ...newCompany, phone: e.target.value })}
+                  placeholder="Enter phone number"
+                />
+              </div>
+              <div className="grid gap-2">
+                <Label htmlFor="address">Address</Label>
+                <Textarea
+                  id="address"
+                  value={newCompany.address}
+                  onChange={(e) => setNewCompany({ ...newCompany, address: e.target.value })}
+                  placeholder="Enter company address"
+                />
+              </div>
+            </div>
+            <DialogFooter>
+              <Button variant="outline" onClick={() => setIsAddDialogOpen(false)}>
+                Cancel
+              </Button>
+              <Button onClick={handleAddCompany}>Add Company</Button>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
+      </div>
+
+      {/* Stats Cards */}
+      <div className="grid gap-4 md:grid-cols-4">
+        <Card>
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium">Total Companies</CardTitle>
+            <Building2 className="h-4 w-4 text-muted-foreground" />
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold">{companies.length}</div>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium">Active</CardTitle>
+            <div className="h-2 w-2 bg-green-500 rounded-full" />
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold">
+              {companies.filter(c => c.status === 'active').length}
+            </div>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium">Pending</CardTitle>
+            <div className="h-2 w-2 bg-yellow-500 rounded-full" />
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold">
+              {companies.filter(c => c.status === 'pending').length}
+            </div>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium">Suspended</CardTitle>
+            <div className="h-2 w-2 bg-red-500 rounded-full" />
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold">
+              {companies.filter(c => c.status === 'suspended').length}
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+
+      {/* Companies Table */}
+      <Card>
+        <CardHeader>
+          <CardTitle>Companies</CardTitle>
+          <CardDescription>
+            A list of all water delivery companies registered on the platform.
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead>Company</TableHead>
+                <TableHead>Contact</TableHead>
+                <TableHead>Status</TableHead>
+                <TableHead>Users</TableHead>
+                <TableHead>Orders</TableHead>
+                <TableHead>Created</TableHead>
+                <TableHead className="text-right">Actions</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {companies.map((company) => (
+                <TableRow key={company.id}>
+                  <TableCell>
+                    <div className="space-y-1">
+                      <div className="font-medium">{company.name}</div>
+                      <div className="flex items-center gap-1 text-sm text-muted-foreground">
+                        <MapPin className="h-3 w-3" />
+                        {company.address}
+                      </div>
+                    </div>
+                  </TableCell>
+                  <TableCell>
+                    <div className="space-y-1">
+                      <div className="flex items-center gap-1 text-sm">
+                        <Mail className="h-3 w-3" />
+                        {company.email}
+                      </div>
+                      <div className="flex items-center gap-1 text-sm text-muted-foreground">
+                        <Phone className="h-3 w-3" />
+                        {company.phone}
+                      </div>
+                    </div>
+                  </TableCell>
+                  <TableCell>{getStatusBadge(company.status)}</TableCell>
+                  <TableCell>{company.users}</TableCell>
+                  <TableCell>{company.orders}</TableCell>
+                  <TableCell>{company.createdAt}</TableCell>
+                  <TableCell className="text-right">
+                    <div className="flex items-center justify-end gap-2">
+                      <Button variant="outline" size="sm">
+                        <Edit className="h-4 w-4" />
+                      </Button>
+                      <AlertDialog>
+                        <AlertDialogTrigger asChild>
+                          <Button variant="outline" size="sm">
+                            <Trash2 className="h-4 w-4" />
+                          </Button>
+                        </AlertDialogTrigger>
+                        <AlertDialogContent>
+                          <AlertDialogHeader>
+                            <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+                            <AlertDialogDescription>
+                              This action cannot be undone. This will permanently delete the
+                              company "{company.name}" and remove all associated data.
+                            </AlertDialogDescription>
+                          </AlertDialogHeader>
+                          <AlertDialogFooter>
+                            <AlertDialogCancel>Cancel</AlertDialogCancel>
+                            <AlertDialogAction
+                              onClick={() => handleRemoveCompany(company.id)}
+                              className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
+                            >
+                              Delete
+                            </AlertDialogAction>
+                          </AlertDialogFooter>
+                        </AlertDialogContent>
+                      </AlertDialog>
+                    </div>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </CardContent>
+      </Card>
+    </div>
+  );
+}

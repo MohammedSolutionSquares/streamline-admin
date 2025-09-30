@@ -30,7 +30,7 @@ import {
 } from "@/components/ui/sidebar";
 
 const adminMenuItems = [
-  { title: "Dashboard", url: "/", icon: Home },
+  { title: "Dashboard", url: "/admin", icon: Home },
   { title: "Companies", url: "/companies", icon: Building2 },
   { title: "All Users", url: "/users", icon: Users },
   { title: "Analytics", url: "/analytics", icon: BarChart3 },

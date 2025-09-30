@@ -1,9 +1,9 @@
-import { RoleProvider, useRole } from "@/contexts/RoleContext";
 import { AdminLayout } from "@/components/admin/AdminLayout";
 import { AdminDashboard } from "@/components/admin/dashboards/AdminDashboard";
 import { CompanyAdminDashboard } from "@/components/admin/dashboards/CompanyAdminDashboard";
 import { ManagerDashboard } from "@/components/admin/dashboards/ManagerDashboard";
 import { StaffDashboard } from "@/components/admin/dashboards/StaffDashboard";
+import { RoleProvider, useRole } from "@/contexts/RoleContext";
 
 function DashboardContent() {
   const { user } = useRole();

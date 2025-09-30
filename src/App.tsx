@@ -14,6 +14,10 @@ import Products from "./pages/Products";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
+import { CompanyManagement } from "./pages/CompanyManagement";
+import AdminDashboardHome from "./pages/AdminDashboardHome";
+import { Sidebar } from "./components/ui/sidebar";
+import { AdminLayout } from "./components/admin/AdminLayout";
 
 const queryClient = new QueryClient();
 
@@ -24,9 +28,11 @@ const App = () => (
         <Toaster />
         <Sonner />
         <BrowserRouter>
+        <AdminLayout >
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/admin" element={<Index />} />
+            <Route path="/admin" element={<AdminDashboardHome />} />
+            <Route path="/companies" element={<CompanyManagement /> } />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/dashboard" element={<Dashboard />} />
@@ -37,6 +43,7 @@ const App = () => (
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
+          </AdminLayout>
         </BrowserRouter>
       </TooltipProvider>
     </RoleProvider>

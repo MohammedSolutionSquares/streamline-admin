@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -25,6 +25,7 @@ interface Company {
 
 export function CompanyManagement() {
   const { toast } = useToast();
+  
   const [companies, setCompanies] = useState<Company[]>([
     {
       id: '1',
@@ -72,12 +73,39 @@ export function CompanyManagement() {
     }
   ]);
 
+  // Persist companies to localStorage so changes survive refresh
+  useEffect(() => {
+    const stored = localStorage.getItem("companies");
+    if (stored) {
+      try {
+        const parsed: Company[] = JSON.parse(stored);
+        if (Array.isArray(parsed) && parsed.length) {
+          setCompanies(parsed);
+        }
+      } catch {}
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("companies", JSON.stringify(companies));
+  }, [companies]);
+
   const [isAddDialogOpen, setIsAddDialogOpen] = useState(false);
+  const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
   const [newCompany, setNewCompany] = useState({
     name: '',
     email: '',
     phone: '',
     address: ''
+  });
+  const [editingCompany, setEditingCompany] = useState<Company | null>(null);
+  const [editCompanyData, setEditCompanyData] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    address: '',
+    status: 'active' as Company['status']
   });
 
   const handleAddCompany = () => {
@@ -115,6 +143,43 @@ export function CompanyManagement() {
       title: "Success",
       description: "Company removed successfully"
     });
+  };
+
+  const openEditDialog = (company: Company) => {
+    setEditingCompany(company);
+    setEditCompanyData({
+      name: company.name,
+      email: company.email,
+      phone: company.phone,
+      address: company.address,
+      status: company.status
+    });
+    setIsEditDialogOpen(true);
+  };
+
+  const handleSaveEdit = () => {
+    if (!editingCompany) return;
+    if (!editCompanyData.name || !editCompanyData.email || !editCompanyData.phone || !editCompanyData.address) {
+      toast({
+        title: "Error",
+        description: "Please fill in all fields",
+        variant: "destructive"
+      });
+      return;
+    }
+
+    setCompanies(prev => prev.map(c => c.id === editingCompany.id ? {
+      ...c,
+      name: editCompanyData.name,
+      email: editCompanyData.email,
+      phone: editCompanyData.phone,
+      address: editCompanyData.address,
+      status: editCompanyData.status
+    } : c));
+
+    setIsEditDialogOpen(false);
+    setEditingCompany(null);
+    toast({ title: "Success", description: "Company updated successfully" });
   };
 
   const getStatusBadge = (status: string) => {
@@ -198,6 +263,74 @@ export function CompanyManagement() {
                 Cancel
               </Button>
               <Button onClick={handleAddCompany}>Add Company</Button>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
+
+        {/* Edit Company Dialog */}
+        <Dialog open={isEditDialogOpen} onOpenChange={setIsEditDialogOpen}>
+          <DialogContent className="sm:max-w-[425px]">
+            <DialogHeader>
+              <DialogTitle>Edit Company</DialogTitle>
+              <DialogDescription>Update the company details.</DialogDescription>
+            </DialogHeader>
+            <div className="grid gap-4 py-4">
+              <div className="grid gap-2">
+                <Label htmlFor="edit-name">Company Name</Label>
+                <Input
+                  id="edit-name"
+                  value={editCompanyData.name}
+                  onChange={(e) => setEditCompanyData({ ...editCompanyData, name: e.target.value })}
+                  placeholder="Enter company name"
+                />
+              </div>
+              <div className="grid gap-2">
+                <Label htmlFor="edit-email">Email</Label>
+                <Input
+                  id="edit-email"
+                  type="email"
+                  value={editCompanyData.email}
+                  onChange={(e) => setEditCompanyData({ ...editCompanyData, email: e.target.value })}
+                  placeholder="Enter contact email"
+                />
+              </div>
+              <div className="grid gap-2">
+                <Label htmlFor="edit-phone">Phone</Label>
+                <Input
+                  id="edit-phone"
+                  value={editCompanyData.phone}
+                  onChange={(e) => setEditCompanyData({ ...editCompanyData, phone: e.target.value })}
+                  placeholder="Enter phone number"
+                />
+              </div>
+              <div className="grid gap-2">
+                <Label htmlFor="edit-address">Address</Label>
+                <Textarea
+                  id="edit-address"
+                  value={editCompanyData.address}
+                  onChange={(e) => setEditCompanyData({ ...editCompanyData, address: e.target.value })}
+                  placeholder="Enter company address"
+                />
+              </div>
+              <div className="grid gap-2">
+                <Label htmlFor="edit-status">Status</Label>
+                <select
+                  id="edit-status"
+                  className="bg-background border rounded-md px-2 py-2"
+                  value={editCompanyData.status}
+                  onChange={(e) => setEditCompanyData({ ...editCompanyData, status: e.target.value as Company['status'] })}
+                >
+                  <option value="active">Active</option>
+                  <option value="pending">Pending</option>
+                  <option value="suspended">Suspended</option>
+                </select>
+              </div>
+            </div>
+            <DialogFooter>
+              <Button variant="outline" onClick={() => setIsEditDialogOpen(false)}>
+                Cancel
+              </Button>
+              <Button onClick={handleSaveEdit}>Save Changes</Button>
             </DialogFooter>
           </DialogContent>
         </Dialog>
@@ -300,7 +433,7 @@ export function CompanyManagement() {
                   <TableCell>{company.createdAt}</TableCell>
                   <TableCell className="text-right">
                     <div className="flex items-center justify-end gap-2">
-                      <Button variant="outline" size="sm">
+                      <Button variant="outline" size="sm" onClick={() => openEditDialog(company)}>
                         <Edit className="h-4 w-4" />
                       </Button>
                       <AlertDialog>

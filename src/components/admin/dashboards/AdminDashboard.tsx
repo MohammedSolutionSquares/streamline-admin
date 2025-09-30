@@ -3,7 +3,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Building2, Users, Package, TrendingUp, AlertTriangle, CheckCircle } from "lucide-react";
-import { CompanyManagement } from "../CompanyManagement";
+import { CompanyManagement } from "../../../pages/CompanyManagement";
 
 export function AdminDashboard() {
   const [activeTab, setActiveTab] = useState("overview");
@@ -61,10 +61,6 @@ export function AdminDashboard() {
       </div>
 
       <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
-        <TabsList className="grid w-full grid-cols-2">
-          <TabsTrigger value="overview">Overview</TabsTrigger>
-          <TabsTrigger value="companies">Companies</TabsTrigger>
-        </TabsList>
 
         <TabsContent value="overview" className="space-y-6">
           {/* Stats Grid */}
@@ -150,9 +146,6 @@ export function AdminDashboard() {
           </div>
         </TabsContent>
 
-        <TabsContent value="companies">
-          <CompanyManagement />
-        </TabsContent>
       </Tabs>
     </div>
   );

@@ -8,13 +8,13 @@ export default function Home() {
   const features = [
     {
       icon: Droplets,
-      title: "Pure & Fresh Water",
-      description: "Premium quality water delivered fresh to your doorstep"
+      title: "Fast Implementation",
+      description: "Help to grow your business more faster than old traditional method"
     },
     {
       icon: Truck,
-      title: "Fast Delivery",
-      description: "Same-day delivery available across the city"
+      title: "Easy to Manage",
+      description: "Easy to manage for supplier"
     },
     {
       icon: Clock,

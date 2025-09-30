@@ -357,7 +357,7 @@ export default function Contact() {
                 ))}
               </div>
               <div className="mt-6 pt-6 border-t text-center">
-                <p className="text-sm text-white/50 mb-4">
+                <p className="text-sm text-white mb-4">
                   Can't find what you're looking for?
                 </p>
                 <Button variant="outline" className="bg-white text-black">View All FAQs</Button>

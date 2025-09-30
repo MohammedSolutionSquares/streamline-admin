@@ -106,24 +106,24 @@ export default function Contact() {
   ];
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-white">
       {/* Navigation */}
-      <nav className="border-b bg-card/50 backdrop-blur-sm sticky top-0 z-50">
+      <nav className="border-b bg-white backdrop-blur-sm sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <Link to="/" className="flex items-center gap-2">
-              <ArrowLeft className="h-5 w-5" />
-              <span className="font-medium">Back to Home</span>
+              <ArrowLeft className="h-5 w-5 text-black" />
+              <span className="font-medium text-black">Back to Home</span>
             </Link>
             <div className="flex items-center gap-4">
-              <Link to="/about" className="text-foreground hover:text-primary transition-colors">
+              <Link to="/about" className="text-black hover:text-primary transition-colors">
                 About
               </Link>
-              <Link to="/products" className="text-foreground hover:text-primary transition-colors">
+              {/* <Link to="/products" className="text-black hover:text-primary transition-colors">
                 Products
-              </Link>
+              </Link> */}
               <Link to="/login">
-                <Button variant="ghost">Login</Button>
+                <Button variant="ghost" className="bg-blue-500">Login</Button>
               </Link>
               <Link to="/register">
                 <Button>Get Started</Button>
@@ -136,7 +136,7 @@ export default function Contact() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {/* Header */}
         <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold mb-4">Contact Us</h1>
+          <h1 className="text-4xl font-bold mb-4 text-blue-500">Contact Us</h1>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
             Have questions about our services? Need help with your delivery? 
             We're here to help and would love to hear from you.
@@ -146,13 +146,13 @@ export default function Contact() {
         <div className="grid lg:grid-cols-3 gap-12">
           {/* Contact Form */}
           <div className="lg:col-span-2">
-            <Card>
+            <Card className="bg-blue-500">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <Send className="h-5 w-5" />
                   Send us a Message
                 </CardTitle>
-                <CardDescription>
+                <CardDescription className="text-white/50">
                   Fill out the form below and we'll get back to you as soon as possible
                 </CardDescription>
               </CardHeader>
@@ -163,6 +163,7 @@ export default function Contact() {
                       <Label htmlFor="name">Full Name *</Label>
                       <Input
                         id="name"
+                        className="bg-white text-black"
                         placeholder="Your full name"
                         value={formData.name}
                         onChange={(e) => handleChange("name", e.target.value)}
@@ -173,6 +174,7 @@ export default function Contact() {
                       <Label htmlFor="email">Email Address *</Label>
                       <Input
                         id="email"
+                        className="bg-white text-black"
                         type="email"
                         placeholder="your@email.com"
                         value={formData.email}
@@ -187,6 +189,7 @@ export default function Contact() {
                       <Label htmlFor="phone">Phone Number</Label>
                       <Input
                         id="phone"
+                        className="bg-white text-black"
                         type="tel"
                         placeholder="+1 (555) 123-4567"
                         value={formData.phone}
@@ -215,6 +218,7 @@ export default function Contact() {
                     <Label htmlFor="subject">Subject *</Label>
                     <Input
                       id="subject"
+                      className="bg-white text-black"
                       placeholder="Brief description of your inquiry"
                       value={formData.subject}
                       onChange={(e) => handleChange("subject", e.target.value)}
@@ -226,6 +230,7 @@ export default function Contact() {
                     <Label htmlFor="message">Message *</Label>
                     <Textarea
                       id="message"
+                      className="bg-white text-black"
                       placeholder="Please provide details about your inquiry..."
                       rows={6}
                       value={formData.message}   
@@ -236,7 +241,7 @@ export default function Contact() {
 
                   <Button
                     type="submit"
-                    className="w-full"
+                    className="w-full bg-white text-black"
                     disabled={isSubmitting}
                   >
                     {isSubmitting ? "Sending..." : "Send Message"}
@@ -249,10 +254,10 @@ export default function Contact() {
           {/* Contact Information */}
           <div className="space-y-6">
             {/* Contact Methods */}
-            <Card>
+            <Card className="bg-blue-500">
               <CardHeader>
                 <CardTitle>Get in Touch</CardTitle>
-                <CardDescription>Choose the best way to reach us</CardDescription>
+                <CardDescription className="text-white">Choose the best way to reach us</CardDescription>
               </CardHeader>
               <CardContent className="space-y-6">
                 {contactMethods.map((method, index) => (
@@ -262,9 +267,9 @@ export default function Contact() {
                     </div>
                     <div className="flex-1">
                       <h3 className="font-medium mb-1">{method.title}</h3>
-                      <p className="text-sm text-muted-foreground mb-1">{method.description}</p>
-                      <p className="text-sm font-medium">{method.contact}</p>
-                      <p className="text-xs text-muted-foreground">{method.availability}</p>
+                      <p className="text-sm text-white/50 mb-1">{method.description}</p>
+                      <p className="text-sm font-medium text-white">{method.contact}</p>
+                      <p className="text-xs text-muted-foreground text-black">{method.availability}</p>
                     </div>
                   </div>
                 ))}
@@ -272,7 +277,7 @@ export default function Contact() {
             </Card>
 
             {/* Business Hours */}
-            <Card>
+            <Card className="bg-blue-500">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <Clock className="h-5 w-5" />
@@ -304,7 +309,7 @@ export default function Contact() {
             </Card>
 
             {/* Location */}
-            <Card>
+            <Card className="bg-blue-500">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <MapPin className="h-5 w-5" />
@@ -315,14 +320,14 @@ export default function Contact() {
                 <div className="space-y-3">
                   <div>
                     <p className="font-medium">AquaFlow Headquarters</p>
-                    <p className="text-sm text-muted-foreground">
+                    <p className="text-sm text-white/50">
                       123 Water Street<br />
                       Suite 200<br />
                       AquaCity, State 12345<br />
                       United States
                     </p>
                   </div>
-                  <Button variant="outline" size="sm" className="w-full">
+                  <Button variant="outline" size="sm" className="w-full bg-white text-black">
                     <MapPin className="h-4 w-4 mr-2" />
                     Get Directions
                   </Button>
@@ -334,28 +339,28 @@ export default function Contact() {
 
         {/* FAQ Section */}
         <div className="mt-16">
-          <Card>
+          <Card className="bg-blue-500">
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <FileQuestion className="h-5 w-5" />
                 Frequently Asked Questions
               </CardTitle>
-              <CardDescription>Quick answers to common questions</CardDescription>
+              <CardDescription className="text-white">Quick answers to common questions</CardDescription>
             </CardHeader>
             <CardContent>
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {faqs.map((faq, index) => (
                   <div key={index} className="space-y-2">
                     <h3 className="font-medium">{faq.question}</h3>
-                    <p className="text-sm text-muted-foreground">{faq.answer}</p>
+                    <p className="text-sm text-white/50">{faq.answer}</p>
                   </div>
                 ))}
               </div>
               <div className="mt-6 pt-6 border-t text-center">
-                <p className="text-sm text-muted-foreground mb-4">
+                <p className="text-sm text-white/50 mb-4">
                   Can't find what you're looking for?
                 </p>
-                <Button variant="outline">View All FAQs</Button>
+                <Button variant="outline" className="bg-white text-black">View All FAQs</Button>
               </div>
             </CardContent>
           </Card>

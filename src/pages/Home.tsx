@@ -101,7 +101,7 @@ export default function Home() {
                 Join Us
               </Button>
             </Link>
-            <Link to="/products">
+            <Link to=''>
               <Button
                 size="lg"
                 className="text-lg px-8 border-white/50 bg-transparent bg-white text-[#1B3C53]">

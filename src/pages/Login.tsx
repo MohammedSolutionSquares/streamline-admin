@@ -32,12 +32,10 @@ export default function Login() {
       });
       
       // Check if it's admin login
-      if (formData.email.includes("admin")) {
-        navigate("/admin");
-      } else {
-        navigate("/dashboard");
-      }
-    }, 1500);
+    if(formData){
+      navigate("/dashboard");
+    }
+    },1500);
   };
 
   const handleChange = (field: string, value: string | boolean) => {

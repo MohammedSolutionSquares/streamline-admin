@@ -18,6 +18,8 @@ import { CompanyManagement } from "./pages/CompanyManagement";
 import AdminDashboardHome from "./pages/AdminDashboardHome";
 import { Sidebar } from "./components/ui/sidebar";
 import { AdminLayout } from "./components/admin/AdminLayout";
+import CommonListDemo from "./pages/CommonListDemo";
+import RequireRole from "./components/RequireRole";
 
 
 
@@ -41,7 +43,15 @@ const App = () => (
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/dashboard" element={<AdminDashboardHome />} />
-            <Route path="/companies" element={<CompanyManagement /> } />
+            <Route
+              path="/companies"
+              element={
+                <RequireRole allowed={["admin"]}>
+                  <CompanyManagement />
+                </RequireRole>
+              }
+            />
+            <Route path="/list-demo" element={<CommonListDemo />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/dashboard" element={<Dashboard />} />

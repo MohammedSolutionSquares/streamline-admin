@@ -7,6 +7,7 @@ import { Badge } from "@/components/ui/badge";
 import { Bell, User } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+import { useNavigate } from "react-router-dom";
 
 interface AdminLayoutProps {
   children: ReactNode;
@@ -14,6 +15,7 @@ interface AdminLayoutProps {
 
 export function AdminLayout({ children }: AdminLayoutProps) {
   const { user, switchRole } = useRole();
+  const navigate = useNavigate();
 
   const handleProfile = (): void => {
     // Implement navigation to profile when routing is available
@@ -25,7 +27,8 @@ export function AdminLayout({ children }: AdminLayoutProps) {
   };
 
   const handleLogout = (): void => {
-    console.log("Logout clicked");
+    // console.log("Logout clicked");
+    navigate("/login");
   };
 
   const getRoleBadgeVariant = (role: string) => {

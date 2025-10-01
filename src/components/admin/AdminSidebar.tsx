@@ -169,7 +169,7 @@ export function AdminSidebar() {
         </SidebarGroup>
 
         {/* Role Switcher - Only show for admin */}
-        {!collapsed && user?.role === 'admin' && (
+        {/* {!collapsed && user?.role === 'admin' && (
           <div className="mt-auto pt-4 border-t">
             <SidebarGroup>
               <SidebarGroupLabel className="text-white">Quick Role Switch</SidebarGroupLabel>
@@ -189,7 +189,7 @@ export function AdminSidebar() {
               </div>
             </SidebarGroup>
           </div>
-        )}
+        )} */}
       </SidebarContent>
     </Sidebar>
   );

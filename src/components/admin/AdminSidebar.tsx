@@ -128,7 +128,7 @@ export function AdminSidebar() {
             </div>
             {!collapsed && (
               <div>
-                <h2 className="text-white font-bold ">AquaFlow</h2>
+                <h2 className="text-white font-bold ">WaterSquares</h2>
                 <p className="text-xs text-muted-foreground text-white/50">{getRoleTitle()}</p>
               </div>
             )}

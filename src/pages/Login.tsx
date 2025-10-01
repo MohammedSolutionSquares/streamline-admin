@@ -28,7 +28,7 @@ export default function Login() {
       setIsLoading(false);
       toast({
         title: "Login Successful",
-        description: "Welcome back to AquaFlow!",
+        description: "Welcome back to WaterSquares!",
       });
 
       // Check if it's admin login
@@ -53,7 +53,7 @@ export default function Login() {
           </div>
           <CardTitle className="text-2xl text-white">Welcome Back</CardTitle>
           <CardDescription className="text-white">
-            Sign in to your AquaFlow account to manage your water deliveries
+            Sign in to your WaterSquares account to manage your water deliveries
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -143,7 +143,7 @@ export default function Login() {
               className="border border-white bg-transparent text-white"
                 size="sm"
                 onClick={() => setFormData({
-                  email: "admin@aquaflow.com",
+                  email: "admin@WaterSquares.com",
                   password: "admin123",
                   rememberMe: false
                 })}

@@ -71,7 +71,7 @@ export default function Contact() {
       icon: Mail,
       title: "Email Support",
       description: "Send us a detailed message",
-      contact: "support@aquaflow.com",
+      contact: "support@WaterSquares.com",
       availability: "Response within 24 hours"
     },
     {
@@ -319,7 +319,7 @@ export default function Contact() {
               <CardContent>
                 <div className="space-y-3">
                   <div>
-                    <p className="font-medium">AquaFlow Headquarters</p>
+                    <p className="font-medium">WaterSquares Headquarters</p>
                     <p className="text-sm text-white/50">
                       123 Water Street<br />
                       Suite 200<br />

@@ -36,10 +36,10 @@ export const RoleProvider: React.FC<RoleProviderProps> = ({ children }) => {
   const [user, setUser] = useState<User | null>({
     id: '1',
     name: 'John Doe',
-    email: 'john@aquaflow.com',
+    email: 'john@WaterSquares.com',
     role: 'admin',
     companyId: '1',
-    companyName: 'AquaFlow Systems'
+    companyName: 'WaterSquares Systems'
   });
 
   const switchRole = (role: UserRole) => {

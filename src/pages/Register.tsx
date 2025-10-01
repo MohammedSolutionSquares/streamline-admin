@@ -54,7 +54,7 @@ export default function Register() {
       setIsLoading(false);
       toast({
         title: "Registration Successful",
-        description: "Welcome to AquaFlow! Please check your email to verify your account.",
+        description: "Welcome to WaterSquares! Please check your email to verify your account.",
       });
       navigate("/login");
     }, 2000);
@@ -75,7 +75,7 @@ export default function Register() {
           </div>
           <CardTitle className="text-2xl">Create Account</CardTitle>
           <CardDescription className="text-white/70">
-            Join AquaFlow and start getting fresh water delivered to your door
+            Join WaterSquares and start getting fresh water delivered to your door
           </CardDescription>
         </CardHeader>
         <CardContent>

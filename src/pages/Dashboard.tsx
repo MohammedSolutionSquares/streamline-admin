@@ -83,7 +83,7 @@ export default function Dashboard() {
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center gap-2">
               <Droplets className="h-8 w-8 text-primary" />
-              <span className="text-xl font-bold">AquaFlow</span>
+              <span className="text-xl font-bold">WaterSquares</span>
             </div>
             <div className="flex items-center gap-4">
               <Button variant="ghost" size="sm" className="relative">

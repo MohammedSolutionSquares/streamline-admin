@@ -226,7 +226,7 @@ export default function About() {
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">Meet Our Team</h2>
             <p className="text-xl text-white/50 max-w-2xl mx-auto">
-              The dedicated professionals behind AquaFlow's success
+              The dedicated professionals behind WaterSquares's success
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -337,7 +337,7 @@ export default function About() {
                 </div>
                 <div className="flex items-center gap-2">
                   <Mail className="h-4 w-4" />
-                  <span>info@aquaflow.com</span>
+                  <span>info@WaterSquares.com</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <MapPin className="h-4 w-4" />

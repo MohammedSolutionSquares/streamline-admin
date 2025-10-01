@@ -48,7 +48,7 @@ export function AdminLayout({ children }: AdminLayoutProps) {
         
         <div className="flex-1 flex flex-col">
           {/* Top Header */}
-          <header className="h-14 md:h-16 bg-white border-b shadow-sm flex items-center gap-4 md:gap-6 px-4 md:px-6 sticky top-0 z-40">
+          <header className="h-14 md:h-16 bg-white border-b shadow-sm flex items-center justify-between gap-4 md:gap-6 px-4 md:px-6 sticky top-0 z-40">
             {/* Left cluster: menu + title */}
             <div className="flex items-center gap-3 md:gap-4 min-w-0">
               <SidebarTrigger className="text-zinc-600 hover:text-zinc-900" />
@@ -60,14 +60,7 @@ export function AdminLayout({ children }: AdminLayoutProps) {
                 {user?.role === 'staff' && 'Staff Portal'}
               </h1>
             </div>
-
-            {/* Center: search (md+) */}
-            <div className="hidden md:flex flex-1 max-w-xl">
-              <div className="w-full">
-                <Input placeholder="Search…" className="h-9 bg-white text-black border border-[#5854FF]" />
-              </div>
-            </div>
-
+            
             {/* Right cluster */}
             <div className="flex items-center gap-4 md:gap-6">
               {/* Role Switcher for Demo */}

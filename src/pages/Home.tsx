@@ -226,7 +226,7 @@ export default function Home() {
                 <span className="text-lg font-bold text-[#1B3C53]">WaterSquares</span>
               </div>
               <p className="text-muted-foreground mb-4">
-                Premium water delivery service bringing pure, fresh water to your doorstep.
+                Exprience Premium Services with us and upgrade your business
               </p>
             </div>
             <div>
@@ -260,7 +260,7 @@ export default function Home() {
             </div>
           </div>
           <div className="border-t mt-8 pt-8 text-center text-muted-foreground">
-            <p>&copy; 2024 WaterSquares. All rights reserved.</p>
+            <p>&copy; 2025 WaterSquares. All rights reserved.</p>
           </div>
         </div>
       </footer>

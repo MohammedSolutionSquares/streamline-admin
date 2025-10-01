@@ -28,7 +28,7 @@ export default function Login() {
       setIsLoading(false);
       toast({
         title: "Login Successful",
-        description: "Welcome back to AquaFlow!",
+        description: "Welcome back to WaterSquares!",
       });
 
       // Check if it's admin login
@@ -44,16 +44,16 @@ export default function Login() {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-subtle px-4 bg-white">
-      <Card className="w-full max-w-md border border-[#5854FF] bg-[#5854FF]">
+      <Card className="w-full max-w-md border border-[#1B3C53] bg-[#1B3C53]">
         <CardHeader className="text-center">
           <div className="flex justify-center mb-4">
-            <div className="w-12 h-12 bg-gradient-primary rounded-full flex items-center justify-center">
+            <div className="w-12 h-12 bg-[#1B3C53] rounded-full flex items-center justify-center">
               <Droplets className="h-6 w-6 text-white" />
             </div>
           </div>
           <CardTitle className="text-2xl text-white">Welcome Back</CardTitle>
           <CardDescription className="text-white">
-            Sign in to your AquaFlow account to manage your water deliveries
+            Sign in to your WaterSquares account to manage your water deliveries
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -120,7 +120,7 @@ export default function Login() {
 
             <Button
               type="submit"
-              className="w-full text-[#5854FF] bg-white"
+              className="w-full text-[#1B3C53] bg-white"
               disabled={isLoading}
             >
               {isLoading ? "Loading...." : "Sign In"}
@@ -143,7 +143,7 @@ export default function Login() {
               className="border border-white bg-transparent text-white"
                 size="sm"
                 onClick={() => setFormData({
-                  email: "admin@aquaflow.com",
+                  email: "admin@WaterSquares.com",
                   password: "admin123",
                   rememberMe: false
                 })}

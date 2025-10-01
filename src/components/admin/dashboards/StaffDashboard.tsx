@@ -59,17 +59,17 @@ export function StaffDashboard() {
     <div className="space-y-6">
       <div className="flex justify-between items-start">
         <div>
-          <h2 className="text-3xl font-bold tracking-tigh text-[#5854FF]">My Dashboard</h2>
+          <h2 className="text-3xl font-bold tracking-tigh text-[#1B3C53]">My Dashboard</h2>
           <p className="text-black/50">
             Track your deliveries and daily tasks
           </p>
         </div>
         <div className="flex gap-2">
-          <Button variant="outline" size="sm" className="bg-[#5854FF] text-white">
+          <Button variant="outline" size="sm" className="bg-[#1B3C53] text-white">
             <Navigation className="h-4 w-4 mr-2" />
             Navigate
           </Button>
-          <Button size="sm" className="bg-[#5854FF]">
+          <Button size="sm" className="bg-[#1B3C53]">
             <CheckCircle className="h-4 w-4 mr-2" />
             Mark Complete
           </Button>
@@ -79,7 +79,7 @@ export function StaffDashboard() {
       {/* Stats Grid */}
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
         {stats.map((stat) => (
-          <Card key={stat.title} className="shadow-card hover:shadow-elevated transition-shadow bg-[#5854FF]">
+          <Card key={stat.title} className="shadow-card hover:shadow-elevated transition-shadow bg-[#1B3C53]">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">
                 {stat.title}
@@ -98,7 +98,7 @@ export function StaffDashboard() {
 
       <div className="grid gap-6 md:grid-cols-2">
         {/* My Deliveries */}
-        <Card className="shadow-card border border-[#5854FF] bg-white">
+        <Card className="shadow-card border border-[#1B3C53] bg-white">
           <CardHeader>
             <CardTitle className="text-black">Today's Deliveries</CardTitle>
             <CardDescription className="text-black">
@@ -119,7 +119,7 @@ export function StaffDashboard() {
                   </div>
                   <div className="text-right">
                     <p className="text-sm font-medium text-black">{delivery.time}</p>
-                    <Button variant="ghost" size="sm" className="mt-1 bg-[#5854FF]">
+                    <Button variant="ghost" size="sm" className="mt-1 bg-[#1B3C53]">
                       <MapPin className="h-3 w-3 mr-1 text-white" />
                       Navigate
                     </Button>
@@ -131,7 +131,7 @@ export function StaffDashboard() {
         </Card>
 
         {/* Performance */}
-        <Card className="shadow-card border border-[#5854FF] bg-white">
+        <Card className="shadow-card border border-[#1B3C53] bg-white">
           <CardHeader>
             <CardTitle className="text-black">Performance</CardTitle>
             <CardDescription className="text-black">
@@ -175,7 +175,7 @@ export function StaffDashboard() {
       </div>
 
       {/* Quick Actions */}
-      <Card className="shadow-card bg-[#5854FF]">
+      <Card className="shadow-card bg-[#1B3C53]">
         <CardHeader>
           <CardTitle>Quick Actions</CardTitle>
           <CardDescription className="text-white/50">

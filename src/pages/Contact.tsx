@@ -71,7 +71,7 @@ export default function Contact() {
       icon: Mail,
       title: "Email Support",
       description: "Send us a detailed message",
-      contact: "support@aquaflow.com",
+      contact: "support@WaterSquares.com",
       availability: "Response within 24 hours"
     },
     {
@@ -112,21 +112,21 @@ export default function Contact() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <Link to="/" className="flex items-center gap-2">
-              <ArrowLeft className="h-5 w-5 text-[#5854FF]" />
-              <span className="font-medium text-[#5854FF]">Back to Home</span>
+              <ArrowLeft className="h-5 w-5 text-[#1B3C53]" />
+              <span className="font-medium text-[#1B3C53]">Back to Home</span>
             </Link>
             <div className="flex items-center gap-4">
-              <Link to="/about" className="text-black transition-colors">
+              <Link to="/about" className="text-[#1B3C53] transition-colors">
                 About
               </Link>
               {/* <Link to="/products" className="text-black hover:text-primary transition-colors">
                 Products
               </Link> */}
               <Link to="/login">
-                <Button className="bg-[#5854FF]">Login</Button>
+                <Button className="bg-[#1B3C53]">Login</Button>
               </Link>
               <Link to="/register">
-                <Button className="bg-[#5854FF]">Get Started</Button>
+                <Button className="bg-[#1B3C53]">Get Started</Button>
               </Link>
             </div>
           </div>
@@ -136,7 +136,7 @@ export default function Contact() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {/* Header */}
         <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold mb-4 text-[#5854FF]">Contact Us</h1>
+          <h1 className="text-4xl font-bold mb-4 text-[#1B3C53]">Contact Us</h1>
           <p className="text-xl text-black/50 max-w-2xl mx-auto">
             Have questions about our services? Need help with your delivery?
             We're here to help and would love to hear from you.
@@ -146,7 +146,7 @@ export default function Contact() {
         <div className="grid lg:grid-cols-3 gap-12">
           {/* Contact Form */}
           <div className="lg:col-span-2">
-            <Card className="bg-[#5854FF]">
+            <Card className="bg-[#1B3C53]">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <Send className="h-5 w-5" />
@@ -241,7 +241,7 @@ export default function Contact() {
 
                   <Button
                     type="submit"
-                    className="w-full bg-white text-[#5854FF]"
+                    className="w-full bg-white text-[#1B3C53]"
                     disabled={isSubmitting}
                   >
                     {isSubmitting ? "Sending..." : "Send Message"}
@@ -254,7 +254,7 @@ export default function Contact() {
           {/* Contact Information */}
           <div className="space-y-6">
             {/* Contact Methods */}
-            <Card className="bg-[#5854FF]">
+            <Card className="bg-[#1B3C53]">
               <CardHeader>
                 <CardTitle>Get in Touch</CardTitle>
                 <CardDescription className="text-white/50">Choose the best way to reach us</CardDescription>
@@ -262,7 +262,7 @@ export default function Contact() {
               <CardContent className="space-y-6">
                 {contactMethods.map((method, index) => (
                   <div key={index} className="flex items-start gap-3">
-                    <div className="w-10 h-10 bg-[#5854FF] rounded-lg flex items-center justify-center flex-shrink-0">
+                    <div className="w-10 h-10 bg-[#1B3C53] rounded-lg flex items-center justify-center flex-shrink-0">
                       <method.icon className="h-5 w-5 text-white" />
                     </div>
                     <div className="flex-1">
@@ -277,7 +277,7 @@ export default function Contact() {
             </Card>
 
             {/* Business Hours */}
-            <Card className="bg-[#5854FF]">
+            <Card className="bg-[#1B3C53]">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <Clock className="h-5 w-5" />
@@ -309,7 +309,7 @@ export default function Contact() {
             </Card>
 
             {/* Location */}
-            <Card className="bg-[#5854FF]">
+            <Card className="bg-[#1B3C53]">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <MapPin className="h-5 w-5" />
@@ -319,7 +319,7 @@ export default function Contact() {
               <CardContent>
                 <div className="space-y-3">
                   <div>
-                    <p className="font-medium">AquaFlow Headquarters</p>
+                    <p className="font-medium">WaterSquares Headquarters</p>
                     <p className="text-sm text-white/50">
                       123 Water Street<br />
                       Suite 200<br />
@@ -327,8 +327,8 @@ export default function Contact() {
                       United States
                     </p>
                   </div>
-                  <Button size="sm" className="w-full bg-white text-[#5854FF]">
-                    <MapPin className="h-4 w-4 mr-2 text-[#5854FF]" />
+                  <Button size="sm" className="w-full bg-white text-[#1B3C53]">
+                    <MapPin className="h-4 w-4 mr-2 text-[#1B3C53]" />
                     Get Directions
                   </Button>
                 </div>
@@ -339,7 +339,7 @@ export default function Contact() {
 
         {/* FAQ Section */}
         <div className="mt-16">
-          <Card className="bg-[#5854FF]"
+          <Card className="bg-[#1B3C53]"
             style={{
               backgroundImage: "url('/Water.png')",
               backgroundSize: "cover",
@@ -366,7 +366,7 @@ export default function Contact() {
                 <p className="text-sm text-white mb-4">
                   Can't find what you're looking for?
                 </p>
-                <Button className="bg-white text-black">View All FAQs</Button>
+                <Button className="bg-white text-[#1B3C53]">View All FAQs</Button>
               </div>
             </CardContent>
           </Card>

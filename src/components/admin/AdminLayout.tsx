@@ -7,6 +7,7 @@ import { Badge } from "@/components/ui/badge";
 import { Bell, User } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+import { useNavigate } from "react-router-dom";
 
 interface AdminLayoutProps {
   children: ReactNode;
@@ -14,6 +15,7 @@ interface AdminLayoutProps {
 
 export function AdminLayout({ children }: AdminLayoutProps) {
   const { user, switchRole } = useRole();
+  const navigate = useNavigate();
 
   const handleProfile = (): void => {
     // Implement navigation to profile when routing is available
@@ -25,7 +27,8 @@ export function AdminLayout({ children }: AdminLayoutProps) {
   };
 
   const handleLogout = (): void => {
-    console.log("Logout clicked");
+    // console.log("Logout clicked");
+    navigate("/login");
   };
 
   const getRoleBadgeVariant = (role: string) => {
@@ -48,7 +51,7 @@ export function AdminLayout({ children }: AdminLayoutProps) {
         
         <div className="flex-1 flex flex-col">
           {/* Top Header */}
-          <header className="h-14 md:h-16 bg-white border-b shadow-sm flex items-center gap-4 md:gap-6 px-4 md:px-6 sticky top-0 z-40">
+          <header className="h-14 md:h-16 bg-white border-b shadow-sm flex items-center justify-between gap-4 md:gap-6 px-4 md:px-6 sticky top-0 z-40">
             {/* Left cluster: menu + title */}
             <div className="flex items-center gap-3 md:gap-4 min-w-0">
               <SidebarTrigger className="text-zinc-600 hover:text-zinc-900" />
@@ -60,14 +63,7 @@ export function AdminLayout({ children }: AdminLayoutProps) {
                 {user?.role === 'staff' && 'Staff Portal'}
               </h1>
             </div>
-
-            {/* Center: search (md+) */}
-            <div className="hidden md:flex flex-1 max-w-xl">
-              <div className="w-full">
-                <Input placeholder="Search…" className="h-9 bg-white text-black border border-[#5854FF]" />
-              </div>
-            </div>
-
+            
             {/* Right cluster */}
             <div className="flex items-center gap-4 md:gap-6">
               {/* Role Switcher for Demo */}
@@ -76,7 +72,7 @@ export function AdminLayout({ children }: AdminLayoutProps) {
                 <select 
                   value={user?.role}
                   onChange={(e) => switchRole(e.target.value as any)}
-                  className="bg-[#5458FF] text-white rounded-full px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#5458FF]/40"
+                  className="bg-[#1B3C53] text-white rounded-full px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#5458FF]/40"
                 >
                   <option value="admin">Admin</option>
                   <option value="company_admin">Company Admin</option>
@@ -94,18 +90,18 @@ export function AdminLayout({ children }: AdminLayoutProps) {
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <button className="flex items-center gap-2 outline-none">
-                    <div className="w-8 h-8 bg-gradient-primary rounded-full flex items-center justify-center">
+                    <div className="w-8 h-8 rounded-full flex items-center justify-center bg-[#1B3C53]">
                       <User className="h-4 w-4 text-white" />
                     </div>
                     <div className="hidden sm:block text-sm text-zinc-900 text-left">
-                      <div className="font-medium leading-tight">{user?.name}</div>
-                      <Badge variant={getRoleBadgeVariant(user?.role || '')} className="text-[10px] md:text-xs rounded-full px-2 bg-blue-600 text-white border-0">
+                      <div className="font-medium leading-tight ">{user?.name}</div>
+                      <Badge variant={getRoleBadgeVariant(user?.role || '')} className="text-[10px] md:text-xs rounded-full px-2 bg-[#1B3C53] text-white border-0">
                         {user?.role?.replace('_', ' ')}
                       </Badge>
                     </div>
                   </button>
                 </DropdownMenuTrigger>
-                <DropdownMenuContent align="end" className="w-48">
+                <DropdownMenuContent align="end" className="w-48 bg-[#1B3C53]">
                   <DropdownMenuLabel>My Account</DropdownMenuLabel>
                   <DropdownMenuSeparator />
                   <DropdownMenuItem onClick={handleProfile}>Profile</DropdownMenuItem>

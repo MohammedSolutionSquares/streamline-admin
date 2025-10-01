@@ -51,17 +51,17 @@ export function ManagerDashboard() {
     <div className="space-y-6">
       <div className="flex justify-between items-start">
         <div>
-          <h2 className="text-3xl font-bold tracking-tight text-[#5854FF]">Management Dashboard</h2>
+          <h2 className="text-3xl font-bold tracking-tight text-[#1B3C53]">Management Dashboard</h2>
           <p className="text-black/50">
             Oversee operations and team performance
           </p>
         </div>
         <div className="flex gap-2">
-          <Button variant="outline" size="sm" className="bg-[#5854FF]">
+          <Button variant="outline" size="sm" className="bg-[#1B3C53]">
             <Clock className="h-4 w-4 mr-2" />
             Schedule
           </Button>
-          <Button size="sm" className="bg-[#5854FF]">
+          <Button size="sm" className="bg-[#1B3C53]">
             <BarChart3 className="h-4 w-4 mr-2" />
             Reports
           </Button>
@@ -71,7 +71,7 @@ export function ManagerDashboard() {
       {/* Stats Grid */}
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
         {stats.map((stat) => (
-          <Card key={stat.title} className="shadow-card hover:shadow-elevated transition-shadow bg-[#5854FF]">
+          <Card key={stat.title} className="shadow-card hover:shadow-elevated transition-shadow bg-[#1B3C53]">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">
                 {stat.title}
@@ -90,7 +90,7 @@ export function ManagerDashboard() {
 
       <div className="grid gap-6 md:grid-cols-2">
         {/* Team Status */}
-        <Card className="shadow-card bg-white border border-[#5854FF]">
+        <Card className="shadow-card bg-white border border-[#1B3C53]">
           <CardHeader>
             <CardTitle className="text-black">Team Status</CardTitle>
             <CardDescription className="text-black">
@@ -109,7 +109,7 @@ export function ManagerDashboard() {
                   </div>
                   <div className="text-right space-y-1 ">
                     <Badge 
-                    className="bg-[#5854FF] border border-[#5854FF]"
+                    className="bg-[#1B3C53] border border-[#1B3C53]"
                       variant={
                         team.status === 'delivering' ? 'default' : 
                         team.status === 'loading' ? 'black' : 
@@ -130,7 +130,7 @@ export function ManagerDashboard() {
         </Card>
 
         {/* Priorities */}
-        <Card className="shadow-card border border-[#5854FF] bg-white">
+        <Card className="shadow-card border border-[#1B3C53] bg-white">
           <CardHeader>
             <CardTitle className="text-black">Priority Items</CardTitle>
             <CardDescription className="text-black">
@@ -156,7 +156,7 @@ export function ManagerDashboard() {
       </div>
 
       {/* Quick Actions */}
-      <Card className="shadow-card bg-[#5854FF]">
+      <Card className="shadow-card bg-[#1B3C53]">
         <CardHeader>
           <CardTitle>Quick Management Actions</CardTitle>
         </CardHeader>

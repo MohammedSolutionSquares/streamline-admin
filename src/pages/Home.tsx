@@ -54,19 +54,19 @@ export default function Home() {
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center gap-2">
               <Droplets className="h-8 w-8 text-primary" />
-              <span className="text-xl font-bold text-[#5854FF]">WaterSquares</span>
+              <span className="text-xl font-bold text-[#1B3C53]">WaterSquares</span>
             </div>
             <div className="hidden md:flex items-center space-x-8">
               {/* <Link to="/products" className="text-black hover:text-primary transition-colors">Products</Link> */}
-              <Link to="/about" className="hover:text-primary transition-colors text-[#5854FF]">About</Link>
-              <Link to="/contact" className="hover:text-primary transition-colors text-[#5854FF]">Contact</Link>
+              <Link to="/about" className="hover:text-primary transition-colors text-[#1B3C53]">About</Link>
+              <Link to="/contact" className="hover:text-primary transition-colors text-[#1B3C53]">Contact</Link>
             </div>
             <div className="flex items-center gap-4">
               <Link to="/login">
-                <Button variant="ghost" className="bg-blue-500 text-white bg-[#5854FF]">Login</Button>
+                <Button variant="ghost" className="bg-blue-500 text-white bg-[#1B3C53]">Login</Button>
               </Link>
               <Link to="/register">
-                <Button className="bg-[#5854FF]">Get Started</Button>
+                <Button className="bg-[#1B3C53]">Get Started</Button>
               </Link>
             </div>
           </div>
@@ -96,7 +96,7 @@ export default function Home() {
               <Button
                 size="lg"
                 variant="secondary"
-                className="text-lg px-8 bg-white text-[#5854FF] font-semibold hover:bg-[#f4f4ff]"
+                className="text-lg px-8 bg-white text-[#1B3C53] font-semibold"
               >
                 Join Us
               </Button>
@@ -104,7 +104,7 @@ export default function Home() {
             <Link to="/products">
               <Button
                 size="lg"
-                className="text-lg px-8 border-white/50 bg-transparent text-white bg-white text-[#5854FF]">
+                className="text-lg px-8 border-white/50 bg-transparent bg-white text-[#1B3C53]">
                 View Plans
               </Button>
             </Link>
@@ -118,14 +118,14 @@ export default function Home() {
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-[#5854FF]">Why Choose WaterSquares?</h2>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-[#1B3C53]">Why Choose WaterSquares?</h2>
             <p className="text-xl max-w-2xl mx-auto text-black/50">
               We provide the best services experience with our top-notch features.
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {features.map((feature, index) => (
-              <Card key={index} className="text-center bg-[#5854FF] hover:shadow-lg transition-shadow">
+              <Card key={index} className="text-center bg-[#1B3C53] hover:shadow-lg transition-shadow">
                 <CardHeader>
                   <feature.icon className="h-12 w-12 text-white mx-auto mb-4" />
                   <CardTitle className="text-xl text-white">{feature.title}</CardTitle>
@@ -169,14 +169,14 @@ export default function Home() {
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-[#5854FF]">What Our Customers Say</h2>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-[#1B3C53]">What Our Customers Say</h2>
             <p className="text-xl text-black/50">
               Don't just take our word for it - hear from our satisfied customers
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {testimonials.map((testimonial, index) => (
-              <Card key={index} className="bg-[#5854FF]">
+              <Card key={index} className="bg-[#1B3C53]">
                 <CardHeader>
                   <div className="flex items-center gap-2 mb-2">
                     {[...Array(testimonial.rating)].map((_, i) => (
@@ -209,7 +209,7 @@ export default function Home() {
             Join thousands of satisfied suppliers who trust us for their daily needs
           </p>
           <Link to="/register">
-            <Button size="lg" className="text-lg bg-white px-8 text-[#5854FF]">
+            <Button size="lg" className="text-lg bg-white px-8 text-[#1B3C53]">
               Start Your Subscription Today
             </Button>
           </Link>
@@ -223,14 +223,14 @@ export default function Home() {
             <div>
               <div className="flex items-center gap-2 mb-4">
                 <Droplets className="h-6 w-6 text-primary" />
-                <span className="text-lg font-bold text-[#5854FF]">WaterSquares</span>
+                <span className="text-lg font-bold text-[#1B3C53]">WaterSquares</span>
               </div>
               <p className="text-muted-foreground mb-4">
                 Premium water delivery service bringing pure, fresh water to your doorstep.
               </p>
             </div>
             <div>
-              <h3 className="font-semibold mb-4 text-[#5854FF]">Quick Links</h3>
+              <h3 className="font-semibold mb-4 text-[#1B3C53]">Quick Links</h3>
               <div className="space-y-2">
                 {/* <Link to="/products" className="block text-muted-foreground hover:text-primary">Products</Link> */}
                 <Link to="/about" className="block text-muted-foreground hover:text-primary">About Us</Link>
@@ -238,7 +238,7 @@ export default function Home() {
               </div>
             </div>
             <div>
-              <h3 className="font-semibold mb-4 text-[#5854FF]">Account</h3>
+              <h3 className="font-semibold mb-4 text-[#1B3C53]">Account</h3>
               <div className="space-y-2">
                 <Link to="/login" className="block text-muted-foreground hover:text-primary">Login</Link>
                 <Link to="/register" className="block text-muted-foreground hover:text-primary">Register</Link>
@@ -246,7 +246,7 @@ export default function Home() {
               </div>
             </div>
             <div>
-              <h3 className="font-semibold mb-4 text-[#5854FF]">Contact Info</h3>
+              <h3 className="font-semibold mb-4 text-[#1B3C53]">Contact Info</h3>
               <div className="space-y-2 text-muted-foreground">
                 <div className="flex items-center gap-2">
                   <Phone className="h-4 w-4" />

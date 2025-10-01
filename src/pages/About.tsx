@@ -80,21 +80,21 @@ export default function About() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <Link to="/" className="flex items-center gap-2">
-              <ArrowLeft className="h-5 w-5 text-[#5854FF]" />
-              <span className="font-medium text-[#5854FF]">Back to Home</span>
+              <ArrowLeft className="h-5 w-5 text-[#1B3C53]" />
+              <span className="font-medium text-[#1B3C53]">Back to Home</span>
             </Link>
             <div className="flex items-center gap-4">
               {/* <Link to="/products" className="text-black hover:text-primary transition-colors">
                 Products
               </Link> */}
-              <Link to="/contact" className="text-[#5854FF] transition-colors">
+              <Link to="/contact" className="text-[#1B3C53] transition-colors">
                 Contact
               </Link>
               <Link to="/login">
-                <Button variant="ghost" className="bg-[#5854FF]">Login</Button>
+                <Button variant="ghost" className="bg-[#1B3C53]">Login</Button>
               </Link>
               <Link to="/register">
-                <Button className="bg-[#5854FF]">Get Started</Button>
+                <Button className="bg-[#1B3C53]">Get Started</Button>
               </Link>
             </div>
           </div>
@@ -102,7 +102,7 @@ export default function About() {
       </nav>
 
       {/* Hero Section */}
-      <section className="bg-[#5854FF] text-white py-20"
+      <section className="bg-[#1B3C53] text-white py-20"
         style={{
           backgroundImage: "url('/Water.png')",
           backgroundSize: "cover",
@@ -120,12 +120,12 @@ export default function About() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <Link to="/products">
-                <Button size="lg" variant="secondary" className="text-lg px-8 text-[#5854FF]">
+                <Button size="lg" variant="secondary" className="text-lg px-8 text-[#1B3C53]">
                   View Our Services
                 </Button>
               </Link>
               <Link to="/contact">
-                <Button size="lg" className="text-lg px-8 border-white/20 text-[#5854FF] bg-white">
+                <Button size="lg" className="text-lg px-8 border-white/20 text-[#1B3C53] bg-white">
                   Contact Us
                 </Button>
               </Link>
@@ -140,9 +140,9 @@ export default function About() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {stats.map((stat, index) => (
               <div key={index} className="text-center">
-                <stat.icon className="h-8 w-8 text-[#5854FF] mx-auto mb-2" />
-                <div className="text-3xl font-bold text-[#5854FF] mb-1">{stat.value}</div>
-                <div className="text-[#5854FF]">{stat.label}</div>
+                <stat.icon className="h-8 w-8 text-[#1B3C53] mx-auto mb-2" />
+                <div className="text-3xl font-bold text-[#1B3C53] mb-1">{stat.value}</div>
+                <div className="text-[#1B3C53]">{stat.label}</div>
               </div>
             ))}
           </div>
@@ -193,14 +193,14 @@ export default function About() {
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl text-[#5854FF] font-bold mb-4">Our Values</h2>
+            <h2 className="text-3xl md:text-4xl text-[#1B3C53] font-bold mb-4">Our Values</h2>
             <p className="text-xl text-black/50 max-w-2xl mx-auto">
               These core values guide everything we do and shape our commitment to our customers
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {values.map((value, index) => (
-              <Card key={index} className="text-center bg-[#5854FF]">
+              <Card key={index} className="text-center bg-[#1B3C53]">
                 <CardHeader>
                   <value.icon className="h-12 w-12 text-white mx-auto mb-4" />
                   <CardTitle className="text-xl">{value.title}</CardTitle>
@@ -233,11 +233,11 @@ export default function About() {
             {team.map((member, index) => (
               <Card key={index} className="text-center bg-white">
                 <CardContent className="p-6">
-                  <div className="w-24 h-24 bg-[#5854FF] rounded-full mx-auto mb-4 flex items-center justify-center">
+                  <div className="w-24 h-24 bg-[#1B3C53] rounded-full mx-auto mb-4 flex items-center justify-center">
                     <Users className="h-12 w-12 text-white" />
                   </div>
-                  <h3 className="text-lg text-[#5854FF] font-semibold mb-1">{member.name}</h3>
-                  <Badge variant="secondary" className="mb-3 text-[#5854FF]">{member.role}</Badge>
+                  <h3 className="text-lg text-[#1B3C53] font-semibold mb-1">{member.name}</h3>
+                  <Badge variant="secondary" className="mb-3 text-[#1B3C53]">{member.role}</Badge>
                   <p className="text-sm text-black/50">{member.description}</p>
                 </CardContent>
               </Card>
@@ -249,7 +249,7 @@ export default function About() {
       {/* Mission Section */}
       <section className="py-20 bg-white text-blue-500">
         <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6 text-[#5854FF]">Our Mission</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-6 text-[#1B3C53]">Our Mission</h2>
           <p className="text-xl text-[#5854FF]/50 mb-8">
             To provide every customer with pure, fresh water through reliable delivery service,
             exceptional customer care, and a commitment to environmental sustainability. We believe
@@ -258,12 +258,12 @@ export default function About() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link to="/register">
-              <Button size="lg" className="text-lg px-8 text-white bg-[#5854FF]">
+              <Button size="lg" className="text-lg px-8 text-white bg-[#1B3C53]">
                 Join Our Mission
               </Button>
             </Link>
             <Link to="/contact">
-              <Button size="lg" className="text-lg px-8 border-white/20 text-white bg-[#5854FF]">
+              <Button size="lg" className="text-lg px-8 border-white/20 text-white bg-[#1B3C53]">
                 Get in Touch
               </Button>
             </Link>
@@ -286,12 +286,12 @@ export default function About() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link to="/products">
-              <Button size="lg" className="text-lg px-8 text-[#5854FF] bg-white">
+              <Button size="lg" className="text-lg px-8 text-[#1B3C53] bg-white">
                 Browse Products
               </Button>
             </Link>
             <Link to="/contact">
-              <Button size="lg" className="text-lg px-8 bg-white text-[#5854FF]">
+              <Button size="lg" className="text-lg px-8 bg-white text-[#1B3C53]">
                 Ask Questions
               </Button>
             </Link>
@@ -306,14 +306,14 @@ export default function About() {
             <div>
               <div className="flex items-center gap-2 mb-4">
                 <Droplets className="h-6 w-6 text-primary" />
-                <span className="text-lg font-bold text-[#5854FF]">WaterSquares</span>
+                <span className="text-lg font-bold text-[#1B3C53]">WaterSquares</span>
               </div>
               <p className="text-black/50 mb-4">
                 Premium water delivery service bringing pure, fresh water to your doorstep.
               </p>
             </div>
             <div>
-              <h3 className="font-semibold mb-4 text-[#5854FF]">Company</h3>
+              <h3 className="font-semibold mb-4 text-[#1B3C53]">Company</h3>
               <div className="space-y-2">
                 <Link to="/about" className="block text-muted-foreground hover:text-primary">About Us</Link>
                 {/* <Link to="/products" className="block text-muted-foreground hover:text-primary">Products</Link> */}
@@ -321,7 +321,7 @@ export default function About() {
               </div>
             </div>
             <div>
-              <h3 className="font-semibold mb-4 text-[#5854FF]">Service</h3>
+              <h3 className="font-semibold mb-4 text-[#1B3C53]">Service</h3>
               <div className="space-y-2">
                 <Link to="/login" className="block text-muted-foreground hover:text-primary">Login</Link>
                 <Link to="/register" className="block text-muted-foreground hover:text-primary">Register</Link>
@@ -329,7 +329,7 @@ export default function About() {
               </div>
             </div>
             <div>
-              <h3 className="font-semibold mb-4 text-[#5854FF]">Contact Info</h3>
+              <h3 className="font-semibold mb-4 text-[#1B3C53]">Contact Info</h3>
               <div className="space-y-2 text-muted-foreground">
                 <div className="flex items-center gap-2">
                   <Phone className="h-4 w-4" />

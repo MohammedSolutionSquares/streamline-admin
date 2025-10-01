@@ -1,14 +1,14 @@
-import { AdminLayout } from "@/components/admin/AdminLayout";
+import { useRole } from "@/contexts/RoleContext";
 import { AdminDashboard } from "@/components/admin/dashboards/AdminDashboard";
 import { CompanyAdminDashboard } from "@/components/admin/dashboards/CompanyAdminDashboard";
 import { ManagerDashboard } from "@/components/admin/dashboards/ManagerDashboard";
 import { StaffDashboard } from "@/components/admin/dashboards/StaffDashboard";
-import { RoleProvider, useRole } from "@/contexts/RoleContext";
+import { AdminLayout } from "@/components/admin/AdminLayout";
 
-function DashboardContent() {
+const AdminDashboardHome = () => {
   const { user } = useRole();
 
-  const renderDashboard = () => {
+  const content = (() => {
     switch (user?.role) {
       case 'admin':
         return <AdminDashboard />;
@@ -21,23 +21,15 @@ function DashboardContent() {
       default:
         return <AdminDashboard />;
     }
-  };
+  })();
 
   return (
     <AdminLayout>
-      {renderDashboard()}
+      {content}
     </AdminLayout>
-  );
-}
-
-const Index = () => {
-  return (
-    <RoleProvider>
-       <AdminLayout>
-        <DashboardContent />
-      </AdminLayout>
-    </RoleProvider>
   );
 };
 
-export default Index;
+export default AdminDashboardHome;
+
+

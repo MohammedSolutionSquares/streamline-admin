@@ -3,7 +3,7 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { RoleProvider } from "./contexts/RoleContext";
+import { RoleProvider, useRole } from "./contexts/RoleContext";
 import Index from "./pages/Index";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
@@ -14,6 +14,15 @@ import Products from "./pages/Products";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
+import { CompanyManagement } from "./pages/CompanyManagement";
+import AdminDashboardHome from "./pages/AdminDashboardHome";
+import { Sidebar } from "./components/ui/sidebar";
+import { AdminLayout } from "./components/admin/AdminLayout";
+
+
+
+// const { user } = useRole();
+// console.log(user.role);
 
 
 
@@ -28,9 +37,11 @@ const App = () => (
         <Toaster />
         <Sonner />
         <BrowserRouter>
+        {/* <AdminLayout > */}
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/admin" element={<Index />} />
+            <Route path="/dashboard" element={<AdminDashboardHome />} />
+            <Route path="/companies" element={<CompanyManagement /> } />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/dashboard" element={<Dashboard />} />
@@ -39,8 +50,9 @@ const App = () => (
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-            <Route path="*" element={<NotFound />} />
+            {/* <Route path="*" element={<NotFound />} /> */}
           </Routes>
+          {/* </AdminLayout> */}
         </BrowserRouter>
       </TooltipProvider>
     </RoleProvider>

@@ -1,8 +1,12 @@
+import { useState } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Building2, Users, Package, TrendingUp, AlertTriangle, CheckCircle } from "lucide-react";
+import { CompanyManagement } from "../../../pages/CompanyManagement";
 
 export function AdminDashboard() {
+  const [activeTab, setActiveTab] = useState("overview");
   const stats = [
     {
       title: "Total Companies",
@@ -55,7 +59,8 @@ export function AdminDashboard() {
           Monitor and manage your entire water delivery platform
         </p>
       </div>
-
+      <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
+        <TabsContent value="overview" className="space-y-6">
       {/* Stats Grid */}
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4 bg-white">
         {stats.map((stat) => (
@@ -132,11 +137,16 @@ export function AdminDashboard() {
                     <p className="text-xs text-black">{alert.time}</p>
                   </div>
                 </div>
-              ))}
-            </div>
-          </CardContent>
-        </Card>
-      </div>
+                ))}
+                </div>
+
+              </CardContent>
+            </Card>
+
+          </div>
+        </TabsContent>
+
+      </Tabs>
     </div>
   );
 }

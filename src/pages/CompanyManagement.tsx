@@ -393,10 +393,10 @@ export function CompanyManagement() {
       </div>
 
       {/* Companies Table */}
-      <Card className="bg-[#1B3C53]">
+      <Card className="border border-[#1B3C53] bg-white">
         <CardHeader>
-          <CardTitle>Companies</CardTitle>
-          <CardDescription>
+          <CardTitle className="text-black">Companies</CardTitle>
+          <CardDescription className="text-black/50">
             A list of all water delivery companies registered on the platform.
           </CardDescription>
         </CardHeader>
@@ -404,13 +404,13 @@ export function CompanyManagement() {
           <Table>
             <TableHeader>
               <TableRow>
-                <TableHead className="text-white">Company</TableHead>
-                <TableHead className="text-white">Contact</TableHead>
-                <TableHead className="text-white">Status</TableHead>
-                <TableHead className="text-white">Users</TableHead>
-                <TableHead className="text-white">Orders</TableHead>
-                <TableHead className="text-white">Created</TableHead>
-                <TableHead className="text-white text-center">Actions</TableHead>
+                <TableHead className="text-black">Company</TableHead>
+                <TableHead className="text-black">Contact</TableHead>
+                <TableHead className="text-black">Status</TableHead>
+                <TableHead className="text-black">Users</TableHead>
+                <TableHead className="text-black">Orders</TableHead>
+                <TableHead className="text-black">Created</TableHead>
+                <TableHead className="text-black text-center">Actions</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -418,29 +418,29 @@ export function CompanyManagement() {
                 <TableRow key={company.id}>
                   <TableCell>
                     <div className="space-y-1">
-                      <div className="font-medium">{company.name}</div>
-                      <div className="flex items-center gap-1 text-sm text-white">
-                        <MapPin className="h-3 w-3 text-white" />
+                      <div className="font-medium text-black">{company.name}</div>
+                      <div className="flex items-center gap-1 text-sm text-black">
+                        <MapPin className="h-3 w-3 text-black" />
                         {company.address}
                       </div>
                     </div>
                   </TableCell>
                   <TableCell>
                     <div className="space-y-1">
-                      <div className="flex items-center gap-1 text-sm text-white">
+                      <div className="flex items-center gap-1 text-sm text-black">
                         <Mail className="h-3 w-3" />
                         {company.email}
                       </div>
-                      <div className="flex items-center gap-1 text-sm text-white">
+                      <div className="flex items-center gap-1 text-sm text-black">
                         <Phone className="h-3 w-3" />
                         {company.phone}
                       </div>
                     </div>
                   </TableCell>
                   <TableCell>{getStatusBadge(company.status)}</TableCell>
-                  <TableCell>{company.users}</TableCell>
-                  <TableCell>{company.orders}</TableCell>
-                  <TableCell>{company.createdAt}</TableCell>
+                  <TableCell className="text-black">{company.users}</TableCell>
+                  <TableCell className="text-black">{company.orders}</TableCell>
+                  <TableCell className="text-black">{company.createdAt}</TableCell>
                   <TableCell className="text-right">
                     <div className="flex items-center justify-end gap-2">
                       <Button variant="outline" size="sm" onClick={() => openEditDialog(company)} className="bg-[#1B3C53] border border-[#1B3C53]">

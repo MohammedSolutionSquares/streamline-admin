@@ -120,7 +120,7 @@ export default function Login() {
 
             <Button
               type="submit"
-              className="w-full text-[#5854FF] bg-white"
+              className="w-full text-[#1B3C53] bg-white"
               disabled={isLoading}
             >
               {isLoading ? "Loading...." : "Sign In"}

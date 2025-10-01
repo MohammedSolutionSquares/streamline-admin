@@ -201,23 +201,23 @@ export function CompanyManagement() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="text-3xl font-bold tracking-tight">Company Management</h2>
-          <p className="text-muted-foreground">
+          <h2 className="text-3xl font-bold tracking-tight text-[#1B3C53]">Company Management</h2>
+          <p className="text-black/60">
             Manage water delivery companies on your platform
           </p>
         </div>
         
         <Dialog open={isAddDialogOpen} onOpenChange={setIsAddDialogOpen}>
           <DialogTrigger asChild>
-            <Button className="gap-2">
+            <Button className="gap-2 bg-[#1B3C53]">
               <Plus className="h-4 w-4" />
               Add Company
             </Button>
           </DialogTrigger>
-          <DialogContent className="sm:max-w-[425px]">
+          <DialogContent className="sm:max-w-[425px] bg-[#1B3C53]">
             <DialogHeader>
               <DialogTitle>Add New Company</DialogTitle>
-              <DialogDescription>
+              <DialogDescription className="text-white/60">
                 Enter the details for the new water delivery company.
               </DialogDescription>
             </DialogHeader>
@@ -225,6 +225,7 @@ export function CompanyManagement() {
               <div className="grid gap-2">
                 <Label htmlFor="name">Company Name</Label>
                 <Input
+                className="bg-white text-black"
                   id="name"
                   value={newCompany.name}
                   onChange={(e) => setNewCompany({ ...newCompany, name: e.target.value })}
@@ -234,6 +235,7 @@ export function CompanyManagement() {
               <div className="grid gap-2">
                 <Label htmlFor="email">Email</Label>
                 <Input
+                className="bg-white text-black"
                   id="email"
                   type="email"
                   value={newCompany.email}
@@ -244,6 +246,7 @@ export function CompanyManagement() {
               <div className="grid gap-2">
                 <Label htmlFor="phone">Phone</Label>
                 <Input
+                className="bg-white text-black"
                   id="phone"
                   value={newCompany.phone}
                   onChange={(e) => setNewCompany({ ...newCompany, phone: e.target.value })}
@@ -253,6 +256,7 @@ export function CompanyManagement() {
               <div className="grid gap-2">
                 <Label htmlFor="address">Address</Label>
                 <Textarea
+                className="bg-white text-black"
                   id="address"
                   value={newCompany.address}
                   onChange={(e) => setNewCompany({ ...newCompany, address: e.target.value })}
@@ -261,25 +265,26 @@ export function CompanyManagement() {
               </div>
             </div>
             <DialogFooter>
-              <Button variant="outline" onClick={() => setIsAddDialogOpen(false)}>
+              <Button className="text-[#1B3C53] bg-white" variant="outline" onClick={() => setIsAddDialogOpen(false)}>
                 Cancel
               </Button>
-              <Button onClick={handleAddCompany}>Add Company</Button>
+              <Button onClick={handleAddCompany} className="bg-white text-[#1B3C53]">Add Company</Button>
             </DialogFooter>
           </DialogContent>
         </Dialog>
 
         {/* Edit Company Dialog */}
         <Dialog open={isEditDialogOpen} onOpenChange={setIsEditDialogOpen}>
-          <DialogContent className="sm:max-w-[425px]">
+          <DialogContent className="sm:max-w-[425px] bg-[#1B3C53]">
             <DialogHeader>
               <DialogTitle>Edit Company</DialogTitle>
-              <DialogDescription>Update the company details.</DialogDescription>
+              <DialogDescription className="text-white/60">Update the company details.</DialogDescription>
             </DialogHeader>
             <div className="grid gap-4 py-4">
               <div className="grid gap-2">
                 <Label htmlFor="edit-name">Company Name</Label>
                 <Input
+                className="text-black bg-white"
                   id="edit-name"
                   value={editCompanyData.name}
                   onChange={(e) => setEditCompanyData({ ...editCompanyData, name: e.target.value })}
@@ -289,6 +294,7 @@ export function CompanyManagement() {
               <div className="grid gap-2">
                 <Label htmlFor="edit-email">Email</Label>
                 <Input
+                className="text-black bg-white"
                   id="edit-email"
                   type="email"
                   value={editCompanyData.email}
@@ -299,6 +305,7 @@ export function CompanyManagement() {
               <div className="grid gap-2">
                 <Label htmlFor="edit-phone">Phone</Label>
                 <Input
+                className="text-black bg-white"
                   id="edit-phone"
                   value={editCompanyData.phone}
                   onChange={(e) => setEditCompanyData({ ...editCompanyData, phone: e.target.value })}
@@ -308,6 +315,7 @@ export function CompanyManagement() {
               <div className="grid gap-2">
                 <Label htmlFor="edit-address">Address</Label>
                 <Textarea
+                className="text-black bg-white"
                   id="edit-address"
                   value={editCompanyData.address}
                   onChange={(e) => setEditCompanyData({ ...editCompanyData, address: e.target.value })}
@@ -318,7 +326,7 @@ export function CompanyManagement() {
                 <Label htmlFor="edit-status">Status</Label>
                 <select
                   id="edit-status"
-                  className="bg-background border rounded-md px-2 py-2"
+                  className="bg-background border rounded-md px-2 py-2 text-black bg-white"
                   value={editCompanyData.status}
                   onChange={(e) => setEditCompanyData({ ...editCompanyData, status: e.target.value as Company['status'] })}
                 >
@@ -329,10 +337,10 @@ export function CompanyManagement() {
               </div>
             </div>
             <DialogFooter>
-              <Button variant="outline" onClick={() => setIsEditDialogOpen(false)}>
+              <Button variant="outline" onClick={() => setIsEditDialogOpen(false)} className="text-black bg-white">
                 Cancel
               </Button>
-              <Button onClick={handleSaveEdit}>Save Changes</Button>
+              <Button onClick={handleSaveEdit} className="text-black bg-white">Save Changes</Button>
             </DialogFooter>
           </DialogContent>
         </Dialog>
@@ -340,16 +348,16 @@ export function CompanyManagement() {
 
       {/* Stats Cards */}
       <div className="grid gap-4 md:grid-cols-4">
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+        <Card className="bg-[#1B3C53]">
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2 ">
             <CardTitle className="text-sm font-medium">Total Companies</CardTitle>
-            <Building2 className="h-4 w-4 text-muted-foreground" />
+            <Building2 className="h-4 w-4 text-white" />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">{companies.length}</div>
           </CardContent>
         </Card>
-        <Card>
+        <Card className="bg-[#1B3C53]">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Active</CardTitle>
             <div className="h-2 w-2 bg-green-500 rounded-full" />
@@ -360,7 +368,7 @@ export function CompanyManagement() {
             </div>
           </CardContent>
         </Card>
-        <Card>
+        <Card className="bg-[#1B3C53]">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Pending</CardTitle>
             <div className="h-2 w-2 bg-yellow-500 rounded-full" />
@@ -371,7 +379,7 @@ export function CompanyManagement() {
             </div>
           </CardContent>
         </Card>
-        <Card>
+        <Card className="bg-[#1B3C53]">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Suspended</CardTitle>
             <div className="h-2 w-2 bg-red-500 rounded-full" />
@@ -385,7 +393,7 @@ export function CompanyManagement() {
       </div>
 
       {/* Companies Table */}
-      <Card>
+      <Card className="bg-[#1B3C53]">
         <CardHeader>
           <CardTitle>Companies</CardTitle>
           <CardDescription>
@@ -396,13 +404,13 @@ export function CompanyManagement() {
           <Table>
             <TableHeader>
               <TableRow>
-                <TableHead>Company</TableHead>
-                <TableHead>Contact</TableHead>
-                <TableHead>Status</TableHead>
-                <TableHead>Users</TableHead>
-                <TableHead>Orders</TableHead>
-                <TableHead>Created</TableHead>
-                <TableHead className="text-right">Actions</TableHead>
+                <TableHead className="text-white">Company</TableHead>
+                <TableHead className="text-white">Contact</TableHead>
+                <TableHead className="text-white">Status</TableHead>
+                <TableHead className="text-white">Users</TableHead>
+                <TableHead className="text-white">Orders</TableHead>
+                <TableHead className="text-white">Created</TableHead>
+                <TableHead className="text-white text-center">Actions</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -411,19 +419,19 @@ export function CompanyManagement() {
                   <TableCell>
                     <div className="space-y-1">
                       <div className="font-medium">{company.name}</div>
-                      <div className="flex items-center gap-1 text-sm text-muted-foreground">
-                        <MapPin className="h-3 w-3" />
+                      <div className="flex items-center gap-1 text-sm text-white">
+                        <MapPin className="h-3 w-3 text-white" />
                         {company.address}
                       </div>
                     </div>
                   </TableCell>
                   <TableCell>
                     <div className="space-y-1">
-                      <div className="flex items-center gap-1 text-sm">
+                      <div className="flex items-center gap-1 text-sm text-white">
                         <Mail className="h-3 w-3" />
                         {company.email}
                       </div>
-                      <div className="flex items-center gap-1 text-sm text-muted-foreground">
+                      <div className="flex items-center gap-1 text-sm text-white">
                         <Phone className="h-3 w-3" />
                         {company.phone}
                       </div>
@@ -435,28 +443,28 @@ export function CompanyManagement() {
                   <TableCell>{company.createdAt}</TableCell>
                   <TableCell className="text-right">
                     <div className="flex items-center justify-end gap-2">
-                      <Button variant="outline" size="sm" onClick={() => openEditDialog(company)}>
+                      <Button variant="outline" size="sm" onClick={() => openEditDialog(company)} className="bg-[#1B3C53] border border-[#1B3C53]">
                         <Edit className="h-4 w-4" />
                       </Button>
                       <AlertDialog>
                         <AlertDialogTrigger asChild>
-                          <Button variant="outline" size="sm">
+                          <Button variant="outline" size="sm" className="bg-[#1B3C53] border border-[#1B3C53]">
                             <Trash2 className="h-4 w-4" />
                           </Button>
                         </AlertDialogTrigger>
-                        <AlertDialogContent>
+                        <AlertDialogContent className="bg-[#1B3C53]">
                           <AlertDialogHeader>
                             <AlertDialogTitle>Are you sure?</AlertDialogTitle>
-                            <AlertDialogDescription>
+                            <AlertDialogDescription className="text-white/50">
                               This action cannot be undone. This will permanently delete the
                               company "{company.name}" and remove all associated data.
                             </AlertDialogDescription>
                           </AlertDialogHeader>
                           <AlertDialogFooter>
-                            <AlertDialogCancel>Cancel</AlertDialogCancel>
+                            <AlertDialogCancel className="text-black bg-white">Cancel</AlertDialogCancel>
                             <AlertDialogAction
                               onClick={() => handleRemoveCompany(company.id)}
-                              className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
+                              className="text-black bg-white"
                             >
                               Delete
                             </AlertDialogAction>

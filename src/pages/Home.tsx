@@ -140,7 +140,7 @@ export default function Home() {
       </section>
 
       {/* Stats Section */}
-      <section className="py-16 bg-[#5854FF] text-white"
+      <section className="py-16 bg-[#1B3C53] text-white"
         style={{
           backgroundImage: "url('/Water.png')",
           backgroundSize: "cover",
@@ -195,7 +195,7 @@ export default function Home() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-[#5854FF]"
+      <section className="py-20 bg-[#1B3C53]"
         style={{
           backgroundImage: "url('/Water.png')",
           backgroundSize: "cover",

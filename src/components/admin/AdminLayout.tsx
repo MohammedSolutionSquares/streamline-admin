@@ -69,7 +69,7 @@ export function AdminLayout({ children }: AdminLayoutProps) {
                 <select 
                   value={user?.role}
                   onChange={(e) => switchRole(e.target.value as any)}
-                  className="bg-[#5458FF] text-white rounded-full px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#5458FF]/40"
+                  className="bg-[#1B3C53] text-white rounded-full px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#5458FF]/40"
                 >
                   <option value="admin">Admin</option>
                   <option value="company_admin">Company Admin</option>
@@ -87,18 +87,18 @@ export function AdminLayout({ children }: AdminLayoutProps) {
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <button className="flex items-center gap-2 outline-none">
-                    <div className="w-8 h-8 bg-gradient-primary rounded-full flex items-center justify-center">
+                    <div className="w-8 h-8 rounded-full flex items-center justify-center bg-[#1B3C53]">
                       <User className="h-4 w-4 text-white" />
                     </div>
                     <div className="hidden sm:block text-sm text-zinc-900 text-left">
-                      <div className="font-medium leading-tight">{user?.name}</div>
-                      <Badge variant={getRoleBadgeVariant(user?.role || '')} className="text-[10px] md:text-xs rounded-full px-2 bg-blue-600 text-white border-0">
+                      <div className="font-medium leading-tight ">{user?.name}</div>
+                      <Badge variant={getRoleBadgeVariant(user?.role || '')} className="text-[10px] md:text-xs rounded-full px-2 bg-[#1B3C53] text-white border-0">
                         {user?.role?.replace('_', ' ')}
                       </Badge>
                     </div>
                   </button>
                 </DropdownMenuTrigger>
-                <DropdownMenuContent align="end" className="w-48">
+                <DropdownMenuContent align="end" className="w-48 bg-[#1B3C53]">
                   <DropdownMenuLabel>My Account</DropdownMenuLabel>
                   <DropdownMenuSeparator />
                   <DropdownMenuItem onClick={handleProfile}>Profile</DropdownMenuItem>

@@ -80,7 +80,7 @@ export function CompanyAdminDashboard() {
     <div className="space-y-6">
       <div className="flex justify-between items-start">
         <div>
-          <h2 className="text-3xl font-bold tracking-tight text-[#5854FF]">Company Dashboard</h2>
+          <h2 className="text-3xl font-bold tracking-tight text-[#1B3C53]">Company Dashboard</h2>
           <p className="text-black/50">
             Manage your water delivery operations
           </p>
@@ -100,7 +100,7 @@ export function CompanyAdminDashboard() {
         {/* Stats Grid */}
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
         {stats.map((stat) => (
-          <Card key={stat.title} className="shadow-card hover:shadow-elevated transition-shadow bg-[#5854FF]">
+          <Card key={stat.title} className="shadow-card hover:shadow-elevated transition-shadow bg-[#1B3C53]">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2 text-white">
               <CardTitle className="text-sm font-medium">
                 {stat.title}
@@ -119,10 +119,10 @@ export function CompanyAdminDashboard() {
 
       <div className="grid gap-6 md:grid-cols-2">
         {/* Recent Orders */}
-        <Card className="shadow-card border border-[#5854FF] bg-white">
+        <Card className="shadow-card border border-[#1B3C53] bg-white">
           <CardHeader className="flex flex-row items-center justify-between">
             <div>
-              <CardTitle className="text-[#5854FF]">Recent Orders</CardTitle>
+              <CardTitle className="text-[#1B3C53]">Recent Orders</CardTitle>
               <CardDescription className="text-black">
                 Latest customer orders and their status
               </CardDescription>
@@ -152,10 +152,10 @@ export function CompanyAdminDashboard() {
         </Card>
 
         {/* Delivery Updates */}
-        <Card className="shadow-card bg-white border border-[#5854FF]">
+        <Card className="shadow-card bg-white border border-[#1B3C53]">
           <CardHeader className="flex flex-row items-center justify-between">
             <div>
-              <CardTitle className="text-[#5854FF]">Delivery Updates</CardTitle>
+              <CardTitle className="text-[#1B3C53]">Delivery Updates</CardTitle>
               <CardDescription className="text-black">
                 Real-time delivery driver status
               </CardDescription>
@@ -190,7 +190,7 @@ export function CompanyAdminDashboard() {
       </div>
 
       {/* Quick Actions */}
-      <Card className="shadow-card bg-[#5854FF]">
+      <Card className="shadow-card bg-[#1B3C53]">
         <CardHeader>
           <CardTitle className="text-white">Quick Actions</CardTitle>
           <CardDescription className="text-white/50">
@@ -199,19 +199,19 @@ export function CompanyAdminDashboard() {
         </CardHeader>
         <CardContent>
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-            <Button variant="outline" className="h-20 flex-col gap-2 bg-white border border-[#5854FF]">
+            <Button variant="outline" className="h-20 flex-col gap-2 bg-white border border-[#1B3C53]">
               <Package className="h-6 w-6 text-black"/>
               <span className="text-black">Manage Inventory</span>
             </Button>
-            <Button variant="outline" className="h-20 flex-col gap-2 bg-white border border-[#5854FF]">
+            <Button variant="outline" className="h-20 flex-col gap-2 bg-white border border-[#1B3C53]">
               <Users className="h-6 w-6 text-black" />
               <span className="text-black">Add Customer</span>
             </Button>
-            <Button variant="outline" className="h-20 flex-col gap-2 bg-white border border-[#5854FF]">
+            <Button variant="outline" className="h-20 flex-col gap-2 bg-white border border-[#1B3C53]">
               <Truck className="h-6 w-6 text-black"/>
               <span className="text-black">Schedule Delivery</span>
             </Button>
-            <Button variant="outline" className="h-20 flex-col gap-2 bg-white border border-[#5854FF]">
+            <Button variant="outline" className="h-20 flex-col gap-2 bg-white border border-[#1B3C53]">
               <TrendingUp className="h-6 w-6 text-black" />
               <span className="text-black">View Reports</span>
             </Button>

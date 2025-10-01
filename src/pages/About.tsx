@@ -150,7 +150,7 @@ export default function About() {
       </section>
 
       {/* Our Story Section */}
-      <section className="py-10 bg-[#5854FF]"
+      <section className="py-10 bg-[#1B3C53]"
         style={{
           backgroundImage: "url('/Water.png')",
           backgroundSize: "cover",
@@ -215,7 +215,7 @@ export default function About() {
       </section>
 
       {/* Team Section */}
-      <section className="py-20 bg-[#5854FF]"
+      <section className="py-20 bg-[#1B3C53]"
         style={{
           backgroundImage: "url('/Water.png')",
           backgroundSize: "cover",
@@ -250,7 +250,7 @@ export default function About() {
       <section className="py-20 bg-white text-blue-500">
         <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl md:text-4xl font-bold mb-6 text-[#1B3C53]">Our Mission</h2>
-          <p className="text-xl text-[#5854FF]/50 mb-8">
+          <p className="text-xl text-[#1B3C53]/50 mb-8">
             To provide every customer with pure, fresh water through reliable delivery service,
             exceptional customer care, and a commitment to environmental sustainability. We believe
             clean water is a fundamental necessity, and we're dedicated to making it accessible,
@@ -272,7 +272,7 @@ export default function About() {
       </section>
 
       {/* Contact CTA */}
-      <section className="py-16 bg-[#5854FF]"
+      <section className="py-16 bg-[#1B3C53]"
         style={{
           backgroundImage: "url('/Water.png')",
           backgroundSize: "cover",

@@ -66,15 +66,15 @@ export default function Register() {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-subtle px-4 py-8 bg-white">
-      <Card className="w-full max-w-md border border-[#5854FF] bg-[#5854FF]">
+      <Card className="w-full max-w-md border border-[#1B3C53] bg-[#1B3C53]">
         <CardHeader className="text-center">
           <div className="flex justify-center mb-4">
-            <div className="w-12 h-12 bg-gradient-primary rounded-full flex items-center justify-center">
+            <div className="w-12 h-12 bg-[#1B3C53] rounded-full flex items-center justify-center">
               <Droplets className="h-6 w-6 text-white" />
             </div>
           </div>
           <CardTitle className="text-2xl">Create Account</CardTitle>
-          <CardDescription className="text-white/50">
+          <CardDescription className="text-white/70">
             Join AquaFlow and start getting fresh water delivered to your door
           </CardDescription>
         </CardHeader>
@@ -227,7 +227,7 @@ export default function Register() {
               {isLoading ? "Creating Account..." : "Create Account"}
             </Button>
 
-            <div className="text-center text-sm text-black">
+            <div className="text-center text-sm text-white">
               Already have an account?{" "}
               <Link to="/login" className="text-black">
                 Sign in here

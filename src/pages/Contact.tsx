@@ -339,7 +339,7 @@ export default function Contact() {
 
         {/* FAQ Section */}
         <div className="mt-16">
-          <Card className="bg-[#5854FF]"
+          <Card className="bg-[#1B3C53]"
             style={{
               backgroundImage: "url('/Water.png')",
               backgroundSize: "cover",

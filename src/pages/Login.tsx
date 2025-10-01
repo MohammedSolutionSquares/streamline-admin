@@ -30,7 +30,7 @@ export default function Login() {
         title: "Login Successful",
         description: "Welcome back to AquaFlow!",
       });
-      
+
       // Check if it's admin login
       if (formData.email.includes("admin")) {
         navigate("/admin");
@@ -45,16 +45,16 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-subtle px-4">
-      <Card className="w-full max-w-md">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-subtle px-4 bg-white">
+      <Card className="w-full max-w-md border border-[#5854FF] bg-[#5854FF]">
         <CardHeader className="text-center">
           <div className="flex justify-center mb-4">
             <div className="w-12 h-12 bg-gradient-primary rounded-full flex items-center justify-center">
               <Droplets className="h-6 w-6 text-white" />
             </div>
           </div>
-          <CardTitle className="text-2xl">Welcome Back</CardTitle>
-          <CardDescription>
+          <CardTitle className="text-2xl text-white">Welcome Back</CardTitle>
+          <CardDescription className="text-white">
             Sign in to your AquaFlow account to manage your water deliveries
           </CardDescription>
         </CardHeader>
@@ -63,6 +63,7 @@ export default function Login() {
             <div className="space-y-2">
               <Label htmlFor="email">Email Address</Label>
               <Input
+                className="bg-white text-black"
                 id="email"
                 type="email"
                 placeholder="Enter your email"
@@ -76,6 +77,7 @@ export default function Login() {
               <Label htmlFor="password">Password</Label>
               <div className="relative">
                 <Input
+                  className="bg-white text-black"
                   id="password"
                   type={showPassword ? "text" : "password"}
                   placeholder="Enter your password"
@@ -91,9 +93,9 @@ export default function Login() {
                   onClick={() => setShowPassword(!showPassword)}
                 >
                   {showPassword ? (
-                    <EyeOff className="h-4 w-4" />
+                    <EyeOff className="h-4 w-4 text-black" />
                   ) : (
-                    <Eye className="h-4 w-4" />
+                    <Eye className="h-4 w-4 text-black" />
                   )}
                 </Button>
               </div>
@@ -112,7 +114,7 @@ export default function Login() {
               </div>
               <Link
                 to="/forgot-password"
-                className="text-sm text-primary hover:underline"
+                className="text-sm hover:underline text-white/50"
               >
                 Forgot password?
               </Link>
@@ -120,27 +122,27 @@ export default function Login() {
 
             <Button
               type="submit"
-              className="w-full"
+              className="w-full text-[#5854FF] bg-white"
               disabled={isLoading}
             >
-              {isLoading ? "Signing in..." : "Sign In"}
+              {isLoading ? "Loading...." : "Sign In"}
             </Button>
 
-            <div className="text-center text-sm text-muted-foreground">
+            <div className="text-center text-white/50 text-sm">
               Don't have an account?{" "}
-              <Link to="/register" className="text-primary hover:underline">
+              <Link to="/register" className="text-white hover:underline">
                 Sign up here
               </Link>
             </div>
           </form>
 
           <div className="mt-6">
-            <div className="text-center text-sm text-muted-foreground mb-4">
+            <div className="text-center text-white text-sm text-muted-foreground mb-4">
               Demo Accounts:
             </div>
             <div className="grid grid-cols-2 gap-2 text-xs">
               <Button
-                variant="outline"
+              className="border border-white bg-transparent text-white"
                 size="sm"
                 onClick={() => setFormData({
                   email: "admin@aquaflow.com",
@@ -151,7 +153,7 @@ export default function Login() {
                 Admin Login
               </Button>
               <Button
-                variant="outline"
+              className="border border-white bg-transparent text-white"
                 size="sm"
                 onClick={() => setFormData({
                   email: "customer@example.com",

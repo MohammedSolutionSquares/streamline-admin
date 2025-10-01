@@ -51,17 +51,17 @@ export function ManagerDashboard() {
     <div className="space-y-6">
       <div className="flex justify-between items-start">
         <div>
-          <h2 className="text-3xl font-bold tracking-tight">Management Dashboard</h2>
-          <p className="text-muted-foreground">
+          <h2 className="text-3xl font-bold tracking-tight text-[#5854FF]">Management Dashboard</h2>
+          <p className="text-black/50">
             Oversee operations and team performance
           </p>
         </div>
         <div className="flex gap-2">
-          <Button variant="outline" size="sm">
+          <Button variant="outline" size="sm" className="bg-[#5854FF]">
             <Clock className="h-4 w-4 mr-2" />
             Schedule
           </Button>
-          <Button size="sm" className="bg-gradient-primary">
+          <Button size="sm" className="bg-[#5854FF]">
             <BarChart3 className="h-4 w-4 mr-2" />
             Reports
           </Button>
@@ -71,16 +71,16 @@ export function ManagerDashboard() {
       {/* Stats Grid */}
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
         {stats.map((stat) => (
-          <Card key={stat.title} className="shadow-card hover:shadow-elevated transition-shadow">
+          <Card key={stat.title} className="shadow-card hover:shadow-elevated transition-shadow bg-[#5854FF]">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">
                 {stat.title}
               </CardTitle>
-              <stat.icon className={`h-4 w-4 ${stat.color}`} />
+              <stat.icon className={`h-4 w-4 text-white ${stat.color}`} />
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">{stat.value}</div>
-              <p className="text-xs text-muted-foreground">
+              <p className="text-xs text-white">
                 {stat.change}
               </p>
             </CardContent>
@@ -90,10 +90,10 @@ export function ManagerDashboard() {
 
       <div className="grid gap-6 md:grid-cols-2">
         {/* Team Status */}
-        <Card className="shadow-card">
+        <Card className="shadow-card bg-white border border-[#5854FF]">
           <CardHeader>
-            <CardTitle>Team Status</CardTitle>
-            <CardDescription>
+            <CardTitle className="text-black">Team Status</CardTitle>
+            <CardDescription className="text-black">
               Real-time delivery team updates
             </CardDescription>
           </CardHeader>
@@ -102,22 +102,23 @@ export function ManagerDashboard() {
               {teamUpdates.map((team, index) => (
                 <div key={index} className="flex items-center justify-between border-b pb-3 last:border-b-0">
                   <div className="space-y-1">
-                    <p className="text-sm font-medium">{team.driver}</p>
-                    <p className="text-xs text-muted-foreground">
+                    <p className="text-sm font-medium text-black">{team.driver}</p>
+                    <p className="text-xs text-black">
                       {team.orders} orders • {team.area}
                     </p>
                   </div>
-                  <div className="text-right space-y-1">
+                  <div className="text-right space-y-1 ">
                     <Badge 
+                    className="bg-[#5854FF] border border-[#5854FF]"
                       variant={
                         team.status === 'delivering' ? 'default' : 
-                        team.status === 'loading' ? 'secondary' : 
+                        team.status === 'loading' ? 'black' : 
                         'outline'
                       }
                     >
                       {team.status}
                     </Badge>
-                    <p className="text-xs text-muted-foreground flex items-center gap-1">
+                    <p className="text-xs text-black flex items-center gap-1">
                       <Clock className="h-3 w-3" />
                       {team.eta}
                     </p>
@@ -129,10 +130,10 @@ export function ManagerDashboard() {
         </Card>
 
         {/* Priorities */}
-        <Card className="shadow-card">
+        <Card className="shadow-card border border-[#5854FF] bg-white">
           <CardHeader>
-            <CardTitle>Priority Items</CardTitle>
-            <CardDescription>
+            <CardTitle className="text-black">Priority Items</CardTitle>
+            <CardDescription className="text-black">
               Issues requiring management attention
             </CardDescription>
           </CardHeader>
@@ -144,8 +145,8 @@ export function ManagerDashboard() {
                   {priority.type === 'attention' && <Clock className="h-4 w-4 text-warning mt-0.5" />}
                   {priority.type === 'success' && <CheckCircle className="h-4 w-4 text-success mt-0.5" />}
                   <div className="space-y-1">
-                    <p className="text-sm">{priority.message}</p>
-                    <p className="text-xs text-muted-foreground">{priority.time}</p>
+                    <p className="text-sm text-black">{priority.message}</p>
+                    <p className="text-xs text-black">{priority.time}</p>
                   </div>
                 </div>
               ))}
@@ -155,31 +156,31 @@ export function ManagerDashboard() {
       </div>
 
       {/* Quick Actions */}
-      <Card className="shadow-card">
+      <Card className="shadow-card bg-[#5854FF]">
         <CardHeader>
           <CardTitle>Quick Management Actions</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="grid gap-4 md:grid-cols-3 lg:grid-cols-5">
-            <Button variant="outline" className="h-20 flex-col gap-2">
-              <Users className="h-6 w-6" />
-              <span>Manage Staff</span>
+            <Button variant="outline" className="h-20 flex-col gap-2 bg-white">
+              <Users className="h-6 w-6 text-black" />
+              <span className="text-black">Manage Staff</span>
             </Button>
-            <Button variant="outline" className="h-20 flex-col gap-2">
-              <MapPin className="h-6 w-6" />
-              <span>Route Planning</span>
+            <Button variant="outline" className="h-20 flex-col gap-2 bg-white">
+              <MapPin className="h-6 w-6 text-black" />
+              <span className="text-black">Route Planning</span>
             </Button>
-            <Button variant="outline" className="h-20 flex-col gap-2">
-              <BarChart3 className="h-6 w-6" />
-              <span>Performance</span>
+            <Button variant="outline" className="h-20 flex-col gap-2 bg-white">
+              <BarChart3 className="h-6 w-6 text-black" />
+              <span className="text-black">Performance</span>
             </Button>
-            <Button variant="outline" className="h-20 flex-col gap-2">
-              <Clock className="h-6 w-6" />
-              <span>Scheduling</span>
+            <Button variant="outline" className="h-20 flex-col gap-2 bg-white">
+              <Clock className="h-6 w-6 text-black" />
+              <span className="text-black">Scheduling</span>
             </Button>
-            <Button variant="outline" className="h-20 flex-col gap-2">
-              <AlertTriangle className="h-6 w-6" />
-              <span>Issues</span>
+            <Button variant="outline" className="h-20 flex-col gap-2 bg-white">
+              <AlertTriangle className="h-6 w-6 text-black" />
+              <span className="text-black">Issues</span>
             </Button>
           </div>
         </CardContent>

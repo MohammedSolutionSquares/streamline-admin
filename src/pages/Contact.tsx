@@ -5,10 +5,10 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { 
-  MapPin, 
-  Phone, 
-  Mail, 
+import {
+  MapPin,
+  Phone,
+  Mail,
   Clock,
   ArrowLeft,
   Send,
@@ -42,7 +42,7 @@ export default function Contact() {
         title: "Message Sent!",
         description: "We'll get back to you within 24 hours.",
       });
-      
+
       // Reset form
       setFormData({
         name: "",
@@ -112,21 +112,21 @@ export default function Contact() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <Link to="/" className="flex items-center gap-2">
-              <ArrowLeft className="h-5 w-5 text-black" />
-              <span className="font-medium text-black">Back to Home</span>
+              <ArrowLeft className="h-5 w-5 text-[#5854FF]" />
+              <span className="font-medium text-[#5854FF]">Back to Home</span>
             </Link>
             <div className="flex items-center gap-4">
-              <Link to="/about" className="text-black hover:text-primary transition-colors">
+              <Link to="/about" className="text-black transition-colors">
                 About
               </Link>
               {/* <Link to="/products" className="text-black hover:text-primary transition-colors">
                 Products
               </Link> */}
               <Link to="/login">
-                <Button variant="ghost" className="bg-blue-500">Login</Button>
+                <Button className="bg-[#5854FF]">Login</Button>
               </Link>
               <Link to="/register">
-                <Button>Get Started</Button>
+                <Button className="bg-[#5854FF]">Get Started</Button>
               </Link>
             </div>
           </div>
@@ -136,9 +136,9 @@ export default function Contact() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {/* Header */}
         <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold mb-4 text-blue-500">Contact Us</h1>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Have questions about our services? Need help with your delivery? 
+          <h1 className="text-4xl font-bold mb-4 text-[#5854FF]">Contact Us</h1>
+          <p className="text-xl text-black/50 max-w-2xl mx-auto">
+            Have questions about our services? Need help with your delivery?
             We're here to help and would love to hear from you.
           </p>
         </div>
@@ -146,7 +146,7 @@ export default function Contact() {
         <div className="grid lg:grid-cols-3 gap-12">
           {/* Contact Form */}
           <div className="lg:col-span-2">
-            <Card className="bg-blue-500">
+            <Card className="bg-[#5854FF]">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <Send className="h-5 w-5" />
@@ -199,10 +199,10 @@ export default function Contact() {
                     <div className="space-y-2">
                       <Label htmlFor="category">Category</Label>
                       <Select value={formData.category} onValueChange={(value) => handleChange("category", value)}>
-                        <SelectTrigger>
+                        <SelectTrigger className="bg-white text-black">
                           <SelectValue placeholder="Select a category" />
                         </SelectTrigger>
-                        <SelectContent>
+                        <SelectContent className="bg-white text-black">
                           <SelectItem value="general">General Inquiry</SelectItem>
                           <SelectItem value="delivery">Delivery Question</SelectItem>
                           <SelectItem value="billing">Billing Support</SelectItem>
@@ -233,7 +233,7 @@ export default function Contact() {
                       className="bg-white text-black"
                       placeholder="Please provide details about your inquiry..."
                       rows={6}
-                      value={formData.message}   
+                      value={formData.message}
                       onChange={(e) => handleChange("message", e.target.value)}
                       required
                     />
@@ -241,7 +241,7 @@ export default function Contact() {
 
                   <Button
                     type="submit"
-                    className="w-full bg-white text-black"
+                    className="w-full bg-white text-[#5854FF]"
                     disabled={isSubmitting}
                   >
                     {isSubmitting ? "Sending..." : "Send Message"}
@@ -254,22 +254,22 @@ export default function Contact() {
           {/* Contact Information */}
           <div className="space-y-6">
             {/* Contact Methods */}
-            <Card className="bg-blue-500">
+            <Card className="bg-[#5854FF]">
               <CardHeader>
                 <CardTitle>Get in Touch</CardTitle>
-                <CardDescription className="text-white">Choose the best way to reach us</CardDescription>
+                <CardDescription className="text-white/50">Choose the best way to reach us</CardDescription>
               </CardHeader>
               <CardContent className="space-y-6">
                 {contactMethods.map((method, index) => (
                   <div key={index} className="flex items-start gap-3">
-                    <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
-                      <method.icon className="h-5 w-5 text-primary" />
+                    <div className="w-10 h-10 bg-[#5854FF] rounded-lg flex items-center justify-center flex-shrink-0">
+                      <method.icon className="h-5 w-5 text-white" />
                     </div>
                     <div className="flex-1">
-                      <h3 className="font-medium mb-1">{method.title}</h3>
+                      <h3 className="font-medium mb-1 text-white">{method.title}</h3>
                       <p className="text-sm text-white/50 mb-1">{method.description}</p>
-                      <p className="text-sm font-medium text-white">{method.contact}</p>
-                      <p className="text-xs text-muted-foreground text-black">{method.availability}</p>
+                      <p className="text-sm font-medium text-white/50">{method.contact}</p>
+                      <p className="text-xs text-muted-foreground text-white">{method.availability}</p>
                     </div>
                   </div>
                 ))}
@@ -277,7 +277,7 @@ export default function Contact() {
             </Card>
 
             {/* Business Hours */}
-            <Card className="bg-blue-500">
+            <Card className="bg-[#5854FF]">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <Clock className="h-5 w-5" />
@@ -300,8 +300,8 @@ export default function Contact() {
                   </div>
                   <div className="pt-2 border-t">
                     <div className="flex justify-between">
-                      <span className="text-sm font-medium">Emergency Support</span>
-                      <span className="text-sm font-medium text-primary">24/7</span>
+                      <span className="text-sm font-medium text-white/50">Emergency Support</span>
+                      <span className="text-sm font-medium text-white/50">24/7</span>
                     </div>
                   </div>
                 </div>
@@ -309,7 +309,7 @@ export default function Contact() {
             </Card>
 
             {/* Location */}
-            <Card className="bg-blue-500">
+            <Card className="bg-[#5854FF]">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <MapPin className="h-5 w-5" />
@@ -327,8 +327,8 @@ export default function Contact() {
                       United States
                     </p>
                   </div>
-                  <Button variant="outline" size="sm" className="w-full bg-white text-black">
-                    <MapPin className="h-4 w-4 mr-2" />
+                  <Button size="sm" className="w-full bg-white text-[#5854FF]">
+                    <MapPin className="h-4 w-4 mr-2 text-[#5854FF]" />
                     Get Directions
                   </Button>
                 </div>
@@ -339,7 +339,13 @@ export default function Contact() {
 
         {/* FAQ Section */}
         <div className="mt-16">
-          <Card className="bg-blue-500">
+          <Card className="bg-[#5854FF]"
+            style={{
+              backgroundImage: "url('/Water.png')",
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+            }}
+          >
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <FileQuestion className="h-5 w-5" />
@@ -352,7 +358,7 @@ export default function Contact() {
                 {faqs.map((faq, index) => (
                   <div key={index} className="space-y-2">
                     <h3 className="font-medium">{faq.question}</h3>
-                    <p className="text-sm text-white/50">{faq.answer}</p>
+                    <p className="text-sm text-white">{faq.answer}</p>
                   </div>
                 ))}
               </div>
@@ -360,7 +366,7 @@ export default function Contact() {
                 <p className="text-sm text-white mb-4">
                   Can't find what you're looking for?
                 </p>
-                <Button variant="outline" className="bg-white text-black">View All FAQs</Button>
+                <Button className="bg-white text-black">View All FAQs</Button>
               </div>
             </CardContent>
           </Card>

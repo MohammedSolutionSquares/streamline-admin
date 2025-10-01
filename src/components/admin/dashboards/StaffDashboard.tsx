@@ -59,17 +59,17 @@ export function StaffDashboard() {
     <div className="space-y-6">
       <div className="flex justify-between items-start">
         <div>
-          <h2 className="text-3xl font-bold tracking-tight">My Dashboard</h2>
-          <p className="text-muted-foreground">
+          <h2 className="text-3xl font-bold tracking-tigh text-[#5854FF]">My Dashboard</h2>
+          <p className="text-black/50">
             Track your deliveries and daily tasks
           </p>
         </div>
         <div className="flex gap-2">
-          <Button variant="outline" size="sm">
+          <Button variant="outline" size="sm" className="bg-[#5854FF] text-white">
             <Navigation className="h-4 w-4 mr-2" />
             Navigate
           </Button>
-          <Button size="sm" className="bg-gradient-primary">
+          <Button size="sm" className="bg-[#5854FF]">
             <CheckCircle className="h-4 w-4 mr-2" />
             Mark Complete
           </Button>
@@ -79,16 +79,16 @@ export function StaffDashboard() {
       {/* Stats Grid */}
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
         {stats.map((stat) => (
-          <Card key={stat.title} className="shadow-card hover:shadow-elevated transition-shadow">
+          <Card key={stat.title} className="shadow-card hover:shadow-elevated transition-shadow bg-[#5854FF]">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">
                 {stat.title}
               </CardTitle>
-              <stat.icon className={`h-4 w-4 ${stat.color}`} />
+              <stat.icon className={`h-4 w-4 text-white${stat.color}`} />
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">{stat.value}</div>
-              <p className="text-xs text-muted-foreground">
+              <p className="text-xs text-white">
                 {stat.change}
               </p>
             </CardContent>
@@ -98,10 +98,10 @@ export function StaffDashboard() {
 
       <div className="grid gap-6 md:grid-cols-2">
         {/* My Deliveries */}
-        <Card className="shadow-card">
+        <Card className="shadow-card border border-[#5854FF] bg-white">
           <CardHeader>
-            <CardTitle>Today's Deliveries</CardTitle>
-            <CardDescription>
+            <CardTitle className="text-black">Today's Deliveries</CardTitle>
+            <CardDescription className="text-black">
               Your scheduled deliveries for today
             </CardDescription>
           </CardHeader>
@@ -111,16 +111,16 @@ export function StaffDashboard() {
                 <div key={delivery.id} className="flex items-center justify-between border-b pb-3 last:border-b-0">
                   <div className="space-y-1">
                     <div className="flex items-center gap-2">
-                      <p className="text-sm font-medium">{delivery.id}</p>
+                      <p className="text-sm font-medium text-black">{delivery.id}</p>
                       {getStatusBadge(delivery.status)}
                     </div>
-                    <p className="text-sm text-muted-foreground">{delivery.customer}</p>
-                    <p className="text-xs text-muted-foreground">{delivery.address}</p>
+                    <p className="text-sm text-black">{delivery.customer}</p>
+                    <p className="text-xs text-black">{delivery.address}</p>
                   </div>
                   <div className="text-right">
-                    <p className="text-sm font-medium">{delivery.time}</p>
-                    <Button variant="ghost" size="sm" className="mt-1">
-                      <MapPin className="h-3 w-3 mr-1" />
+                    <p className="text-sm font-medium text-black">{delivery.time}</p>
+                    <Button variant="ghost" size="sm" className="mt-1 bg-[#5854FF]">
+                      <MapPin className="h-3 w-3 mr-1 text-white" />
                       Navigate
                     </Button>
                   </div>
@@ -131,37 +131,37 @@ export function StaffDashboard() {
         </Card>
 
         {/* Performance */}
-        <Card className="shadow-card">
+        <Card className="shadow-card border border-[#5854FF] bg-white">
           <CardHeader>
-            <CardTitle>Performance</CardTitle>
-            <CardDescription>
+            <CardTitle className="text-black">Performance</CardTitle>
+            <CardDescription className="text-black">
               Your delivery performance metrics
             </CardDescription>
           </CardHeader>
           <CardContent>
             <div className="space-y-6">
               <div>
-                <div className="flex justify-between text-sm mb-1">
+                <div className="text-black flex justify-between text-sm mb-1">
                   <span>On-time Delivery Rate</span>
                   <span>94%</span>
                 </div>
-                <div className="w-full bg-muted rounded-full h-2">
+                <div className=" text-black w-full bg-muted rounded-full h-2">
                   <div className="bg-success h-2 rounded-full w-[94%]"></div>
                 </div>
               </div>
               
               <div>
-                <div className="flex justify-between text-sm mb-1">
+                <div className="text-black flex justify-between text-sm mb-1">
                   <span>Customer Satisfaction</span>
                   <span>4.8/5</span>
                 </div>
-                <div className="w-full bg-muted rounded-full h-2">
-                  <div className="bg-primary h-2 rounded-full w-[96%]"></div>
+                <div className="w-full bg-white rounded-full h-2">
+                  <div className="bg-black h-2 rounded-full w-[96%]"></div>
                 </div>
               </div>
 
               <div>
-                <div className="flex justify-between text-sm mb-1">
+                <div className="text-black flex justify-between text-sm mb-1">
                   <span>Route Efficiency</span>
                   <span>88%</span>
                 </div>
@@ -175,30 +175,30 @@ export function StaffDashboard() {
       </div>
 
       {/* Quick Actions */}
-      <Card className="shadow-card">
+      <Card className="shadow-card bg-[#5854FF]">
         <CardHeader>
           <CardTitle>Quick Actions</CardTitle>
-          <CardDescription>
+          <CardDescription className="text-white/50">
             Common delivery tasks and tools
           </CardDescription>
         </CardHeader>
         <CardContent>
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-            <Button variant="outline" className="h-20 flex-col gap-2">
-              <Navigation className="h-6 w-6" />
-              <span>Start Route</span>
+            <Button variant="outline" className="h-20 flex-col gap-2 bg-white">
+              <Navigation className="h-6 w-6 text-black" />
+              <span className="text-black">Start Route</span>
             </Button>
-            <Button variant="outline" className="h-20 flex-col gap-2">
-              <CheckCircle className="h-6 w-6" />
-              <span>Mark Delivered</span>
+            <Button variant="outline" className="h-20 flex-col gap-2 bg-white">
+              <CheckCircle className="h-6 w-6 text-black" />
+              <span className="text-black">Mark Delivered</span>
             </Button>
-            <Button variant="outline" className="h-20 flex-col gap-2">
-              <User className="h-6 w-6" />
-              <span>Contact Customer</span>
+            <Button variant="outline" className="h-20 flex-col gap-2 bg-white">
+              <User className="h-6 w-6 text-black" />
+              <span className="text-black">Contact Customer</span>
             </Button>
-            <Button variant="outline" className="h-20 flex-col gap-2">
-              <Clock className="h-6 w-6" />
-              <span>Break Time</span>
+            <Button variant="outline" className="h-20 flex-col gap-2 bg-white">
+              <Clock className="h-6 w-6 text-black" />
+              <span className="text-black">Break Time</span>
             </Button>
           </div>
         </CardContent>

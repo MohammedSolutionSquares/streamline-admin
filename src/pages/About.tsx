@@ -1,12 +1,12 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { 
-  Droplets, 
-  Users, 
-  Award, 
-  Shield, 
-  Truck, 
+import {
+  Droplets,
+  Users,
+  Award,
+  Shield,
+  Truck,
   Leaf,
   ArrowLeft,
   MapPin,
@@ -80,21 +80,21 @@ export default function About() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <Link to="/" className="flex items-center gap-2">
-              <ArrowLeft className="h-5 w-5 text-black" />
-              <span className="font-medium text-black">Back to Home</span>
+              <ArrowLeft className="h-5 w-5 text-[#5854FF]" />
+              <span className="font-medium text-[#5854FF]">Back to Home</span>
             </Link>
             <div className="flex items-center gap-4">
               {/* <Link to="/products" className="text-black hover:text-primary transition-colors">
                 Products
               </Link> */}
-              <Link to="/contact" className="text-black hover:text-primary transition-colors">
+              <Link to="/contact" className="text-[#5854FF] transition-colors">
                 Contact
               </Link>
               <Link to="/login">
-                <Button variant="ghost" className="bg-blue-500">Login</Button>
+                <Button variant="ghost" className="bg-[#5854FF]">Login</Button>
               </Link>
               <Link to="/register">
-                <Button>Get Started</Button>
+                <Button className="bg-[#5854FF]">Get Started</Button>
               </Link>
             </div>
           </div>
@@ -102,24 +102,30 @@ export default function About() {
       </nav>
 
       {/* Hero Section */}
-      <section className="bg-gradient-primary text-white py-20">
+      <section className="bg-[#5854FF] text-white py-20"
+        style={{
+          backgroundImage: "url('/Water.png')",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl">
             <h1 className="text-4xl md:text-6xl font-bold mb-6">
               About WaterSquares
             </h1>
-            <p className="text-xl md:text-2xl text-white/90 mb-8">
-              We're on a mission to provide pure, fresh water to every home and business, 
+            <p className="text-xl md:text-2xl text-white/50 mb-8">
+              We're on a mission to provide pure, fresh water to every home and business,
               one delivery at a time. Since 2016, we've been the trusted choice for water delivery.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <Link to="/products">
-                <Button size="lg" variant="secondary" className="text-lg px-8">
+                <Button size="lg" variant="secondary" className="text-lg px-8 text-[#5854FF]">
                   View Our Services
                 </Button>
               </Link>
               <Link to="/contact">
-                <Button size="lg" variant="outline" className="text-lg px-8 border-white/20 text-white hover:bg-white/10">
+                <Button size="lg" className="text-lg px-8 border-white/20 text-[#5854FF] bg-white">
                   Contact Us
                 </Button>
               </Link>
@@ -134,9 +140,9 @@ export default function About() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {stats.map((stat, index) => (
               <div key={index} className="text-center">
-                <stat.icon className="h-8 w-8 text-primary mx-auto mb-2" />
-                <div className="text-3xl font-bold text-blue-500 mb-1">{stat.value}</div>
-                <div className="text-muted-foreground">{stat.label}</div>
+                <stat.icon className="h-8 w-8 text-[#5854FF] mx-auto mb-2" />
+                <div className="text-3xl font-bold text-[#5854FF] mb-1">{stat.value}</div>
+                <div className="text-[#5854FF]">{stat.label}</div>
               </div>
             ))}
           </div>
@@ -144,26 +150,32 @@ export default function About() {
       </section>
 
       {/* Our Story Section */}
-      <section className="py-10 bg-blue-500">
+      <section className="py-10 bg-[#5854FF]"
+        style={{
+          backgroundImage: "url('/Water.png')",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
               <h2 className="text-3xl md:text-4xl font-bold mb-6">Our Story</h2>
-              <div className="space-y-4 text-white">
+              <div className="space-y-4 text-white/50">
                 <p>
-                  Founded in 2016 by Sarah Johnson, WaterSquares started as a small local business 
-                  with a simple goal: to provide families with access to pure, high-quality water 
+                  Founded in 2016 by Sarah Johnson, WaterSquares started as a small local business
+                  with a simple goal: to provide families with access to pure, high-quality water
                   delivered right to their doorstep.
                 </p>
                 <p>
-                  What began as a single delivery truck serving just a few neighborhoods has grown 
-                  into a trusted water delivery service spanning 25+ cities. Our commitment to 
-                  quality, reliability, and exceptional customer service has earned us the trust 
+                  What began as a single delivery truck serving just a few neighborhoods has grown
+                  into a trusted water delivery service spanning 25+ cities. Our commitment to
+                  quality, reliability, and exceptional customer service has earned us the trust
                   of over 10,000 satisfied customers.
                 </p>
                 <p>
-                  Today, we continue to innovate and expand our services while staying true to 
-                  our core values: providing pure water, reliable service, and building lasting 
+                  Today, we continue to innovate and expand our services while staying true to
+                  our core values: providing pure water, reliable service, and building lasting
                   relationships with our customers and communities.
                 </p>
               </div>
@@ -181,14 +193,14 @@ export default function About() {
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl text-blue-500 font-bold mb-4">Our Values</h2>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+            <h2 className="text-3xl md:text-4xl text-[#5854FF] font-bold mb-4">Our Values</h2>
+            <p className="text-xl text-black/50 max-w-2xl mx-auto">
               These core values guide everything we do and shape our commitment to our customers
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {values.map((value, index) => (
-              <Card key={index} className="text-center bg-blue-500">
+              <Card key={index} className="text-center bg-[#5854FF]">
                 <CardHeader>
                   <value.icon className="h-12 w-12 text-white mx-auto mb-4" />
                   <CardTitle className="text-xl">{value.title}</CardTitle>
@@ -203,7 +215,13 @@ export default function About() {
       </section>
 
       {/* Team Section */}
-      <section className="py-20 bg-blue-500">
+      <section className="py-20 bg-[#5854FF]"
+        style={{
+          backgroundImage: "url('/Water.png')",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">Meet Our Team</h2>
@@ -215,12 +233,12 @@ export default function About() {
             {team.map((member, index) => (
               <Card key={index} className="text-center bg-white">
                 <CardContent className="p-6">
-                  <div className="w-24 h-24 bg-gradient-primary rounded-full mx-auto mb-4 flex items-center justify-center">
+                  <div className="w-24 h-24 bg-[#5854FF] rounded-full mx-auto mb-4 flex items-center justify-center">
                     <Users className="h-12 w-12 text-white" />
                   </div>
-                  <h3 className="text-lg text-blue-500 font-semibold mb-1">{member.name}</h3>
-                  <Badge variant="secondary" className="mb-3">{member.role}</Badge>
-                  <p className="text-sm text-muted-foreground">{member.description}</p>
+                  <h3 className="text-lg text-[#5854FF] font-semibold mb-1">{member.name}</h3>
+                  <Badge variant="secondary" className="mb-3 text-[#5854FF]">{member.role}</Badge>
+                  <p className="text-sm text-black/50">{member.description}</p>
                 </CardContent>
               </Card>
             ))}
@@ -231,21 +249,21 @@ export default function About() {
       {/* Mission Section */}
       <section className="py-20 bg-white text-blue-500">
         <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6">Our Mission</h2>
-          <p className="text-xl text-blue/90 mb-8">
-            To provide every customer with pure, fresh water through reliable delivery service, 
-            exceptional customer care, and a commitment to environmental sustainability. We believe 
-            clean water is a fundamental necessity, and we're dedicated to making it accessible, 
+          <h2 className="text-3xl md:text-4xl font-bold mb-6 text-[#5854FF]">Our Mission</h2>
+          <p className="text-xl text-[#5854FF]/50 mb-8">
+            To provide every customer with pure, fresh water through reliable delivery service,
+            exceptional customer care, and a commitment to environmental sustainability. We believe
+            clean water is a fundamental necessity, and we're dedicated to making it accessible,
             affordable, and convenient for everyone.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link to="/register">
-              <Button size="lg" variant="secondary" className="text-lg px-8">
+              <Button size="lg" className="text-lg px-8 text-white bg-[#5854FF]">
                 Join Our Mission
               </Button>
             </Link>
             <Link to="/contact">
-              <Button size="lg" variant="outline" className="text-lg px-8 border-white/20 text-white hover:bg-white/10">
+              <Button size="lg" className="text-lg px-8 border-white/20 text-white bg-[#5854FF]">
                 Get in Touch
               </Button>
             </Link>
@@ -254,7 +272,13 @@ export default function About() {
       </section>
 
       {/* Contact CTA */}
-      <section className="py-16 bg-blue-500">
+      <section className="py-16 bg-[#5854FF]"
+        style={{
+          backgroundImage: "url('/Water.png')",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+      >
         <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
           <h2 className="text-2xl md:text-3xl font-bold mb-4">Ready to Experience WaterSquares?</h2>
           <p className="text-lg text-white/50 mb-8">
@@ -262,12 +286,12 @@ export default function About() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link to="/products">
-              <Button size="lg" className="text-lg px-8 bg-white text-black">
+              <Button size="lg" className="text-lg px-8 text-[#5854FF] bg-white">
                 Browse Products
               </Button>
             </Link>
             <Link to="/contact">
-              <Button size="lg" variant="outline" className="text-lg px-8 bg-white text-black">
+              <Button size="lg" className="text-lg px-8 bg-white text-[#5854FF]">
                 Ask Questions
               </Button>
             </Link>
@@ -282,14 +306,14 @@ export default function About() {
             <div>
               <div className="flex items-center gap-2 mb-4">
                 <Droplets className="h-6 w-6 text-primary" />
-                <span className="text-lg font-bold text-blue-500">WaterSquares</span>
+                <span className="text-lg font-bold text-[#5854FF]">WaterSquares</span>
               </div>
-              <p className="text-muted-foreground mb-4">
+              <p className="text-black/50 mb-4">
                 Premium water delivery service bringing pure, fresh water to your doorstep.
               </p>
             </div>
             <div>
-              <h3 className="font-semibold mb-4 text-blue-500">Company</h3>
+              <h3 className="font-semibold mb-4 text-[#5854FF]">Company</h3>
               <div className="space-y-2">
                 <Link to="/about" className="block text-muted-foreground hover:text-primary">About Us</Link>
                 {/* <Link to="/products" className="block text-muted-foreground hover:text-primary">Products</Link> */}
@@ -297,7 +321,7 @@ export default function About() {
               </div>
             </div>
             <div>
-              <h3 className="font-semibold mb-4 text-blue-500">Service</h3>
+              <h3 className="font-semibold mb-4 text-[#5854FF]">Service</h3>
               <div className="space-y-2">
                 <Link to="/login" className="block text-muted-foreground hover:text-primary">Login</Link>
                 <Link to="/register" className="block text-muted-foreground hover:text-primary">Register</Link>
@@ -305,7 +329,7 @@ export default function About() {
               </div>
             </div>
             <div>
-              <h3 className="font-semibold mb-4 text-blue-500">Contact Info</h3>
+              <h3 className="font-semibold mb-4 text-[#5854FF]">Contact Info</h3>
               <div className="space-y-2 text-muted-foreground">
                 <div className="flex items-center gap-2">
                   <Phone className="h-4 w-4" />

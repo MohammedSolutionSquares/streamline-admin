@@ -33,7 +33,9 @@ function DashboardContent() {
 const Index = () => {
   return (
     <RoleProvider>
-      <DashboardContent />
+       <AdminLayout>
+        <DashboardContent />
+      </AdminLayout>
     </RoleProvider>
   );
 };

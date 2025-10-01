@@ -30,7 +30,7 @@ import {
 } from "@/components/ui/sidebar";
 
 const adminMenuItems = [
-  { title: "Dashboard", url: "/admin", icon: Home },
+  { title: "Dashboard", url: "/dashboard", icon: Home },
   { title: "Companies", url: "/companies", icon: Building2 },
   { title: "All Users", url: "/users", icon: Users },
   { title: "Analytics", url: "/analytics", icon: BarChart3 },
@@ -39,7 +39,7 @@ const adminMenuItems = [
 ];
 
 const companyAdminMenuItems = [
-  { title: "Dashboard", url: "/", icon: Home },
+  { title: "Dashboard", url: "/dashboard", icon: Home },
   { title: "Orders", url: "/orders", icon: Package },
   { title: "Deliveries", url: "/deliveries", icon: Truck },
   { title: "Inventory", url: "/inventory", icon: Droplets },
@@ -52,7 +52,7 @@ const companyAdminMenuItems = [
 ];
 
 const managerMenuItems = [
-  { title: "Dashboard", url: "/", icon: Home },
+  { title: "Dashboard", url: "/dashboard", icon: Home },
   { title: "Orders", url: "/orders", icon: Package },
   { title: "Deliveries", url: "/deliveries", icon: Truck },
   { title: "Customers", url: "/customers", icon: UserCheck },
@@ -61,7 +61,7 @@ const managerMenuItems = [
 ];
 
 const staffMenuItems = [
-  { title: "Dashboard", url: "/", icon: Home },
+  { title: "Dashboard", url: "/dashboard", icon: Home },
   { title: "My Deliveries", url: "/my-deliveries", icon: Truck },
   { title: "Orders", url: "/orders", icon: Package },
   { title: "Profile", url: "/profile", icon: Settings },
@@ -154,7 +154,6 @@ export function AdminSidebar() {
                       end 
                       className={({ isActive }) => `
                         flex items-center gap-3 px-3 py-2 rounded-lg transition-all duration-200
-                        ${getNavCls({ isActive })}
                       `}
                     >
                       <item.icon className="h-5 w-5 flex-shrink-0" />

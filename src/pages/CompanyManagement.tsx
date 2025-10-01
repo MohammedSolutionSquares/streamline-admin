@@ -10,6 +10,7 @@ import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, 
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Building2, Plus, Trash2, Edit, Mail, Phone, MapPin } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { AdminLayout } from "@/components/admin/AdminLayout";
 
 interface Company {
   id: string;
@@ -196,6 +197,7 @@ export function CompanyManagement() {
   };
 
   return (
+    <AdminLayout>
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
@@ -470,5 +472,6 @@ export function CompanyManagement() {
         </CardContent>
       </Card>
     </div>
+    </AdminLayout>
   );
 }

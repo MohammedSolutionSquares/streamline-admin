@@ -158,12 +158,12 @@ export function CommonList<T>(props: CommonListProps<T>) {
   };
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-4 bg-white p-3 rounded-2xl">
       {(title || description || enableSearch || renderToolbarActions) && (
         <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
           <div className="space-y-1">
-            {title && <div className="text-base font-semibold leading-none tracking-tight">{title}</div>}
-            {description && <div className="text-sm text-muted-foreground">{description}</div>}
+            {title && <div className="text-base font-semibold leading-none tracking-tight text-black">{title}</div>}
+            {description && <div className="text-sm text-black/50">{description}</div>}
           </div>
 
           <div className="flex items-center gap-2 w-full md:w-auto">
@@ -173,9 +173,9 @@ export function CommonList<T>(props: CommonListProps<T>) {
                   value={localSearch}
                   onChange={(e) => handleSearchChange(e.target.value)}
                   placeholder={searchPlaceholder}
-                  className="pl-9"
+                  className="pl-9 bg-[#1B3C53] text-white"
                 />
-                <Search className="absolute left-2 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                <Search className="absolute left-2 top-1/2 -translate-y-1/2 h-4 w-4 text-white" />
               </div>
             )}
             {renderToolbarActions && (
@@ -198,6 +198,7 @@ export function CommonList<T>(props: CommonListProps<T>) {
               {selectable && (
                 <TableHead className="w-10">
                   <Checkbox
+                  className="bg-white text-black-50"
                     checked={allSelected}
                     onCheckedChange={(v) => toggleAll(Boolean(v))}
                     aria-checked={someSelected ? "mixed" : allSelected}
@@ -219,9 +220,9 @@ export function CommonList<T>(props: CommonListProps<T>) {
                         className="-ml-2 px-2"
                         onClick={() => handleSort(key)}
                       >
-                        <span className="mr-1">{col.header}</span>
-                        {dir === "asc" && <ArrowUpNarrowWide className="h-4 w-4" />}
-                        {dir === "desc" && <ArrowDownNarrowWide className="h-4 w-4" />}
+                        <span className="mr-1 text-black">{col.header}</span>
+                        {dir === "asc" && <ArrowUpNarrowWide className="h-4 w-4 text-black" />}
+                        {dir === "desc" && <ArrowDownNarrowWide className="h-4 w-4 text-black" />}
                       </Button>
                     ) : (
                       col.header
@@ -239,7 +240,7 @@ export function CommonList<T>(props: CommonListProps<T>) {
               <TableRow>
                 <TableCell colSpan={(columns.length + (selectable ? 1 : 0) + (renderRowActions ? 1 : 0)) as any}>
                   {emptyState || (
-                    <div className="py-10 text-center text-sm text-muted-foreground">No data found.</div>
+                    <div className="py-10 text-center text-sm text-black">No data found.</div>
                   )}
                 </TableCell>
               </TableRow>
@@ -249,7 +250,7 @@ export function CommonList<T>(props: CommonListProps<T>) {
                 return (
                   <TableRow key={id} data-state={selected[id] ? "selected" : undefined}>
                     {selectable && (
-                      <TableCell className="w-10">
+                      <TableCell className="w-10 text-black">
                         <Checkbox checked={!!selected[id]} onCheckedChange={(v) => toggleOne(id, Boolean(v))} />
                       </TableCell>
                     )}
@@ -261,7 +262,7 @@ export function CommonList<T>(props: CommonListProps<T>) {
                       else if (col.accessor) content = col.accessor(row);
                       else content = (row as any)[col.key as any] as React.ReactNode;
                       return (
-                        <TableCell key={`${id}-${key}`} className={cn("whitespace-nowrap", col.className)}>
+                        <TableCell key={`${id}-${key}`} className={cn("whitespace-nowrap text-black", col.className)}>
                           {content}
                         </TableCell>
                       );
@@ -276,8 +277,8 @@ export function CommonList<T>(props: CommonListProps<T>) {
         </Table>
       </div>
 
-      <div className="flex items-center justify-between">
-        <div className="text-sm text-muted-foreground">
+      <div className="flex items-center justify-between text-black bg-white">
+        <div className="text-sm">
           {totalItems > 0 ? (
             <span>
               Showing {Math.min((page - 1) * pageSize + 1, totalItems)} -
@@ -297,6 +298,7 @@ export function CommonList<T>(props: CommonListProps<T>) {
               <PaginationItem key={p}>
                 <PaginationLink
                   href="#"
+                  className="bg-white"
                   isActive={p === page}
                   onClick={(e) => { e.preventDefault(); onPageChange(p); }}
                 >

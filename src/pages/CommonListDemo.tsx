@@ -62,8 +62,8 @@ export default function CommonListDemo() {
 
   return (
     <AdminLayout>
-    <div className="max-w-6xl mx-auto px-4 py-8">
-      <Card className="mb-6">
+    <div className="max-w-6xl mx-auto px-4 py-8 ">
+      <Card className="mb-6 bg-[#1B3C53]">
         <CardHeader>
           <CardTitle>Common List Demo</CardTitle>
           <CardDescription>A reusable list scaffold with search, sorting, selection, and pagination.</CardDescription>
@@ -108,7 +108,7 @@ export default function CommonListDemo() {
             )}
             // per-row actions
             renderRowActions={(row) => (
-              <Button size="sm" variant="outline" onClick={() => alert(`Edit ${row.name}`)}>
+              <Button size="sm" variant="outline" className="bg-[#1B3C53]" onClick={() => alert(`Edit ${row.name}`)}>
                 Edit
               </Button>
             )}

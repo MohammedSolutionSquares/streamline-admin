@@ -54,95 +54,95 @@ export function AdminDashboard() {
   return (
     <div className="space-y-6">
       <div>
-        <h2 className="text-3xl font-bold tracking-tight">Admin Dashboard</h2>
+        <h2 className="text-3xl font-bold tracking-tight text-[#5854FF]">System Overview</h2>
         <p className="text-muted-foreground">
           Monitor and manage your entire water delivery platform
         </p>
       </div>
-
       <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
-
         <TabsContent value="overview" className="space-y-6">
-          {/* Stats Grid */}
-          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-            {stats.map((stat) => (
-              <Card key={stat.title} className="shadow-card hover:shadow-elevated transition-shadow">
-                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <CardTitle className="text-sm font-medium">
-                    {stat.title}
-                  </CardTitle>
-                  <stat.icon className={`h-4 w-4 ${stat.color}`} />
-                </CardHeader>
-                <CardContent>
-                  <div className="text-2xl font-bold">{stat.value}</div>
-                  <p className="text-xs text-muted-foreground">
-                    {stat.change}
-                  </p>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
+      {/* Stats Grid */}
+      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4 bg-white">
+        {stats.map((stat) => (
+          <Card key={stat.title} className="shadow-card hover:shadow-elevated bg-[#5854FF] transition-shadow">
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardTitle className="text-sm font-medium">
+                {stat.title}
+              </CardTitle>
+              <stat.icon className={`text-white h-4 w-4 ${stat.color}`} />
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold">{stat.value}</div>
+              <p className="text-white text-xs">
+                {stat.change}
+              </p>
+            </CardContent>
+          </Card>
+        ))}
+      </div>
 
-          <div className="grid gap-6 md:grid-cols-2">
-            {/* Recent Companies */}
-            <Card className="shadow-card">
-              <CardHeader>
-                <CardTitle>Recent Companies</CardTitle>
-                <CardDescription>
-                  Latest registered water delivery companies
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-4">
-                  {recentCompanies.map((company) => (
-                    <div key={company.id} className="flex items-center justify-between">
-                      <div className="space-y-1">
-                        <p className="text-sm font-medium leading-none">
-                          {company.name}
-                        </p>
-                        <p className="text-xs text-muted-foreground">
-                          {company.users} users • {company.orders} orders
-                        </p>
-                      </div>
-                      <Badge 
-                        variant={
-                          company.status === 'active' ? 'default' : 
-                          company.status === 'pending' ? 'secondary' : 
-                          'destructive'
-                        }
-                      >
-                        {company.status}
-                      </Badge>
-                    </div>
-                  ))}
+      <div className="grid gap-6 md:grid-cols-2 ">
+        {/* Recent Companies */}
+        <Card className="shadow-card bg-white border border-[#5854FF]">
+          <CardHeader>
+            <CardTitle className="text-black">Recent Companies</CardTitle>
+            <CardDescription className="text-black">
+              Latest registered water delivery companies
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-4">
+              {recentCompanies.map((company) => (
+                <div key={company.id} className="flex items-center justify-between">
+                  <div className="space-y-1">
+                    <p className="text-sm font-medium leading-none text-black">
+                      {company.name}
+                    </p>
+                    <p className="text-xs text-black">
+                      {company.users} users • {company.orders} orders
+                    </p>
+                  </div>
+                  <Badge 
+                    variant={
+                      company.status === 'active' ? 'default' : 
+                      company.status === 'pending' ? 'secondary' : 
+                      'destructive'
+                    }
+                  >
+                    {company.status}
+                  </Badge>
                 </div>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* System Alerts */}
+        <Card className="shadow-card bg-white border border-[#5854FF]">
+          <CardHeader>
+            <CardTitle className="text-black">System Alerts</CardTitle>
+            <CardDescription className="text-black">
+              Important system notifications and updates
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-4">
+              {systemAlerts.map((alert, index) => (
+                <div key={index} className="flex gap-3">
+                  {alert.type === 'warning' && <AlertTriangle className="h-4 w-4 text-[#5854FF] mt-0.5" />}
+                  {alert.type === 'info' && <Package className="h-4 w-4 text-[#5854FF] mt-0.5" />}
+                  {alert.type === 'success' && <CheckCircle className="h-4 w-4 text-[#5854FF] mt-0.5" />}
+                  <div className="space-y-1">
+                    <p className="text-black">{alert.message}</p>
+                    <p className="text-xs text-black">{alert.time}</p>
+                  </div>
+                </div>
+                ))}
+                </div>
+
               </CardContent>
             </Card>
 
-            {/* System Alerts */}
-            <Card className="shadow-card">
-              <CardHeader>
-                <CardTitle>System Alerts</CardTitle>
-                <CardDescription>
-                  Important system notifications and updates
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-4">
-                  {systemAlerts.map((alert, index) => (
-                    <div key={index} className="flex gap-3">
-                      {alert.type === 'warning' && <AlertTriangle className="h-4 w-4 text-warning mt-0.5" />}
-                      {alert.type === 'info' && <Package className="h-4 w-4 text-info mt-0.5" />}
-                      {alert.type === 'success' && <CheckCircle className="h-4 w-4 text-success mt-0.5" />}
-                      <div className="space-y-1">
-                        <p className="text-sm">{alert.message}</p>
-                        <p className="text-xs text-muted-foreground">{alert.time}</p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
           </div>
         </TabsContent>
 

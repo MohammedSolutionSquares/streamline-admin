@@ -28,7 +28,7 @@ export default function Register() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (formData.password !== formData.confirmPassword) {
       toast({
         title: "Error",
@@ -65,8 +65,8 @@ export default function Register() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-subtle px-4 py-8">
-      <Card className="w-full max-w-md">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-subtle px-4 py-8 bg-white">
+      <Card className="w-full max-w-md border border-[#5854FF] bg-[#5854FF]">
         <CardHeader className="text-center">
           <div className="flex justify-center mb-4">
             <div className="w-12 h-12 bg-gradient-primary rounded-full flex items-center justify-center">
@@ -74,7 +74,7 @@ export default function Register() {
             </div>
           </div>
           <CardTitle className="text-2xl">Create Account</CardTitle>
-          <CardDescription>
+          <CardDescription className="text-white/50">
             Join AquaFlow and start getting fresh water delivered to your door
           </CardDescription>
         </CardHeader>
@@ -84,6 +84,7 @@ export default function Register() {
               <div className="space-y-2">
                 <Label htmlFor="firstName">First Name</Label>
                 <Input
+                  className="bg-white text-black"
                   id="firstName"
                   placeholder="John"
                   value={formData.firstName}
@@ -94,6 +95,7 @@ export default function Register() {
               <div className="space-y-2">
                 <Label htmlFor="lastName">Last Name</Label>
                 <Input
+                  className="bg-white text-black"
                   id="lastName"
                   placeholder="Doe"
                   value={formData.lastName}
@@ -106,6 +108,7 @@ export default function Register() {
             <div className="space-y-2">
               <Label htmlFor="email">Email Address</Label>
               <Input
+                className="bg-white text-black"
                 id="email"
                 type="email"
                 placeholder="john@example.com"
@@ -118,6 +121,7 @@ export default function Register() {
             <div className="space-y-2">
               <Label htmlFor="phone">Phone Number</Label>
               <Input
+                className="bg-white text-black"
                 id="phone"
                 type="tel"
                 placeholder="+1 (555) 123-4567"
@@ -130,12 +134,12 @@ export default function Register() {
             <div className="space-y-2">
               <Label htmlFor="accountType">Account Type</Label>
               <Select value={formData.accountType} onValueChange={(value) => handleChange("accountType", value)}>
-                <SelectTrigger>
-                  <SelectValue placeholder="Select account type" />
+                <SelectTrigger className="bg-white text-black">
+                  <SelectValue placeholder="Select account type" className="bg-white text-black" />
                 </SelectTrigger>
-                <SelectContent>
+                <SelectContent className="bg-white text-black">
                   <SelectItem value="customer">Customer</SelectItem>
-                  <SelectItem value="business">Business</SelectItem>
+                  {/* <SelectItem value="business">Business</SelectItem> */}
                   <SelectItem value="company">Water Company</SelectItem>
                 </SelectContent>
               </Select>
@@ -145,6 +149,7 @@ export default function Register() {
               <Label htmlFor="password">Password</Label>
               <div className="relative">
                 <Input
+                  className="bg-white text-black" 
                   id="password"
                   type={showPassword ? "text" : "password"}
                   placeholder="Create a strong password"
@@ -160,9 +165,9 @@ export default function Register() {
                   onClick={() => setShowPassword(!showPassword)}
                 >
                   {showPassword ? (
-                    <EyeOff className="h-4 w-4" />
+                    <EyeOff className="h-4 w-4 text-black" />
                   ) : (
-                    <Eye className="h-4 w-4" />
+                    <Eye className="h-4 w-4 text-black" />
                   )}
                 </Button>
               </div>
@@ -172,6 +177,7 @@ export default function Register() {
               <Label htmlFor="confirmPassword">Confirm Password</Label>
               <div className="relative">
                 <Input
+                className="bg-white text-black"
                   id="confirmPassword"
                   type={showConfirmPassword ? "text" : "password"}
                   placeholder="Confirm your password"
@@ -187,9 +193,9 @@ export default function Register() {
                   onClick={() => setShowConfirmPassword(!showConfirmPassword)}
                 >
                   {showConfirmPassword ? (
-                    <EyeOff className="h-4 w-4" />
+                    <EyeOff className="h-4 w-4 text-black"/>
                   ) : (
-                    <Eye className="h-4 w-4" />
+                    <Eye className="h-4 w-4 text-black" />
                   )}
                 </Button>
               </div>
@@ -203,11 +209,11 @@ export default function Register() {
               />
               <Label htmlFor="terms" className="text-sm">
                 I agree to the{" "}
-                <Link to="/terms" className="text-primary hover:underline">
+                <Link to="/terms" className="text-black hover:underline">
                   Terms of Service
                 </Link>{" "}
                 and{" "}
-                <Link to="/privacy" className="text-primary hover:underline">
+                <Link to="/privacy" className="text-black hover:underline">
                   Privacy Policy
                 </Link>
               </Label>
@@ -221,9 +227,9 @@ export default function Register() {
               {isLoading ? "Creating Account..." : "Create Account"}
             </Button>
 
-            <div className="text-center text-sm text-muted-foreground">
+            <div className="text-center text-sm text-black">
               Already have an account?{" "}
-              <Link to="/login" className="text-primary hover:underline">
+              <Link to="/login" className="text-black">
                 Sign in here
               </Link>
             </div>

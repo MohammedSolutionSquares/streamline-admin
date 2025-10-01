@@ -5,6 +5,8 @@ import { useRole } from "@/contexts/RoleContext";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Bell, User } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 
 interface AdminLayoutProps {
   children: ReactNode;
@@ -12,6 +14,19 @@ interface AdminLayoutProps {
 
 export function AdminLayout({ children }: AdminLayoutProps) {
   const { user, switchRole } = useRole();
+
+  const handleProfile = (): void => {
+    // Implement navigation to profile when routing is available
+    console.log("Open profile");
+  };
+
+  const handleSettings = (): void => {
+    console.log("Open settings");
+  };
+
+  const handleLogout = (): void => {
+    console.log("Logout clicked");
+  };
 
   const getRoleBadgeVariant = (role: string) => {
     switch (role) {
@@ -33,11 +48,12 @@ export function AdminLayout({ children }: AdminLayoutProps) {
         
         <div className="flex-1 flex flex-col">
           {/* Top Header */}
-          <header className="h-16 border-b bg-card/50 backdrop-blur-sm flex items-center justify-between px-6 sticky top-0 z-40">
-            <div className="flex items-center gap-4">
-              <SidebarTrigger className="text-muted-foreground hover:text-foreground" />
-              <div className="h-6 w-px bg-border" />
-              <h1 className="font-semibold text-foreground">
+          <header className="h-14 md:h-16 bg-white border-b shadow-sm flex items-center gap-4 md:gap-6 px-4 md:px-6 sticky top-0 z-40">
+            {/* Left cluster: menu + title */}
+            <div className="flex items-center gap-3 md:gap-4 min-w-0">
+              <SidebarTrigger className="text-zinc-600 hover:text-zinc-900" />
+              <div className="h-6 w-px bg-zinc-200" />
+              <h1 className="font-semibold text-zinc-900 text-sm md:text-base lg:text-lg truncate">
                 {user?.role === 'admin' && 'System Administration'}
                 {user?.role === 'company_admin' && 'Company Dashboard'}
                 {user?.role === 'manager' && 'Management Panel'}
@@ -45,14 +61,22 @@ export function AdminLayout({ children }: AdminLayoutProps) {
               </h1>
             </div>
 
-            <div className="flex items-center gap-4">
+            {/* Center: search (md+) */}
+            <div className="hidden md:flex flex-1 max-w-xl">
+              <div className="w-full">
+                <Input placeholder="Search…" className="h-9 bg-white text-black border border-[#5854FF]" />
+              </div>
+            </div>
+
+            {/* Right cluster */}
+            <div className="flex items-center gap-4 md:gap-6">
               {/* Role Switcher for Demo */}
               <div className="flex items-center gap-2">
-                <span className="text-sm text-muted-foreground">Role:</span>
+                <span className="text-sm text-zinc-500">Role:</span>
                 <select 
                   value={user?.role}
                   onChange={(e) => switchRole(e.target.value as any)}
-                  className="bg-background border rounded-md px-2 py-1 text-sm"
+                  className="bg-[#5458FF] text-white rounded-full px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#5458FF]/40"
                 >
                   <option value="admin">Admin</option>
                   <option value="company_admin">Company Admin</option>
@@ -61,31 +85,44 @@ export function AdminLayout({ children }: AdminLayoutProps) {
                 </select>
               </div>
 
-              <Button variant="ghost" size="sm" className="relative">
-                <Bell className="h-4 w-4" />
-                <span className="absolute -top-1 -right-1 w-2 h-2 bg-destructive rounded-full"></span>
+              <Button variant="ghost" size="icon" className="relative text-zinc-600 hover:bg-zinc-100">
+                <Bell className="h-5 w-5 text-zinc-700" />
+                <span className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
               </Button>
 
-              <div className="flex items-center gap-2">
-                <div className="w-8 h-8 bg-gradient-primary rounded-full flex items-center justify-center">
-                  <User className="h-4 w-4 text-white" />
-                </div>
-                <div className="text-sm">
-                  <div className="font-medium">{user?.name}</div>
-                  <Badge variant={getRoleBadgeVariant(user?.role || '')} className="text-xs">
-                    {user?.role?.replace('_', ' ')}
-                  </Badge>
-                </div>
-              </div>
+              {/* User dropdown */}
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <button className="flex items-center gap-2 outline-none">
+                    <div className="w-8 h-8 bg-gradient-primary rounded-full flex items-center justify-center">
+                      <User className="h-4 w-4 text-white" />
+                    </div>
+                    <div className="hidden sm:block text-sm text-zinc-900 text-left">
+                      <div className="font-medium leading-tight">{user?.name}</div>
+                      <Badge variant={getRoleBadgeVariant(user?.role || '')} className="text-[10px] md:text-xs rounded-full px-2 bg-blue-600 text-white border-0">
+                        {user?.role?.replace('_', ' ')}
+                      </Badge>
+                    </div>
+                  </button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end" className="w-48">
+                  <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem onClick={handleProfile}>Profile</DropdownMenuItem>
+                  <DropdownMenuItem onClick={handleSettings}>Settings</DropdownMenuItem>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem onClick={handleLogout}>Logout</DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
             </div>
           </header>
 
           {/* Main Content */}
-          <main className="flex-1 p-6 bg-muted/20">
+          <main className="flex-1 p-6 bg-white">
             {children}
           </main>
         </div>
       </div>
     </SidebarProvider>
   );
-}
+} 

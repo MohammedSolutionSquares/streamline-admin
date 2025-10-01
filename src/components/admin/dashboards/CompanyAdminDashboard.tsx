@@ -51,7 +51,7 @@ export function CompanyAdminDashboard() {
   const getStatusBadge = (status: string) => {
     switch (status) {
       case 'preparing':
-        return <Badge variant="secondary">Preparing</Badge>;
+        return <Badge>Preparing</Badge>;
       case 'delivering':
         return <Badge className="bg-accent text-accent-foreground">Delivering</Badge>;
       case 'delivered':
@@ -68,7 +68,7 @@ export function CompanyAdminDashboard() {
       case 'on_route':
         return <Badge className="bg-accent text-accent-foreground">On Route</Badge>;
       case 'loading':
-        return <Badge variant="secondary">Loading</Badge>;
+        return <Badge>Loading</Badge>;
       case 'delivered':
         return <Badge className="bg-success text-white">Completed</Badge>;
       default:
@@ -80,14 +80,14 @@ export function CompanyAdminDashboard() {
     <div className="space-y-6">
       <div className="flex justify-between items-start">
         <div>
-          <h2 className="text-3xl font-bold tracking-tight">Company Dashboard</h2>
-          <p className="text-muted-foreground">
+          <h2 className="text-3xl font-bold tracking-tight text-[#5854FF]">Company Dashboard</h2>
+          <p className="text-black/50">
             Manage your water delivery operations
           </p>
         </div>
         <div className="flex gap-2">
-          <Button variant="outline" size="sm">
-            <MapPin className="h-4 w-4 mr-2" />
+          <Button variant="outline" size="sm" className="bg-blue-500 text-white">
+            <MapPin className="h-4 w-4 mr-2 " />
             View Map
           </Button>
           <Button size="sm" className="bg-gradient-primary">
@@ -97,19 +97,19 @@ export function CompanyAdminDashboard() {
         </div>
       </div>
 
-      {/* Stats Grid */}
+        {/* Stats Grid */}
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
         {stats.map((stat) => (
-          <Card key={stat.title} className="shadow-card hover:shadow-elevated transition-shadow">
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+          <Card key={stat.title} className="shadow-card hover:shadow-elevated transition-shadow bg-[#5854FF]">
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2 text-white">
               <CardTitle className="text-sm font-medium">
                 {stat.title}
               </CardTitle>
-              <stat.icon className={`h-4 w-4 ${stat.color}`} />
+              <stat.icon className={`h-4 w-4 bg-white${stat.color}`} />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">{stat.value}</div>
-              <p className="text-xs text-muted-foreground">
+              <div className="text-2xl font-bold ">{stat.value}</div>
+              <p className="text-xs text-white">
                 {stat.change}
               </p>
             </CardContent>
@@ -119,15 +119,15 @@ export function CompanyAdminDashboard() {
 
       <div className="grid gap-6 md:grid-cols-2">
         {/* Recent Orders */}
-        <Card className="shadow-card">
+        <Card className="shadow-card border border-[#5854FF] bg-white">
           <CardHeader className="flex flex-row items-center justify-between">
             <div>
-              <CardTitle>Recent Orders</CardTitle>
-              <CardDescription>
+              <CardTitle className="text-[#5854FF]">Recent Orders</CardTitle>
+              <CardDescription className="text-black">
                 Latest customer orders and their status
               </CardDescription>
             </div>
-            <Button variant="ghost" size="sm">View All</Button>
+            <Button size="sm">View All</Button>
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
@@ -135,15 +135,15 @@ export function CompanyAdminDashboard() {
                 <div key={order.id} className="flex items-center justify-between border-b pb-3 last:border-b-0">
                   <div className="space-y-1">
                     <div className="flex items-center gap-2">
-                      <p className="text-sm font-medium">{order.id}</p>
+                      <p className="text-sm font-medium text-black">{order.id}</p>
                       {getStatusBadge(order.status)}
                     </div>
-                    <p className="text-sm text-muted-foreground">{order.customer}</p>
-                    <p className="text-xs text-muted-foreground">{order.address}</p>
+                    <p className="text-sm text-black">{order.customer}</p>
+                    <p className="text-xs text-black">{order.address}</p>
                   </div>
                   <div className="text-right">
-                    <p className="text-sm font-medium">{order.amount}</p>
-                    <p className="text-xs text-muted-foreground">{order.time}</p>
+                    <p className="text-sm font-medium text-black">{order.amount}</p>
+                    <p className="text-xs text-black">{order.time}</p>
                   </div>
                 </div>
               ))}
@@ -152,15 +152,15 @@ export function CompanyAdminDashboard() {
         </Card>
 
         {/* Delivery Updates */}
-        <Card className="shadow-card">
+        <Card className="shadow-card bg-white border border-[#5854FF]">
           <CardHeader className="flex flex-row items-center justify-between">
             <div>
-              <CardTitle>Delivery Updates</CardTitle>
-              <CardDescription>
+              <CardTitle className="text-[#5854FF]">Delivery Updates</CardTitle>
+              <CardDescription className="text-black">
                 Real-time delivery driver status
               </CardDescription>
             </div>
-            <Button variant="ghost" size="sm">
+            <Button size="sm">
               <MapPin className="h-4 w-4 mr-1" />
               Track All
             </Button>
@@ -170,14 +170,14 @@ export function CompanyAdminDashboard() {
               {deliveryUpdates.map((delivery, index) => (
                 <div key={index} className="flex items-center justify-between border-b pb-3 last:border-b-0">
                   <div className="space-y-1">
-                    <p className="text-sm font-medium">{delivery.driver}</p>
-                    <p className="text-xs text-muted-foreground">
+                    <p className="text-sm font-medium text-black">{delivery.driver}</p>
+                    <p className="text-xs text-black">
                       {delivery.orders} orders • {delivery.area}
                     </p>
                   </div>
                   <div className="text-right space-y-1">
                     {getDriverStatusBadge(delivery.status)}
-                    <p className="text-xs text-muted-foreground flex items-center gap-1">
+                    <p className="text-xs text-black flex items-center gap-1">
                       <Clock className="h-3 w-3" />
                       {delivery.eta}
                     </p>
@@ -190,30 +190,30 @@ export function CompanyAdminDashboard() {
       </div>
 
       {/* Quick Actions */}
-      <Card className="shadow-card">
+      <Card className="shadow-card bg-[#5854FF]">
         <CardHeader>
-          <CardTitle>Quick Actions</CardTitle>
-          <CardDescription>
+          <CardTitle className="text-white">Quick Actions</CardTitle>
+          <CardDescription className="text-white/50">
             Common tasks and operations
           </CardDescription>
         </CardHeader>
         <CardContent>
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-            <Button variant="outline" className="h-20 flex-col gap-2">
-              <Package className="h-6 w-6" />
-              <span>Manage Inventory</span>
+            <Button variant="outline" className="h-20 flex-col gap-2 bg-white border border-[#5854FF]">
+              <Package className="h-6 w-6 text-black"/>
+              <span className="text-black">Manage Inventory</span>
             </Button>
-            <Button variant="outline" className="h-20 flex-col gap-2">
-              <Users className="h-6 w-6" />
-              <span>Add Customer</span>
+            <Button variant="outline" className="h-20 flex-col gap-2 bg-white border border-[#5854FF]">
+              <Users className="h-6 w-6 text-black" />
+              <span className="text-black">Add Customer</span>
             </Button>
-            <Button variant="outline" className="h-20 flex-col gap-2">
-              <Truck className="h-6 w-6" />
-              <span>Schedule Delivery</span>
+            <Button variant="outline" className="h-20 flex-col gap-2 bg-white border border-[#5854FF]">
+              <Truck className="h-6 w-6 text-black"/>
+              <span className="text-black">Schedule Delivery</span>
             </Button>
-            <Button variant="outline" className="h-20 flex-col gap-2">
-              <TrendingUp className="h-6 w-6" />
-              <span>View Reports</span>
+            <Button variant="outline" className="h-20 flex-col gap-2 bg-white border border-[#5854FF]">
+              <TrendingUp className="h-6 w-6 text-black" />
+              <span className="text-black">View Reports</span>
             </Button>
           </div>
         </CardContent>

@@ -95,9 +95,9 @@ export function AdminSidebar() {
 
   const getNavCls = ({ isActive }: { isActive: boolean }) =>
     isActive 
-      ? "bg-primary text-primary-foreground font-medium shadow-sm" 
-      : "hover:bg-accent/50 text-muted-foreground hover:text-foreground";
-
+      ? "bg-primary text-white font-medium shadow-sm" 
+      : "text-white";
+    
   const getRoleTitle = () => {
     switch (user?.role) {
       case 'admin':
@@ -115,10 +115,10 @@ export function AdminSidebar() {
 
   return (
     <Sidebar
-      className={`${collapsed ? "w-16" : "w-64"} border-r bg-card transition-all duration-300`}
+      className={`${collapsed ? "w-16" : "w-64"} border-r bg-white transition-all duration-300`}
       collapsible="icon"
     >
-      <SidebarContent className="p-4">
+      <SidebarContent className="p-4 bg-[#5A57FF]">
         {/* Header */}
         <div className="mb-6">
           <div className="flex items-center gap-3 mb-2">
@@ -127,8 +127,8 @@ export function AdminSidebar() {
             </div>
             {!collapsed && (
               <div>
-                <h2 className="font-bold text-foreground">AquaFlow</h2>
-                <p className="text-xs text-muted-foreground">{getRoleTitle()}</p>
+                <h2 className="text-white font-bold ">AquaFlow</h2>
+                <p className="text-xs text-muted-foreground text-white/50">{getRoleTitle()}</p>
               </div>
             )}
           </div>
@@ -140,7 +140,7 @@ export function AdminSidebar() {
         </div>
 
         <SidebarGroup>
-          <SidebarGroupLabel className={collapsed ? "sr-only" : ""}>
+          <SidebarGroupLabel className={collapsed ? "sr-only text-white" : "text-white"}>
             Navigation
           </SidebarGroupLabel>
 
@@ -153,11 +153,13 @@ export function AdminSidebar() {
                       to={item.url} 
                       end 
                       className={({ isActive }) => `
+
                         flex items-center gap-3 px-3 py-2 rounded-lg transition-all duration-200
+                        ${getNavCls({ isActive })}
                       `}
                     >
-                      <item.icon className="h-5 w-5 flex-shrink-0" />
-                      {!collapsed && <span className="font-medium">{item.title}</span>}
+                      <item.icon className="h-5 w-5 flex-shrink text-white"/>
+                      {!collapsed && <span className="font-medium text-white">{item.title}</span>}
                     </NavLink>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
@@ -170,17 +172,17 @@ export function AdminSidebar() {
         {!collapsed && user?.role === 'admin' && (
           <div className="mt-auto pt-4 border-t">
             <SidebarGroup>
-              <SidebarGroupLabel>Quick Role Switch</SidebarGroupLabel>
-              <div className="grid grid-cols-2 gap-2 text-xs">
+              <SidebarGroupLabel className="text-white">Quick Role Switch</SidebarGroupLabel>
+              <div className="grid grid-cols-2 gap-2 text-xs text-white">
                 <button 
                   onClick={() => user && user.role !== 'company_admin' && window.location.reload()}
-                  className="px-2 py-1 bg-company-primary/20 text-company-primary rounded hover:bg-company-primary/30 transition-colors"
+                  className="px-2 py-1 bg-company-primary/20 text-company-primary rounded hover:bg-company-primary/30 transition-colors text-white"
                 >
                   Company
                 </button>
                 <button 
                   onClick={() => user && user.role !== 'staff' && window.location.reload()}
-                  className="px-2 py-1 bg-muted text-muted-foreground rounded hover:bg-muted/80 transition-colors"
+                  className="px-2 py-1 bg-white  rounded hover:bg-white/80 transition-colors text-black"
                 >
                   Staff
                 </button>

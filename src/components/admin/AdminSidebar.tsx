@@ -16,6 +16,7 @@ import {
 } from "lucide-react";
 import { NavLink, useLocation } from "react-router-dom";
 import { useRole } from "@/contexts/RoleContext";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 import {
   Sidebar,
@@ -72,7 +73,7 @@ export function AdminSidebar() {
   const { state } = useSidebar();
   const collapsed = state === "collapsed";
   const location = useLocation();
-  const { user } = useRole();
+  const { user, switchRole } = useRole();
   const currentPath = location.pathname;
 
   const getMenuItems = () => {
@@ -168,28 +169,25 @@ export function AdminSidebar() {
           </SidebarGroupContent>
         </SidebarGroup>
 
-        {/* Role Switcher - Only show for admin */}
-        {/* {!collapsed && user?.role === 'admin' && (
-          <div className="mt-auto pt-4 border-t">
+        {/* Role Switcher Dropdown */}
+        {!collapsed && (
+          <div className="mt-auto pt-4 border-t border-white/20">
             <SidebarGroup>
-              <SidebarGroupLabel className="text-white">Quick Role Switch</SidebarGroupLabel>
-              <div className="grid grid-cols-2 gap-2 text-xs text-white">
-                <button 
-                  onClick={() => user && user.role !== 'company_admin' && window.location.reload()}
-                  className="px-2 py-1 bg-white text-[#1B3C53] rounded transition-colors"
-                >
-                  Company
-                </button>
-                <button 
-                  onClick={() => user && user.role !== 'staff' && window.location.reload()}
-                  className="px-2 py-1 bg-white  rounded transition-colors text-black"
-                >
-                  Staff
-                </button>
-              </div>
+              <SidebarGroupLabel className="text-white/70 text-xs mb-2">Switch Role</SidebarGroupLabel>
+              <Select value={user?.role} onValueChange={(value) => switchRole(value as any)}>
+                <SelectTrigger className="w-full bg-white text-[#1B3C53] border-0 focus:ring-2 focus:ring-white/40">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent className="bg-white border border-zinc-200 z-50">
+                  <SelectItem value="admin">Admin</SelectItem>
+                  <SelectItem value="company_admin">Company Admin</SelectItem>
+                  <SelectItem value="manager">Manager</SelectItem>
+                  <SelectItem value="staff">Staff</SelectItem>
+                </SelectContent>
+              </Select>
             </SidebarGroup>
           </div>
-        )} */}
+        )}
       </SidebarContent>
     </Sidebar>
   );

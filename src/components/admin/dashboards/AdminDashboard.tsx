@@ -88,7 +88,7 @@ export function AdminDashboard() {
         {stats.map((stat) => (
           <Card key={stat.title} className="shadow-card hover:shadow-elevated bg-[#1B3C53] transition-shadow">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">
+              <CardTitle className="text-sm font-medium text-white">
                 {stat.title}
               </CardTitle>
               <stat.icon className={`text-white h-4 w-4 ${stat.color}`} />

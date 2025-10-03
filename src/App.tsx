@@ -16,6 +16,7 @@ import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
 import { CompanyManagement } from "./pages/CompanyManagement";
 import AdminDashboardHome from "./pages/AdminDashboardHome";
+import Analytics from "./pages/Analytics";
 import { Sidebar } from "./components/ui/sidebar";
 import { AdminLayout } from "./components/admin/AdminLayout";
 import CommonListDemo from "./pages/CommonListDemo";
@@ -43,6 +44,14 @@ const App = () => (
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/dashboard" element={<AdminDashboardHome />} />
+            <Route
+              path="/analytics"
+              element={
+                <RequireRole allowed={["admin"]}>
+                  <Analytics />
+                </RequireRole>
+              }
+            />
             <Route
               path="/companies"
               element={

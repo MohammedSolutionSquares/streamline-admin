@@ -1,12 +1,15 @@
 import { useState } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Building2, Users, Package, TrendingUp, AlertTriangle, CheckCircle } from "lucide-react";
+import { Building2, Users, Package, TrendingUp, AlertTriangle, CheckCircle, BarChart3, ArrowRight } from "lucide-react";
 import { CompanyManagement } from "../../../pages/CompanyManagement";
+import { useNavigate } from "react-router-dom";
 
 export function AdminDashboard() {
   const [activeTab, setActiveTab] = useState("overview");
+  const navigate = useNavigate();
   const stats = [
     {
       title: "Total Companies",
@@ -53,11 +56,21 @@ export function AdminDashboard() {
 
   return (
     <div className="space-y-6">
-      <div>
-        <h2 className="text-3xl font-bold tracking-tight text-[#1B3C53]">System Overview</h2>
-        <p className="text-muted-foreground">
-          Monitor and manage your entire water delivery platform
-        </p>
+      <div className="flex justify-between items-start">
+        <div>
+          <h2 className="text-3xl font-bold tracking-tight text-[#1B3C53]">System Overview</h2>
+          <p className="text-muted-foreground">
+            Monitor and manage your entire water delivery platform
+          </p>
+        </div>
+        <Button 
+          onClick={() => navigate('/analytics')}
+          className="bg-[#1B3C53] hover:bg-[#2D5A77] text-white"
+        >
+          <BarChart3 className="h-4 w-4 mr-2" />
+          View Analytics
+          <ArrowRight className="h-4 w-4 ml-2" />
+        </Button>
       </div>
       <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
         <TabsContent value="overview" className="space-y-6">

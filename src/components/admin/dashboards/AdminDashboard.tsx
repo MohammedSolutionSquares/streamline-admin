@@ -63,14 +63,23 @@ export function AdminDashboard() {
             Monitor and manage your entire water delivery platform
           </p>
         </div>
-        <Button 
-          onClick={() => navigate('/analytics')}
-          className="bg-[#1B3C53] hover:bg-[#2D5A77] text-white"
-        >
-          <BarChart3 className="h-4 w-4 mr-2" />
-          View Analytics
-          <ArrowRight className="h-4 w-4 ml-2" />
-        </Button>
+        <div className="flex gap-2">
+          <Button 
+            onClick={() => navigate('/users')}
+            className="bg-[#1B3C53] hover:bg-[#2D5A77] text-white"
+          >
+            Manage Users
+            <ArrowRight className="h-4 w-4 ml-2" />
+          </Button>
+          <Button 
+            onClick={() => navigate('/analytics')}
+            className="bg-[#1B3C53] hover:bg-[#2D5A77] text-white"
+          >
+            <BarChart3 className="h-4 w-4 mr-2" />
+            View Analytics
+            <ArrowRight className="h-4 w-4 ml-2" />
+          </Button>
+        </div>
       </div>
       <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
         <TabsContent value="overview" className="space-y-6">

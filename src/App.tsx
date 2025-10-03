@@ -17,6 +17,7 @@ import NotFound from "./pages/NotFound";
 import { CompanyManagement } from "./pages/CompanyManagement";
 import AdminDashboardHome from "./pages/AdminDashboardHome";
 import Analytics from "./pages/Analytics";
+import Users from "./pages/Users";
 import { Sidebar } from "./components/ui/sidebar";
 import { AdminLayout } from "./components/admin/AdminLayout";
 import CommonListDemo from "./pages/CommonListDemo";
@@ -26,7 +27,6 @@ import RequireRole from "./components/RequireRole";
 
 // const { user } = useRole();
 // console.log(user.role);
-
 
 
 
@@ -49,6 +49,14 @@ const App = () => (
               element={
                 <RequireRole allowed={["admin"]}>
                   <Analytics />
+                </RequireRole>
+              }
+            />
+            <Route
+              path="/users"
+              element={
+                <RequireRole allowed={["admin"]}>
+                  <Users />
                 </RequireRole>
               }
             />

@@ -7,6 +7,7 @@ import { Badge } from "@/components/ui/badge";
 import { Bell, User } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useNavigate } from "react-router-dom";
 
 interface AdminLayoutProps {
@@ -68,17 +69,18 @@ export function AdminLayout({ children }: AdminLayoutProps) {
             <div className="flex items-center gap-4 md:gap-6">
               {/* Role Switcher for Demo */}
               <div className="flex items-center gap-2">
-                <span className="text-sm text-zinc-500">Role:</span>
-                <select 
-                  value={user?.role}
-                  onChange={(e) => switchRole(e.target.value as any)}
-                  className="bg-[#1B3C53] text-white rounded-full px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#5458FF]/40"
-                >
-                  <option value="admin">Admin</option>
-                  <option value="company_admin">Company Admin</option>
-                  <option value="manager">Manager</option>
-                  <option value="staff">Staff</option>
-                </select>
+                <span className="text-sm text-zinc-500 hidden sm:inline">Role:</span>
+                <Select value={user?.role} onValueChange={(value) => switchRole(value as any)}>
+                  <SelectTrigger className="w-[140px] md:w-[160px] bg-[#1B3C53] text-white border-0 focus:ring-2 focus:ring-[#5458FF]/40">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent className="bg-white border border-zinc-200 z-50">
+                    <SelectItem value="admin">Admin</SelectItem>
+                    <SelectItem value="company_admin">Company Admin</SelectItem>
+                    <SelectItem value="manager">Manager</SelectItem>
+                    <SelectItem value="staff">Staff</SelectItem>
+                  </SelectContent>
+                </Select>
               </div>
 
               <Button variant="ghost" size="icon" className="relative text-zinc-600 hover:bg-zinc-100">

@@ -112,7 +112,7 @@ export function ManagerDashboard() {
                     className="bg-[#1B3C53] border border-[#1B3C53]"
                       variant={
                         team.status === 'delivering' ? 'default' : 
-                        team.status === 'loading' ? 'black' : 
+                        team.status === 'loading' ? 'secondary' : 
                         'outline'
                       }
                     >

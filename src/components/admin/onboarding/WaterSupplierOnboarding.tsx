@@ -25,6 +25,7 @@ import {
   Users
 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/lib/supabaseClient";
 
 interface WaterJarSize {
   id: string;
@@ -92,7 +93,7 @@ export function WaterSupplierOnboarding() {
     city: '',
     state: '',
     zipCode: '',
-    country: 'United States',
+    country: '',
     phone: '',
     email: '',
     website: '',
@@ -171,17 +172,17 @@ export function WaterSupplierOnboarding() {
     }
   };
 
-  const nextStep = () => {
-    if (validateStep(currentStep)) {
-      setCurrentStep(prev => Math.min(prev + 1, totalSteps));
-    } else {
-      toast({
-        title: "Please complete all required fields",
-        description: "All fields marked with * are required.",
-        variant: "destructive",
-      }); 
-    }
-  };
+  // const nextStep = () => {
+  //   if (validateStep(currentStep)) {
+  //     setCurrentStep(prev => Math.min(prev + 1, totalSteps));
+  //   } else {
+  //     toast({
+  //       title: "Please complete all required fields",
+  //       description: "All fields marked with * are required.",
+  //       variant: "destructive",
+  //     }); 
+  //   }
+  // };
 
   const prevStep = () => {
     setCurrentStep(prev => Math.max(prev - 1, 1));
@@ -210,6 +211,48 @@ export function WaterSupplierOnboarding() {
       setIsSubmitting(false);
     }
   };
+
+  const handleCompanySubmit = async () => {
+  try {
+    const { data, error } = await supabase
+      .from("companies")
+      .insert([
+        {
+          company_name: companyDetails.companyName,
+          business_type: companyDetails.businessType,
+          registration_number: companyDetails.registrationNumber,
+          address: companyDetails.address,
+          city: companyDetails.city,
+          state: companyDetails.state,
+          zip_code: companyDetails.zipCode,
+          phone: companyDetails.phone,  
+          email: companyDetails.email,
+          website: companyDetails.website,
+          country: companyDetails.country,
+          description: companyDetails.description,
+        },
+      ])
+      .select();
+
+    if (error) {
+      console.error("Supabase insert error:", error);
+      alert("❌ Could not save company: " + error.message);
+      return;
+    }
+
+    console.log("✅ Company saved:", data);
+    alert("Company onboarded successfully!");
+  } catch (err) {
+    console.error("Unexpected error:", err);
+  }
+};
+
+const nextStep = async () => {
+  if (currentStep === 1) {
+    await handleCompanySubmit();  // save to Supabase
+  }
+  setCurrentStep(currentStep + 1);
+};
 
   const renderStepContent = () => {
     switch (currentStep) {

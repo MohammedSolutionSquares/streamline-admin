@@ -41,17 +41,20 @@ const queryClient = new QueryClient();
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <RoleProvider>
+      
       <CompaniesProvider>
+      <UsersProvider>
         <OrdersProvider>
           <TooltipProvider>
             <Toaster />
             <Sonner />
+            
             <BrowserRouter>
-        <UsersProvider>
-          <TooltipProvider>
+        
+          {/* <TooltipProvider>
           <Toaster />
           <Sonner />
-          <BrowserRouter>
+          <BrowserRouter> */}
           {/* <AdminLayout > */}
             <Routes>
               <Route path="/" element={<Home />} />

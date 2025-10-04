@@ -16,6 +16,18 @@ interface OrdersContextType {
   deleteDriver: (id: string) => void;
   getOrdersByCompany: (companyId: string) => Order[];
   getMetrics: (companyId: string) => OrderMetrics;
+  // Delivery management functions
+  assignDelivery: (orderId: string, driverId: string) => void;
+  updateDeliveryStatus: (orderId: string, status: OrderStatus) => void;
+  getDeliveriesByDriver: (driverId: string) => Order[];
+  getActiveDeliveries: (companyId: string) => Order[];
+  getDeliveryMetrics: (companyId: string) => {
+    totalDeliveries: number;
+    activeDeliveries: number;
+    completedToday: number;
+    pendingAssignments: number;
+    driverUtilization: Record<string, number>;
+  };
 }
 
 const OrdersContext = createContext<OrdersContextType | undefined>(undefined);
@@ -160,7 +172,7 @@ const DEFAULT_DRIVERS: DeliveryDriver[] = [
     companyId: '1',
   },
 ];
-
+  
 export const OrdersProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [orders, setOrders] = useState<Order[]>(() => {
     const stored = localStorage.getItem('orders');
@@ -319,6 +331,65 @@ export const OrdersProvider: React.FC<{ children: React.ReactNode }> = ({ childr
     };
   };
 
+  // Delivery management functions
+  const assignDelivery = (orderId: string, driverId: string) => {
+    updateOrder(orderId, { 
+      assignedDriver: driverId, 
+      status: 'confirmed' 
+    });
+  };
+
+  const updateDeliveryStatus = (orderId: string, status: OrderStatus) => {
+    updateOrder(orderId, { status });
+  };
+
+  const getDeliveriesByDriver = (driverId: string): Order[] => {
+    return orders.filter(order => order.assignedDriver === driverId);
+  };
+
+  const getActiveDeliveries = (companyId: string): Order[] => {
+    const companyOrders = getOrdersByCompany(companyId);
+    return companyOrders.filter(order => 
+      order.status === 'confirmed' || 
+      order.status === 'preparing' || 
+      order.status === 'ready' || 
+      order.status === 'in_transit'
+    );
+  };
+
+  const getDeliveryMetrics = (companyId: string) => {
+    const companyOrders = getOrdersByCompany(companyId);
+    const companyDrivers = drivers.filter(driver => driver.companyId === companyId);
+    
+    const now = new Date();
+    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    
+    const totalDeliveries = companyOrders.length;
+    const activeDeliveries = getActiveDeliveries(companyId).length;
+    const completedToday = companyOrders.filter(order => 
+      order.status === 'delivered' && 
+      new Date(order.updatedAt) >= today
+    ).length;
+    
+    const pendingAssignments = companyOrders.filter(order => 
+      order.status === 'pending' || order.status === 'confirmed'
+    ).length;
+    
+    const driverUtilization = companyDrivers.reduce((acc, driver) => {
+      const driverOrders = getDeliveriesByDriver(driver.id);
+      acc[driver.id] = driverOrders.length;
+      return acc;
+    }, {} as Record<string, number>);
+
+    return {
+      totalDeliveries,
+      activeDeliveries,
+      completedToday,
+      pendingAssignments,
+      driverUtilization
+    };
+  };
+
   return (
     <OrdersContext.Provider value={{
       orders,
@@ -335,9 +406,14 @@ export const OrdersProvider: React.FC<{ children: React.ReactNode }> = ({ childr
       deleteDriver,
       getOrdersByCompany,
       getMetrics,
+      assignDelivery,
+      updateDeliveryStatus,
+      getDeliveriesByDriver,
+      getActiveDeliveries,
+      getDeliveryMetrics,
     }}>
       {children}
     </OrdersContext.Provider>
   );
 };
-    
+ 

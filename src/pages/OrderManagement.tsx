@@ -82,6 +82,11 @@ export function OrderManagement() {
     setEditingOrder(null);
   };
 
+  const handleNewOrderClick = () => {
+    setEditingOrder(null); // Reset editing order before opening form
+    setIsFormOpen(true);
+  };
+
   return (
     <AdminLayout>
     <div className="space-y-6">
@@ -93,9 +98,14 @@ export function OrderManagement() {
             Manage customer orders and delivery operations
           </p>
         </div>
-        <Dialog open={isFormOpen} onOpenChange={setIsFormOpen}>
+        <Dialog open={isFormOpen} onOpenChange={(open) => {
+          setIsFormOpen(open);
+          if (!open) {
+            setEditingOrder(null);
+          }
+        }}>
           <DialogTrigger asChild>
-            <Button className="bg-gradient-primary">
+            <Button className="bg-gradient-primary" onClick={handleNewOrderClick}>
               <Plus className="h-4 w-4 mr-2" />
               New Order
             </Button>

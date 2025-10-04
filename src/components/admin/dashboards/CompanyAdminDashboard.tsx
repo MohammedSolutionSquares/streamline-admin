@@ -125,16 +125,16 @@ export function CompanyAdminDashboard() {
             className="bg-blue-500 text-white"
             onClick={() => navigate('/orders')}
           >
-            <MapPin className="h-4 w-4 mr-2 " />
-            View Orders
+            <Package className="h-4 w-4 mr-2 " />
+            Orders
           </Button>
           <Button 
             size="sm" 
             className="bg-gradient-primary"
-            onClick={() => navigate('/orders')}
+            onClick={() => navigate('/deliveries')}
           >
-            <Package className="h-4 w-4 mr-2" />
-            Manage Orders
+            <Truck className="h-4 w-4 mr-2" />
+            Deliveries
           </Button>
         </div>
       </div>
@@ -249,9 +249,13 @@ export function CompanyAdminDashboard() {
               <Users className="h-6 w-6 text-black" />
               <span className="text-black">Add Customer</span>
             </Button>
-            <Button variant="outline" className="h-20 flex-col gap-2 bg-white border border-[#1B3C53]">
+            <Button 
+              variant="outline" 
+              className="h-20 flex-col gap-2 bg-white border border-[#1B3C53]"
+              onClick={() => navigate('/deliveries')}
+            >
               <Truck className="h-6 w-6 text-black"/>
-              <span className="text-black">Schedule Delivery</span>
+              <span className="text-black">Manage Deliveries</span>
             </Button>
             <Button variant="outline" className="h-20 flex-col gap-2 bg-white border border-[#1B3C53]">
               <TrendingUp className="h-6 w-6 text-black" />

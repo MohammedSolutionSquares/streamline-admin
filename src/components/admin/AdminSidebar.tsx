@@ -43,13 +43,13 @@ const companyAdminMenuItems = [
   { title: "Dashboard", url: "/dashboard", icon: Home },
   { title: "Orders", url: "/orders", icon: Package },
   { title: "Deliveries", url: "/deliveries", icon: Truck },
-  { title: "Inventory", url: "/inventory", icon: Droplets },
-  { title: "Customers", url: "/customers", icon: UserCheck },
-  { title: "Delivery Areas", url: "/areas", icon: MapPin },
-  { title: "Billing", url: "/billing", icon: CreditCard },
-  { title: "Staff", url: "/staff", icon: Users },
-  { title: "Reports", url: "/reports", icon: BarChart3 },
-  { title: "Settings", url: "/settings", icon: Settings },
+  // { title: "Inventory", url: "/inventory", icon: Droplets },
+  // { title: "Customers", url: "/customers", icon: UserCheck },
+  // { title: "Delivery Areas", url: "/areas", icon: MapPin },
+  // { title: "Billing", url: "/billing", icon: CreditCard },
+  // { title: "Staff", url: "/staff", icon: Users },
+  // { title: "Reports", url: "/reports", icon: BarChart3 },
+  // { title: "Settings", url: "/settings", icon: Settings },
 ];
 
 const managerMenuItems = [

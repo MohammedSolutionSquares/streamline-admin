@@ -67,6 +67,24 @@ export function OrderForm({ order, onClose, onSuccess }: OrderFormProps) {
         tax: order.tax
       });
       setOrderItems(order.items);
+    } else {
+      // Reset form data when creating a new order
+      setFormData({
+        customerName: '',
+        customerEmail: '',
+        contactNumber: '',
+        deliveryAddress: '',
+        city: '',
+        postalCode: '',
+        deliveryDate: '',
+        deliveryTime: '',
+        notes: '',
+        status: 'pending',
+        assignedDriver: '',
+        deliveryFee: 5.00,
+        tax: 0.00
+      });
+      setOrderItems([]);
     }
   }, [order]);
 

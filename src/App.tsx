@@ -21,6 +21,7 @@ import AdminDashboardHome from "./pages/AdminDashboardHome";
 import Analytics from "./pages/Analytics";
 import Users from "./pages/Users";
 import { OrderManagement } from "./pages/OrderManagement";
+import { DeliveryManagement } from "./pages/DeliveryManagement";
 import { Sidebar } from "./components/ui/sidebar";
 import { AdminLayout } from "./components/admin/AdminLayout";
 import CommonListDemo from "./pages/CommonListDemo";
@@ -78,6 +79,14 @@ const App = () => (
                 element={
                   <RequireRole allowed={["company_admin", "manager"]}>
                     <OrderManagement />
+                  </RequireRole>
+                }
+              />
+              <Route
+                path="/deliveries"
+                element={
+                  <RequireRole allowed={["company_admin", "manager"]}>
+                    <DeliveryManagement />
                   </RequireRole>
                 }
               />

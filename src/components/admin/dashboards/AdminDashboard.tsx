@@ -113,21 +113,28 @@ export function AdminDashboard() {
                 </CardDescription>
               </CardHeader>
 
-              <CardContent className="w-full">
-                <div className="space-y-4 w-full">
-                  {recentCompanies.map((company) => (
-                    <div
-                      key={company.id}
-                      className="flex items-center justify-between w-full border-b border-gray-200 pb-2"
-                    >
-                      <div className="space-y-1 w-full">
-                        <p className="text-sm font-medium leading-none text-black w-full">
-                          {company.name}
-                        </p>
-                        <p className="text-xs text-black w-full">
-                          {company.users} users • {company.orders} orders
-                        </p>
-                      </div>
+        {/* System Alerts */}
+        {/* <Card className="shadow-card bg-white border border-[#1B3C53]">
+          <CardHeader>
+            <CardTitle className="text-black">System Alerts</CardTitle>
+            <CardDescription className="text-black">
+              Important system notifications and updates
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-4">
+              {systemAlerts.map((alert, index) => (
+                <div key={index} className="flex gap-3">
+                  {alert.type === 'warning' && <AlertTriangle className="h-4 w-4 text-[#1B3C53] mt-0.5" />}
+                  {alert.type === 'info' && <Package className="h-4 w-4 text-[#1B3C53] mt-0.5" />}
+                  {alert.type === 'success' && <CheckCircle className="h-4 w-4 text-[#1B3C53] mt-0.5" />}
+                  <div className="space-y-1">
+                    <p className="text-black">{alert.message}</p>
+                    <p className="text-xs text-black">{alert.time}</p>
+                  </div>
+                </div>
+                ))}
+                </div>
 
                       <div className="flex justify-end w-24">
                         <Badge
@@ -147,7 +154,7 @@ export function AdminDashboard() {
                   ))}
                 </div>
               </CardContent>
-            </Card>
+            </Card> */}
 
           </div>
         </TabsContent>

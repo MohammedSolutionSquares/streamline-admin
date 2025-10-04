@@ -2,45 +2,78 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Package, Truck, Users, DollarSign, MapPin, Clock, TrendingUp, AlertCircle } from "lucide-react";
+import { useOrders } from "@/contexts/OrdersContext";
+import { useRole } from "@/contexts/RoleContext";
+import { useNavigate } from "react-router-dom";
 
 export function CompanyAdminDashboard() {
+  const { getOrdersByCompany, getMetrics } = useOrders();
+  const { user } = useRole();
+  const navigate = useNavigate();
+  
+  const companyId = user?.companyId || '1';
+  const companyOrders = getOrdersByCompany(companyId);
+  const metrics = getMetrics(companyId);
+  
+  const activeOrders = metrics.confirmedOrders + metrics.preparingOrders + metrics.readyOrders + metrics.inTransitOrders;
+  const uniqueCustomers = new Set(companyOrders.map(order => order.customerName)).size;
+
+  const getTimeAgo = (dateString: string) => {
+    const now = new Date();
+    const date = new Date(dateString);
+    const diffInMinutes = Math.floor((now.getTime() - date.getTime()) / (1000 * 60));
+    
+    if (diffInMinutes < 60) {
+      return `${diffInMinutes} min ago`;
+    } else if (diffInMinutes < 1440) {
+      return `${Math.floor(diffInMinutes / 60)} hour${Math.floor(diffInMinutes / 60) > 1 ? 's' : ''} ago`;
+    } else {
+      return `${Math.floor(diffInMinutes / 1440)} day${Math.floor(diffInMinutes / 1440) > 1 ? 's' : ''} ago`;
+    }
+  };
+
   const stats = [
     {
       title: "Today's Orders",
-      value: "47",
-      change: "+12% from yesterday",
+      value: metrics.todaysOrders.toString(),
+      change: `${metrics.thisWeekOrders} this week`,
       icon: Package,
       color: "text-primary"
     },
     {
-      title: "Active Deliveries",
-      value: "23",
-      change: "8 completed today",
+      title: "Active Orders",
+      value: activeOrders.toString(),
+      change: `${metrics.deliveredOrders} completed`,
       icon: Truck,
       color: "text-accent"
     },
     {
       title: "Total Customers",
-      value: "1,489",
-      change: "+5.2% this month",
+      value: uniqueCustomers.toString(),
+      change: `${metrics.thisMonthOrders} orders this month`,
       icon: Users,
       color: "text-success"
     },
     {
-      title: "Monthly Revenue",
-      value: "$12,845",
-      change: "+8.1% from last month",
+      title: "Total Revenue",
+      value: `$${metrics.totalRevenue.toFixed(0)}`,
+      change: `Avg: $${metrics.averageOrderValue.toFixed(0)}`,
       icon: DollarSign,
       color: "text-warning"
     }
   ];
 
-  const recentOrders = [
-    { id: "#ORD-001", customer: "John Smith", address: "123 Main St", status: "preparing", amount: "$24.99", time: "10 min ago" },
-    { id: "#ORD-002", customer: "Sarah Johnson", address: "456 Oak Ave", status: "delivering", amount: "$19.99", time: "25 min ago" },
-    { id: "#ORD-003", customer: "Mike Wilson", address: "789 Pine Rd", status: "delivered", amount: "$29.99", time: "1 hour ago" },
-    { id: "#ORD-004", customer: "Emily Davis", address: "321 Elm St", status: "pending", amount: "$34.99", time: "2 hours ago" },
-  ];
+  const recentOrders = companyOrders
+    .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
+    .slice(0, 4)
+    .map(order => ({
+      id: order.orderNumber,
+      customer: order.customerName,
+      address: order.deliveryAddress,
+      status: order.status,
+      amount: `$${order.totalAmount.toFixed(2)}`,
+      time: getTimeAgo(order.createdAt)
+    }));
 
   const deliveryUpdates = [
     { driver: "Alex Thompson", orders: 5, area: "Downtown", status: "on_route", eta: "30 min" },
@@ -86,13 +119,22 @@ export function CompanyAdminDashboard() {
           </p>
         </div>
         <div className="flex gap-2">
-          <Button variant="outline" size="sm" className="bg-[#1B3C53] text-white">
+          <Button 
+            variant="outline" 
+            size="sm" 
+            className="bg-blue-500 text-white"
+            onClick={() => navigate('/orders')}
+          >
             <MapPin className="h-4 w-4 mr-2 " />
-            View Map
+            View Orders
           </Button>
-          <Button size="sm" className="bg-[#1B3C53]">
+          <Button 
+            size="sm" 
+            className="bg-gradient-primary"
+            onClick={() => navigate('/orders')}
+          >
             <Package className="h-4 w-4 mr-2" />
-            New Order
+            Manage Orders
           </Button>
         </div>
       </div>
@@ -127,7 +169,7 @@ export function CompanyAdminDashboard() {
                 Latest customer orders and their status
               </CardDescription>
             </div>
-            <Button size="sm">View All</Button>
+            <Button size="sm" onClick={() => navigate('/orders')}>View All</Button>
           </CardHeader>
           <CardContent>
             <div className="space-y-4">

@@ -194,7 +194,7 @@ export function CompanyAdminDashboard() {
         </Card>
 
         {/* Delivery Updates */}
-        <Card className="shadow-card bg-white border border-[#1B3C53]">
+        {/* <Card className="shadow-card bg-white border border-[#1B3C53]">
           <CardHeader className="flex flex-row items-center justify-between">
             <div>
               <CardTitle className="text-[#1B3C53]">Delivery Updates</CardTitle>
@@ -228,11 +228,17 @@ export function CompanyAdminDashboard() {
               ))}
             </div>
           </CardContent>
-        </Card>
+        </Card> */}
+        <Button 
+          className="bg-white border border-[#1B3C53] text-black hover:bg-[#1B3C53] hover:text-white transition-colors"
+          onClick={() => navigate('/onboarding')}
+        >
+          Start Migration
+        </Button>
       </div>
 
       {/* Quick Actions */}
-      <Card className="shadow-card bg-[#1B3C53]">
+      {/* <Card className="shadow-card bg-[#1B3C53]">
         <CardHeader>
           <CardTitle className="text-white">Quick Actions</CardTitle>
           <CardDescription className="text-white/50">
@@ -263,7 +269,7 @@ export function CompanyAdminDashboard() {
             </Button>
           </div>
         </CardContent>
-      </Card>
+      </Card> */}
     </div>
   );
 }

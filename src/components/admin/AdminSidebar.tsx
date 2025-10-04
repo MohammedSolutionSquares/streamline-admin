@@ -12,7 +12,11 @@ import {
   Droplets,
   MapPin,
   CreditCard,
-  UserCheck
+  UserCheck,
+  PillBottle,
+  TestTube,
+  LucidePillBottle,
+  Drum
 } from "lucide-react";
 import { NavLink, useLocation } from "react-router-dom";
 import { useRole } from "@/contexts/RoleContext";
@@ -42,9 +46,10 @@ const adminMenuItems = [
 
 const companyAdminMenuItems = [
   { title: "Dashboard", url: "/dashboard", icon: Home },
+  { title: "Onboarding", url: "/onboarding", icon: UserCheck },
   { title: "Orders", url: "/orders", icon: Package },
   { title: "Deliveries", url: "/deliveries", icon: Truck },
-  // { title: "Inventory", url: "/inventory", icon: Droplets },
+  { title: "Jar Management", url: "/inventory", icon: PillBottle },
   // { title: "Customers", url: "/customers", icon: UserCheck },
   // { title: "Delivery Areas", url: "/areas", icon: MapPin },
   // { title: "Billing", url: "/billing", icon: CreditCard },

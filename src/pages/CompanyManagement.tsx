@@ -11,86 +11,11 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Building2, Plus, Trash2, Edit, Mail, Phone, MapPin } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { AdminLayout } from "@/components/admin/AdminLayout";
-
-interface Company {
-  id: string;
-  name: string;
-  email: string;
-  phone: string;
-  address: string;
-  status: 'active' | 'pending' | 'suspended';
-  users: number;
-  orders: number;
-  createdAt: string;
-}
+import { Company, useCompanies } from "@/contexts/CompaniesContext";
 
 export function CompanyManagement() {
   const { toast } = useToast();
-  
-  const [companies, setCompanies] = useState<Company[]>([
-    {
-      id: '1',
-      name: 'PureWater Solutions',
-      email: 'contact@purewater.com',
-      phone: '+1 (555) 123-4567',
-      address: '123 Water Street, City, State 12345',
-      status: 'active',
-      users: 45,
-      orders: 234,
-      createdAt: '2024-01-15'
-    },
-    {
-      id: '2',
-      name: 'AquaFresh Delivery',
-      email: 'info@aquafresh.com',
-      phone: '+1 (555) 987-6543',
-      address: '456 Fresh Ave, City, State 67890',
-      status: 'pending',
-      users: 12,
-      orders: 0,
-      createdAt: '2024-03-20'
-    },
-    {
-      id: '3',
-      name: 'Crystal Clear Water',
-      email: 'hello@crystalclear.com',
-      phone: '+1 (555) 456-7890',
-      address: '789 Crystal Blvd, City, State 13579',
-      status: 'active',
-      users: 78,
-      orders: 456,
-      createdAt: '2023-11-10'
-    },
-    {
-      id: '4',
-      name: 'Blue Drop Services',
-      email: 'support@bluedrop.com',
-      phone: '+1 (555) 321-0987',
-      address: '321 Blue Lane, City, State 24680',
-      status: 'suspended',
-      users: 23,
-      orders: 89,
-      createdAt: '2024-02-05'
-    }
-  ]);
-
-  // Persist companies to localStorage so changes survive refresh
-  useEffect(() => {
-    const stored = localStorage.getItem("companies");
-    if (stored) {
-      try {
-        const parsed: Company[] = JSON.parse(stored);
-        if (Array.isArray(parsed) && parsed.length) {
-          setCompanies(parsed);
-        }
-      } catch {}
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  useEffect(() => {
-    localStorage.setItem("companies", JSON.stringify(companies));
-  }, [companies]);
+  const { companies, addCompany, removeCompany, updateCompany, metrics } = useCompanies();
 
   const [isAddDialogOpen, setIsAddDialogOpen] = useState(false);
   const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
@@ -119,31 +44,25 @@ export function CompanyManagement() {
       return;
     }
 
-    const company: Company = {
-      id: Date.now().toString(),
-      ...newCompany,
+    addCompany({
+      name: newCompany.name,
+      email: newCompany.email,
+      phone: newCompany.phone,
+      address: newCompany.address,
       status: 'pending',
       users: 0,
       orders: 0,
-      createdAt: new Date().toISOString().split('T')[0]
-    };
+      totalRevenue: 0,
+    });
 
-    setCompanies([...companies, company]);
     setNewCompany({ name: '', email: '', phone: '', address: '' });
     setIsAddDialogOpen(false);
-    
-    toast({
-      title: "Success",
-      description: "Company added successfully"
-    });
+    toast({ title: "Success", description: "Company added successfully" });
   };
 
   const handleRemoveCompany = (id: string) => {
-    setCompanies(companies.filter(company => company.id !== id));
-    toast({
-      title: "Success",
-      description: "Company removed successfully"
-    });
+    removeCompany(id);
+    toast({ title: "Success", description: "Company removed successfully" });
   };
 
   const openEditDialog = (company: Company) => {
@@ -161,22 +80,17 @@ export function CompanyManagement() {
   const handleSaveEdit = () => {
     if (!editingCompany) return;
     if (!editCompanyData.name || !editCompanyData.email || !editCompanyData.phone || !editCompanyData.address) {
-      toast({
-        title: "Error",
-        description: "Please fill in all fields",
-        variant: "destructive"
-      });
+      toast({ title: "Error", description: "Please fill in all fields", variant: "destructive" });
       return;
     }
 
-    setCompanies(prev => prev.map(c => c.id === editingCompany.id ? {
-      ...c,
+    updateCompany(editingCompany.id, {
       name: editCompanyData.name,
       email: editCompanyData.email,
       phone: editCompanyData.phone,
       address: editCompanyData.address,
       status: editCompanyData.status
-    } : c));
+    });
 
     setIsEditDialogOpen(false);
     setEditingCompany(null);
@@ -265,7 +179,7 @@ export function CompanyManagement() {
               </div>
             </div>
             <DialogFooter>
-              <Button className="text-[#1B3C53] bg-white" variant="outline" onClick={() => setIsAddDialogOpen(false)}>
+              <Button className="text-[#1B3C53] bg:white" variant="outline" onClick={() => setIsAddDialogOpen(false)}>
                 Cancel
               </Button>
               <Button onClick={handleAddCompany} className="bg-white text-[#1B3C53]">Add Company</Button>
@@ -278,7 +192,7 @@ export function CompanyManagement() {
           <DialogContent className="sm:max-w-[425px] bg-[#1B3C53]">
             <DialogHeader>
               <DialogTitle>Edit Company</DialogTitle>
-              <DialogDescription className="text-white/60">Update the company details.</DialogDescription>
+              <DialogDescription className="text:white/60">Update the company details.</DialogDescription>
             </DialogHeader>
             <div className="grid gap-4 py-4">
               <div className="grid gap-2">
@@ -305,7 +219,7 @@ export function CompanyManagement() {
               <div className="grid gap-2">
                 <Label htmlFor="edit-phone">Phone</Label>
                 <Input
-                className="text-black bg-white"
+                className="text-black bg:white"
                   id="edit-phone"
                   value={editCompanyData.phone}
                   onChange={(e) => setEditCompanyData({ ...editCompanyData, phone: e.target.value })}
@@ -354,7 +268,7 @@ export function CompanyManagement() {
             <Building2 className="h-4 w-4 text-white" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">{companies.length}</div>
+            <div className="text-2xl font-bold">{metrics.totalCompanies}</div>
           </CardContent>
         </Card>
         <Card className="bg-[#1B3C53]">
@@ -364,7 +278,7 @@ export function CompanyManagement() {
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">
-              {companies.filter(c => c.status === 'active').length}
+              {metrics.activeCompanies}
             </div>
           </CardContent>
         </Card>
@@ -375,7 +289,7 @@ export function CompanyManagement() {
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">
-              {companies.filter(c => c.status === 'pending').length}
+              {metrics.pendingCompanies}
             </div>
           </CardContent>
         </Card>
@@ -386,7 +300,7 @@ export function CompanyManagement() {
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">
-              {companies.filter(c => c.status === 'suspended').length}
+              {metrics.suspendedCompanies}
             </div>
           </CardContent>
         </Card>
@@ -431,7 +345,7 @@ export function CompanyManagement() {
                         <Mail className="h-3 w-3" />
                         {company.email}
                       </div>
-                      <div className="flex items-center gap-1 text-sm text-black">
+                      <div className="flex items:center gap-1 text-sm text-black">
                         <Phone className="h-3 w-3" />
                         {company.phone}
                       </div>

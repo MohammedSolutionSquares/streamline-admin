@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useMemo, useState } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
@@ -10,6 +10,8 @@ import { Badge } from "@/components/ui/badge";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { AdminLayout } from "@/components/admin/AdminLayout";
 import { User, UserRole } from "@/contexts/RoleContext";
+import { useUsers } from "@/contexts/UsersContext";
+import { useCompanies } from "@/contexts/CompaniesContext";
 import { Plus, Pencil, Trash2 } from "lucide-react";
 
 const roleBadgeVariant = (role: UserRole) => {
@@ -20,12 +22,8 @@ const roleBadgeVariant = (role: UserRole) => {
 };
 
 export default function Users() {
-	const [users, setUsers] = useState<User[]>([
-		{ id: "1", name: "John Doe", email: "john@watersquares.com", role: "admin" },
-		{ id: "2", name: "Emily Clark", email: "emily@purewater.com", role: "company_admin", companyId: "c1", companyName: "PureWater" },
-		{ id: "3", name: "Marcus Lee", email: "marcus@hydromax.io", role: "manager", companyId: "c2", companyName: "HydroMax" },
-		{ id: "4", name: "Sara Khan", email: "sara@bluedrop.net", role: "staff", companyId: "c3", companyName: "Blue Drop" },
-	]);
+	const { users, addUser, updateUser, removeUser } = useUsers();
+	const { companies } = useCompanies();
 
 	const [open, setOpen] = useState(false);
 	const [isEditing, setIsEditing] = useState(false);
@@ -33,33 +31,19 @@ export default function Users() {
 	const [name, setName] = useState("");
 	const [email, setEmail] = useState("");
 	const [role, setRole] = useState<UserRole>("staff");
-	const [companyName, setCompanyName] = useState("");
+	const [selectedCompanyId, setSelectedCompanyId] = useState("");
 
 	const canHaveCompany = useMemo(() => role !== "admin", [role]);
 
-	// Load users from localStorage on mount
-	useEffect(() => {
-		try {
-			const raw = localStorage.getItem("users");
-			if (raw) {
-				const parsed = JSON.parse(raw) as User[];
-				if (Array.isArray(parsed)) setUsers(parsed);
-			}
-		} catch {}
-	}, []);
-
-	// Persist users to localStorage whenever they change
-	useEffect(() => {
-		try {
-			localStorage.setItem("users", JSON.stringify(users));
-		} catch {}
-	}, [users]);
+	const selectedCompany = useMemo(() => {
+		return companies.find(c => c.id === selectedCompanyId);
+	}, [companies, selectedCompanyId]);
 
 	const resetForm = () => {
 		setName("");
 		setEmail("");
 		setRole("staff");
-		setCompanyName("");
+		setSelectedCompanyId("");
 		setIsEditing(false);
 		setEditingUserId(null);
 	};
@@ -67,24 +51,21 @@ export default function Users() {
 	const handleSaveUser = () => {
 		if (!name.trim() || !email.trim()) return;
 		if (isEditing && editingUserId) {
-			setUsers(prev => prev.map(u => u.id === editingUserId ? {
-				...u,
+			updateUser(editingUserId, {
 				name: name.trim(),
 				email: email.trim(),
 				role,
-				companyName: canHaveCompany && companyName.trim() ? companyName.trim() : undefined,
-				companyId: canHaveCompany && companyName.trim() ? (u.companyId ?? `c_${Math.random().toString(36).slice(2, 8)}`) : undefined,
-			} : u));
+				companyName: canHaveCompany && selectedCompany ? selectedCompany.name : undefined,
+				companyId: canHaveCompany && selectedCompanyId ? selectedCompanyId : undefined,
+			});
 		} else {
-			const newUser: User = {
-				id: String(Date.now()),
+			addUser({
 				name: name.trim(),
 				email: email.trim(),
 				role,
-				companyName: canHaveCompany && companyName.trim() ? companyName.trim() : undefined,
-				companyId: canHaveCompany && companyName.trim() ? `c_${Math.random().toString(36).slice(2, 8)}` : undefined,
-			};
-			setUsers(prev => [newUser, ...prev]);
+				companyName: canHaveCompany && selectedCompany ? selectedCompany.name : undefined,
+				companyId: canHaveCompany && selectedCompanyId ? selectedCompanyId : undefined,
+			});
 		}
 		setOpen(false);
 		resetForm();
@@ -96,12 +77,14 @@ export default function Users() {
 		setName(user.name);
 		setEmail(user.email);
 		setRole(user.role);
-		setCompanyName(user.companyName || "");
+		// Find company by companyId or companyName
+		const company = companies.find(c => c.id === user.companyId || c.name === user.companyName);
+		setSelectedCompanyId(company?.id || "");
 		setOpen(true);
 	};
 
 	const deleteUser = (id: string) => {
-		setUsers(prev => prev.filter(u => u.id !== id));
+		removeUser(id);
 	};
 
 	return (
@@ -150,8 +133,21 @@ export default function Users() {
 								</div>
 								{canHaveCompany && (
 									<div className="grid grid-cols-4 items-center gap-4">
-										<Label htmlFor="company" className="text-right">Company</Label>
-										<Input id="company" value={companyName} onChange={e => setCompanyName(e.target.value)} className="col-span-3" placeholder="Optional" />
+										<Label className="text-right">Company</Label>
+										<div className="col-span-3">
+											<Select value={selectedCompanyId} onValueChange={setSelectedCompanyId}>
+												<SelectTrigger>
+													<SelectValue placeholder="Select a company" />
+												</SelectTrigger>
+												<SelectContent>
+													{companies.map((company) => (
+														<SelectItem key={company.id} value={company.id}>
+															{company.name}
+														</SelectItem>
+													))}
+												</SelectContent>
+											</Select>
+										</div>
 									</div>
 								)}
 							</div>

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -6,47 +6,50 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Building2, Users, Package, TrendingUp, AlertTriangle, CheckCircle, BarChart3, ArrowRight } from "lucide-react";
 import { CompanyManagement } from "../../../pages/CompanyManagement";
 import { useNavigate } from "react-router-dom";
+import { useCompanies } from "@/contexts/CompaniesContext";
+import { useUsers } from "@/contexts/UsersContext";
 
-export function AdminDashboard() {
+export function   AdminDashboard() {
   const [activeTab, setActiveTab] = useState("overview");
   const navigate = useNavigate();
+  const { companies, metrics } = useCompanies();
+  const { metrics: userMetrics } = useUsers();
   const stats = [
     {
       title: "Total Companies",
-      value: "24",
+      value: metrics.totalCompanies.toString(),
       change: "+2 this month",
       icon: Building2,
       color: "text-primary"
     },
     {
       title: "Total Users",
-      value: "1,247",
+      value: userMetrics.totalUsers.toString(),
       change: "+12% from last month",
       icon: Users,
       color: "text-accent"
     },
-    {
-      title: "Total Orders",
-      value: "5,489",
-      change: "+23% from last month",
-      icon: Package,
-      color: "text-success"
-    },
-    {
-      title: "Revenue",
-      value: "$45,231",
-      change: "+18% from last month",
-      icon: TrendingUp,
-      color: "text-warning"
-    }
+    // {
+    //   title: "Total Orders",
+    //   value: "5,489",
+    //   change: "+23% from last month",
+    //   icon: Package,
+    //   color: "text-success"
+    // },
+    // {
+    //   title: "Revenue",
+    //   value: "$45,231",
+    //   change: "+18% from last month",
+    //   icon: TrendingUp,
+    //   color: "text-warning"
+    // }
   ];
 
-  const recentCompanies = [
-    { id: 1, name: "PureWater Solutions", status: "active", users: 45, orders: 234 },
-    { id: 2, name: "AquaFresh Delivery", status: "pending", users: 12, orders: 0 },
-    { id: 3, name: "Crystal Clear Water", status: "active", users: 78, orders: 456 },
-    { id: 4, name: "Blue Drop Services", status: "suspended", users: 23, orders: 89 },
-  ];
+  const recentCompanies = useMemo(() => {
+    return companies
+      .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
+      .slice(0, 4);
+  }, [companies]);
 
   const systemAlerts = [
     { type: "warning", message: "Server maintenance scheduled for tonight", time: "2 hours ago" },
@@ -120,8 +123,11 @@ export function AdminDashboard() {
                     <p className="text-sm font-medium leading-none text-black">
                       {company.name}
                     </p>
-                    <p className="text-xs text-black">
+                    {/* <p className="text-xs text-black">
                       {company.users} users • {company.orders} orders
+                    </p> */}
+                    <p className="text-xs text-gray-500">
+                      Created: {new Date(company.createdAt).toLocaleDateString()}
                     </p>
                   </div>
                   <Badge 

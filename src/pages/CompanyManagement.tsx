@@ -321,8 +321,8 @@ export function CompanyManagement() {
                 <TableHead className="text-black">Company</TableHead>
                 <TableHead className="text-black">Contact</TableHead>
                 <TableHead className="text-black">Status</TableHead>
-                <TableHead className="text-black">Users</TableHead>
-                <TableHead className="text-black">Orders</TableHead>
+                {/* <TableHead className="text-black">Users</TableHead>
+                <TableHead className="text-black">Orders</TableHead> */}
                 <TableHead className="text-black">Created</TableHead>
                 <TableHead className="text-black text-center">Actions</TableHead>
               </TableRow>
@@ -352,8 +352,8 @@ export function CompanyManagement() {
                     </div>
                   </TableCell>
                   <TableCell>{getStatusBadge(company.status)}</TableCell>
-                  <TableCell className="text-black">{company.users}</TableCell>
-                  <TableCell className="text-black">{company.orders}</TableCell>
+                  {/* <TableCell className="text-black">{company.users}</TableCell>
+                  <TableCell className="text-black">{company.orders}</TableCell> */}
                   <TableCell className="text-black">{company.createdAt}</TableCell>
                   <TableCell className="text-right">
                     <div className="flex items-center justify-end gap-2">

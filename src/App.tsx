@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { RoleProvider, useRole } from "./contexts/RoleContext";
 import { CompaniesProvider } from "./contexts/CompaniesContext";
+import { OrdersProvider } from "./contexts/OrdersContext";
 import { UsersProvider } from "./contexts/UsersContext";
 import Index from "./pages/Index";
 import Home from "./pages/Home";
@@ -20,6 +21,8 @@ import { CompanyManagement } from "./pages/CompanyManagement";
 import AdminDashboardHome from "./pages/AdminDashboardHome";
 import Analytics from "./pages/Analytics";
 import Users from "./pages/Users";
+import { OrderManagement } from "./pages/OrderManagement";
+import { DeliveryManagement } from "./pages/DeliveryManagement";
 import { Sidebar } from "./components/ui/sidebar";
 import { AdminLayout } from "./components/admin/AdminLayout";
 import CommonListDemo from "./pages/CommonListDemo";
@@ -39,6 +42,11 @@ const App = () => (
   <QueryClientProvider client={queryClient}>
     <RoleProvider>
       <CompaniesProvider>
+        <OrdersProvider>
+          <TooltipProvider>
+            <Toaster />
+            <Sonner />
+            <BrowserRouter>
         <UsersProvider>
           <TooltipProvider>
           <Toaster />
@@ -72,6 +80,22 @@ const App = () => (
                   </RequireRole>
                 }
               />
+              <Route
+                path="/orders"
+                element={
+                  <RequireRole allowed={["company_admin", "manager"]}>
+                    <OrderManagement />
+                  </RequireRole>
+                }
+              />
+              <Route
+                path="/deliveries"
+                element={
+                  <RequireRole allowed={["company_admin", "manager"]}>
+                    <DeliveryManagement />
+                  </RequireRole>
+                }
+              />
               <Route path="/list-demo" element={<CommonListDemo />} />
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
@@ -86,6 +110,7 @@ const App = () => (
             {/* </AdminLayout> */}
           </BrowserRouter>
         </TooltipProvider>
+        </OrdersProvider>
         </UsersProvider>
       </CompaniesProvider>
     </RoleProvider>

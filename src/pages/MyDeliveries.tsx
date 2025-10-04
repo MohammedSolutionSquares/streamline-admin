@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { AdminLayout } from "@/components/admin/AdminLayout";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -137,6 +138,7 @@ export default function MyDeliveries() {
   const completedDeliveries = filteredDeliveries.filter(d => d.status === "Delivered" || d.status === "Cancelled");
 
   return (
+    <AdminLayout>
     <div className="min-h-screen bg-muted/20">
       {/* Navigation */}
       <nav className="border-b bg-card/50 backdrop-blur-sm sticky top-0 z-50">
@@ -383,5 +385,6 @@ export default function MyDeliveries() {
         </Tabs>
       </div>
     </div>
+    </AdminLayout>
   );
 }

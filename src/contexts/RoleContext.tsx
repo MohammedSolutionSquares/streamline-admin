@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, ReactNode } from 'react';
+import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 
 export type UserRole = 'admin' | 'company_admin' | 'manager' | 'staff';
 
@@ -32,15 +32,36 @@ interface RoleProviderProps {
 }
 
 export const RoleProvider: React.FC<RoleProviderProps> = ({ children }) => {
-  // Mock user for demonstration - in real app this would come from auth
-  const [user, setUser] = useState<User | null>({
+  // Default user - will be overridden by localStorage if available
+  const defaultUser: User = {
     id: '1',
     name: 'John Doe',
     email: 'john@WaterSquares.com',
     role: 'admin',
     companyId: '1',
     companyName: 'WaterSquares Systems'
+  };
+
+  const [user, setUser] = useState<User | null>(() => {
+    // Load user from localStorage on initialization
+    try {
+      const stored = localStorage.getItem('currentUser');
+      if (stored) {
+        const parsed = JSON.parse(stored) as User;
+        if (parsed && parsed.id && parsed.name && parsed.email && parsed.role) {
+          return parsed;
+        }
+      }
+    } catch {}
+    return defaultUser;
   });
+
+  // Save user to localStorage whenever it changes
+  useEffect(() => {
+    if (user) {
+      localStorage.setItem('currentUser', JSON.stringify(user));
+    }
+  }, [user]);
 
   const switchRole = (role: UserRole) => {
     if (user) {

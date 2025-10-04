@@ -35,9 +35,9 @@ const adminMenuItems = [
   { title: "Companies", url: "/companies", icon: Building2 },
   { title: "All Users", url: "/users", icon: Users },
   { title: "Analytics", url: "/analytics", icon: BarChart3 },
-  { title: "Security", url: "/security", icon: Shield },
-  { title: "System Settings", url: "/system", icon: Settings },
-  { title: "List Demo", url: "/list-demo" , icon: Home},
+  // { title: "Security", url: "/security", icon: Shield },
+  // { title: "System Settings", url: "/system", icon: Settings },
+  // { title: "List Demo", url: "/list-demo" , icon: Home},
 ];
 
 const companyAdminMenuItems = [

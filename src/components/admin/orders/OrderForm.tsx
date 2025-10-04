@@ -119,7 +119,7 @@ export function OrderForm({ order, onClose, onSuccess }: OrderFormProps) {
     const subtotal = orderItems.reduce((sum, item) => sum + item.totalPrice, 0);
     const tax = subtotal * 0.1; // 10% tax
     const total = subtotal + formData.deliveryFee + tax;
-    
+
     return { subtotal, tax, total };
   };
 
@@ -195,9 +195,9 @@ export function OrderForm({ order, onClose, onSuccess }: OrderFormProps) {
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
       {/* Customer Information */}
-      <Card>
+      <Card className='border border-[#1B3C53] bg-[#1B3C53]'>
         <CardHeader>
-          <CardTitle className="flex items-center gap-2 text-[#1B3C53]">
+          <CardTitle className="flex items-center gap-2 text-white">
             <User className="h-5 w-5" />
             Customer Information
           </CardTitle>
@@ -205,8 +205,9 @@ export function OrderForm({ order, onClose, onSuccess }: OrderFormProps) {
         <CardContent className="space-y-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-2">
-              <Label htmlFor="customerName">Customer Name *</Label>
+              <Label htmlFor="customerName" className='text-white'>Customer Name *</Label>
               <Input
+                className='text-black bg-white'
                 id="customerName"
                 value={formData.customerName}
                 onChange={(e) => setFormData({ ...formData, customerName: e.target.value })}
@@ -215,8 +216,9 @@ export function OrderForm({ order, onClose, onSuccess }: OrderFormProps) {
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="contactNumber">Contact Number *</Label>
+              <Label htmlFor="contactNumber" className="text-white">Contact Number *</Label>
               <Input
+                className='text-black bg-white'
                 id="contactNumber"
                 value={formData.contactNumber}
                 onChange={(e) => setFormData({ ...formData, contactNumber: e.target.value })}
@@ -225,8 +227,9 @@ export function OrderForm({ order, onClose, onSuccess }: OrderFormProps) {
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="customerEmail">Email</Label>
+              <Label htmlFor="customerEmail" className="text-white">Email</Label>
               <Input
+                className='text-black bg-white'
                 id="customerEmail"
                 type="email"
                 value={formData.customerEmail}
@@ -239,17 +242,18 @@ export function OrderForm({ order, onClose, onSuccess }: OrderFormProps) {
       </Card>
 
       {/* Delivery Address */}
-      <Card>
+      <Card className='border border-[#1B3C53] bg-[#1B3C53]'>
         <CardHeader>
-          <CardTitle className="flex items-center gap-2 text-[#1B3C53]">
+          <CardTitle className="flex items-center gap-2 text-white">
             <MapPin className="h-5 w-5" />
             Delivery Address
           </CardTitle>
         </CardHeader>
-        <CardContent className="space-y-4">
+        <CardContent className="space-y-4" >
           <div className="space-y-2">
-            <Label htmlFor="deliveryAddress">Address *</Label>
+            <Label htmlFor="deliveryAddress" className="text-white">Address *</Label>
             <Input
+              className='text-black bg-white'
               id="deliveryAddress"
               value={formData.deliveryAddress}
               onChange={(e) => setFormData({ ...formData, deliveryAddress: e.target.value })}
@@ -259,8 +263,9 @@ export function OrderForm({ order, onClose, onSuccess }: OrderFormProps) {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-2">
-              <Label htmlFor="city">City *</Label>
+              <Label htmlFor="city" className="text-white">City *</Label>
               <Input
+                className='text-black bg-white'
                 id="city"
                 value={formData.city}
                 onChange={(e) => setFormData({ ...formData, city: e.target.value })}
@@ -269,8 +274,9 @@ export function OrderForm({ order, onClose, onSuccess }: OrderFormProps) {
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="postalCode">Postal Code *</Label>
+              <Label htmlFor="postalCode" className="text-white">Postal Code *</Label>
               <Input
+                className='text-black bg-white'
                 id="postalCode"
                 value={formData.postalCode}
                 onChange={(e) => setFormData({ ...formData, postalCode: e.target.value })}
@@ -283,19 +289,19 @@ export function OrderForm({ order, onClose, onSuccess }: OrderFormProps) {
       </Card>
 
       {/* Order Items */}
-      <Card>
+      <Card className='border border-[#1B3C53] bg-[#1B3C53]'>
         <CardHeader>
-          <CardTitle className="flex items-center gap-2 text-[#1B3C53]">
+          <CardTitle className="flex items-center gap-2 text-white">
             <Package className="h-5 w-5" />
             Order Items
           </CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
           {orderItems.map((item, index) => (
-            <div key={index} className="flex items-center gap-4 p-4 border rounded-lg">
+            <div key={index} className="flex items-center gap-4 p-4 border rounded-lg border border-white">
               <div className="flex-1 grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div className="space-y-2">
-                  <Label>Product</Label>
+                  <Label className='text-white'>Product</Label>
                   <Select
                     value={item.productId}
                     onValueChange={(value) => updateOrderItem(index, 'productId', value)}
@@ -303,7 +309,7 @@ export function OrderForm({ order, onClose, onSuccess }: OrderFormProps) {
                     <SelectTrigger>
                       <SelectValue />
                     </SelectTrigger>
-                    <SelectContent>
+                    <SelectContent className='text-black bg-white'>
                       {availableProducts.map((product) => (
                         <SelectItem key={product.id} value={product.id}>
                           {product.name} - {product.size} (${product.price})
@@ -313,9 +319,10 @@ export function OrderForm({ order, onClose, onSuccess }: OrderFormProps) {
                   </Select>
                 </div>
                 <div className="space-y-2">
-                  <Label>Quantity</Label>
+                  <Label className='text-white'>Quantity</Label>
                   <div className="flex items-center gap-2">
                     <Button
+                      className='text-black bg-white'
                       type="button"
                       variant="outline"
                       size="sm"
@@ -328,9 +335,10 @@ export function OrderForm({ order, onClose, onSuccess }: OrderFormProps) {
                       min="1"
                       value={item.quantity}
                       onChange={(e) => updateOrderItem(index, 'quantity', parseInt(e.target.value))}
-                      className="w-20 text-center"
+                      className="w-20 text-center border border-[#1B35C3] text-black bg-white"
                     />
                     <Button
+                      className='text-black bg-white'
                       type="button"
                       variant="outline"
                       size="sm"
@@ -341,8 +349,8 @@ export function OrderForm({ order, onClose, onSuccess }: OrderFormProps) {
                   </div>
                 </div>
                 <div className="space-y-2">
-                  <Label>Total</Label>
-                  <div className="text-lg font-semibold text-[#1B3C53]">
+                  <Label className='text-white'>Total</Label>
+                  <div className="text-lg font-semibold text-white">
                     ${item.totalPrice.toFixed(2)}
                   </div>
                 </div>
@@ -352,18 +360,19 @@ export function OrderForm({ order, onClose, onSuccess }: OrderFormProps) {
                 variant="ghost"
                 size="sm"
                 onClick={() => removeOrderItem(index)}
-                className="text-red-500 hover:text-red-700"
+                className="text-red-500"
               >
                 <Trash2 className="h-4 w-4" />
               </Button>
             </div>
           ))}
-          
+
           <Button
+            // className='text-black bg-white'
             type="button"
             variant="outline"
             onClick={addOrderItem}
-            className="w-full"
+            className="w-full text-black bg-white"
           >
             <Plus className="h-4 w-4 mr-2" />
             Add Item
@@ -372,9 +381,9 @@ export function OrderForm({ order, onClose, onSuccess }: OrderFormProps) {
       </Card>
 
       {/* Order Details */}
-      <Card>
+      <Card className='border border-[#1B3C53] bg-[#1B3C53]'>
         <CardHeader>
-          <CardTitle className="text-[#1B3C53]">Order Details</CardTitle>
+          <CardTitle className="text-white">Order Details</CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -387,8 +396,8 @@ export function OrderForm({ order, onClose, onSuccess }: OrderFormProps) {
                 <SelectTrigger>
                   <SelectValue />
                 </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="pending">Pending</SelectItem>
+                <SelectContent className='text-black bg-white'>
+                  <SelectItem value="pending" >Pending</SelectItem>
                   <SelectItem value="confirmed">Confirmed</SelectItem>
                   <SelectItem value="preparing">Preparing</SelectItem>
                   <SelectItem value="ready">Ready</SelectItem>
@@ -419,6 +428,7 @@ export function OrderForm({ order, onClose, onSuccess }: OrderFormProps) {
             <div className="space-y-2">
               <Label htmlFor="deliveryDate">Delivery Date</Label>
               <Input
+                className='text-black bg-white'
                 id="deliveryDate"
                 type="date"
                 value={formData.deliveryDate}
@@ -428,6 +438,7 @@ export function OrderForm({ order, onClose, onSuccess }: OrderFormProps) {
             <div className="space-y-2">
               <Label htmlFor="deliveryTime">Delivery Time</Label>
               <Input
+                className='text-black bg-white'
                 id="deliveryTime"
                 type="time"
                 value={formData.deliveryTime}
@@ -438,6 +449,7 @@ export function OrderForm({ order, onClose, onSuccess }: OrderFormProps) {
           <div className="space-y-2">
             <Label htmlFor="notes">Notes</Label>
             <Textarea
+              className='text-black bg-white'
               id="notes"
               value={formData.notes}
               onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
@@ -449,9 +461,9 @@ export function OrderForm({ order, onClose, onSuccess }: OrderFormProps) {
       </Card>
 
       {/* Order Summary */}
-      <Card>
+      <Card className='border border-[#1B3C53] bg-[#1B3C53]'>
         <CardHeader>
-          <CardTitle className="text-[#1B3C53]">Order Summary</CardTitle>
+          <CardTitle className="text-white">Order Summary</CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="space-y-2">
@@ -467,7 +479,7 @@ export function OrderForm({ order, onClose, onSuccess }: OrderFormProps) {
               <span>Tax:</span>
               <span>${tax.toFixed(2)}</span>
             </div>
-            <div className="flex justify-between text-lg font-bold text-[#1B3C53] border-t pt-2">
+            <div className="flex justify-between text-lg font-bold text-white border-t pt-2">
               <span>Total:</span>
               <span>${total.toFixed(2)}</span>
             </div>
@@ -477,10 +489,10 @@ export function OrderForm({ order, onClose, onSuccess }: OrderFormProps) {
 
       {/* Form Actions */}
       <div className="flex justify-end gap-4">
-        <Button type="button" variant="outline" onClick={onClose}>
+        <Button type="button" variant="outline" onClick={onClose} className='text-white bg-[#1B3C53]'>
           Cancel
         </Button>
-        <Button type="submit" className="bg-gradient-primary">
+        <Button type="submit" className='text-white bg-[#1B3C53]'>
           {order ? 'Update Order' : 'Create Order'}
         </Button>
       </div>

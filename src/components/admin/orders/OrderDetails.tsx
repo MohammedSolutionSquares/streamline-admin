@@ -71,7 +71,7 @@ export function OrderDetails({ order, onClose, onEdit }: OrderDetailsProps) {
 
       <div className="grid gap-6 md:grid-cols-2">
         {/* Customer Information */}
-        <Card>
+        <Card className='border border-[#1B3C53] bg-white'>
           <CardHeader>
             <CardTitle className="flex items-center gap-2 text-[#1B3C53]">
               <User className="h-5 w-5" />
@@ -80,14 +80,14 @@ export function OrderDetails({ order, onClose, onEdit }: OrderDetailsProps) {
           </CardHeader>
           <CardContent className="space-y-4">
             <div>
-              <h4 className="font-semibold text-lg">{order.customerName}</h4>
+              <h4 className="font-semibold text-lg text-[#1B3C53]">{order.customerName}</h4>
               {order.customerEmail && (
-                <div className="flex items-center gap-2 text-gray-600">
+                <div className="flex items-center gap-2 text-[#1B3C53]">
                   <Mail className="h-4 w-4" />
                   {order.customerEmail}
                 </div>
               )}
-              <div className="flex items-center gap-2 text-gray-600">
+              <div className="flex items-center gap-2 text-[#1B3C53]">
                 <Phone className="h-4 w-4" />
                 {order.contactNumber}
               </div>
@@ -96,7 +96,7 @@ export function OrderDetails({ order, onClose, onEdit }: OrderDetailsProps) {
         </Card>
 
         {/* Delivery Information */}
-        <Card>
+        <Card className='border border-[#1B3C53] bg-white'>
           <CardHeader>
             <CardTitle className="flex items-center gap-2 text-[#1B3C53]">
               <MapPin className="h-5 w-5" />
@@ -105,23 +105,23 @@ export function OrderDetails({ order, onClose, onEdit }: OrderDetailsProps) {
           </CardHeader>
           <CardContent className="space-y-4">
             <div>
-              <p className="font-medium">{order.deliveryAddress}</p>
-              <p className="text-gray-600">{order.city}, {order.postalCode}</p>
+              <p className="font-medium text-[#1B3C53]">{order.deliveryAddress}</p>
+              <p className="text-[#1B3C53]">{order.city}, {order.postalCode}</p>
             </div>
             {order.deliveryDate && (
-              <div className="flex items-center gap-2 text-gray-600">
-                <Calendar className="h-4 w-4" />
+              <div className="flex items-center gap-2 text-[#1B3C53]">
+                <Calendar className="h-4 w-4 text-[#1B3C53]" />
                 {new Date(order.deliveryDate).toLocaleDateString()}
               </div>
             )}
             {order.deliveryTime && (
-              <div className="flex items-center gap-2 text-gray-600">
+              <div className="flex items-center gap-2 text-[#1B3C53]">
                 <Clock className="h-4 w-4" />
                 {order.deliveryTime}
               </div>
             )}
             {order.assignedDriver && (
-              <div className="flex items-center gap-2 text-gray-600">
+              <div className="flex items-center gap-2 text-[#1B3C53]">
                 <Truck className="h-4 w-4" />
                 Driver: {order.assignedDriver}
               </div>
@@ -131,7 +131,7 @@ export function OrderDetails({ order, onClose, onEdit }: OrderDetailsProps) {
       </div>
 
       {/* Order Items */}
-      <Card>
+      <Card className='text-[#1B3C53] border border-[#1B3C53] bg-white'>
         <CardHeader>
           <CardTitle className="flex items-center gap-2 text-[#1B3C53]">
             <Package className="h-5 w-5" />
@@ -141,15 +141,15 @@ export function OrderDetails({ order, onClose, onEdit }: OrderDetailsProps) {
         <CardContent>
           <div className="space-y-4">
             {order.items.map((item, index) => (
-              <div key={index} className="flex items-center justify-between p-4 border rounded-lg">
-                <div className="flex-1">
-                  <h4 className="font-semibold">{item.product.name}</h4>
-                  <p className="text-gray-600">{item.product.description}</p>
-                  <p className="text-sm text-gray-500">Size: {item.product.size}</p>
+              <div key={index} className="flex items-center justify-between p-4 border rounded-lg border border-[#1B3C53]">
+                <div className="flex-1 text-[#1B3C53]">
+                  <h4 className="font-semibold text-[#1B3C53]">{item.product.name}</h4>
+                  <p className="text-[#1B3C53]">{item.product.description}</p>
+                  <p className="text-sm text-[#1B3C53]">Size: {item.product.size}</p>
                 </div>
-                <div className="text-right">
+                <div className="text-right text-[#1B3C53]">
                   <p className="font-semibold">Qty: {item.quantity}</p>
-                  <p className="text-gray-600">${item.unitPrice.toFixed(2)} each</p>
+                  <p className="text-[#1B3C53]">${item.unitPrice.toFixed(2)} each</p>
                   <p className="font-semibold text-[#1B3C53]">${item.totalPrice.toFixed(2)}</p>
                 </div>
               </div>
@@ -159,14 +159,14 @@ export function OrderDetails({ order, onClose, onEdit }: OrderDetailsProps) {
       </Card>
 
       {/* Order Summary */}
-      <Card>
+      <Card className='border border-[#1B3C53] bg-white'>
         <CardHeader>
           <CardTitle className="flex items-center gap-2 text-[#1B3C53]">
             <DollarSign className="h-5 w-5" />
             Order Summary
           </CardTitle>
         </CardHeader>
-        <CardContent>
+        <CardContent className='text-[#1B3C53]'>
           <div className="space-y-3">
             <div className="flex justify-between">
               <span>Subtotal:</span>
@@ -180,7 +180,7 @@ export function OrderDetails({ order, onClose, onEdit }: OrderDetailsProps) {
               <span>Tax:</span>
               <span>${order.tax.toFixed(2)}</span>
             </div>
-            <Separator />
+            <Separator className='text-[#1B3C53]'/>
             <div className="flex justify-between text-xl font-bold text-[#1B3C53]">
               <span>Total:</span>
               <span>${order.totalAmount.toFixed(2)}</span>
@@ -191,26 +191,26 @@ export function OrderDetails({ order, onClose, onEdit }: OrderDetailsProps) {
 
       {/* Notes */}
       {order.notes && (
-        <Card>
+        <Card className="border border-[#1B3C53] bg-white">
           <CardHeader>
             <CardTitle className="text-[#1B3C53]">Notes</CardTitle>
           </CardHeader>
           <CardContent>
-            <p className="text-gray-700">{order.notes}</p>
+            <p className="text-[#1B3C53]">{order.notes}</p>
           </CardContent>
         </Card>
       )}
 
       {/* Actions */}
       <div className="flex justify-end gap-4">
-        <Button variant="outline" onClick={onClose}>
+        <Button variant="outline" onClick={onClose} className='bg-[#1B3C53] text-white'>
           Close
         </Button>
-        <Button variant="outline">
+        <Button variant="outline" className='bg-[#1B3C53] text-white'>
           <Printer className="h-4 w-4 mr-2" />
           Print
         </Button>
-        <Button onClick={onEdit} className="bg-gradient-primary">
+        <Button onClick={onEdit} className="bg-[#1B3C53] text-white">
           <Edit className="h-4 w-4 mr-2" />
           Edit Order
         </Button>

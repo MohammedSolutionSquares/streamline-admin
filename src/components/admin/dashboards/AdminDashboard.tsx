@@ -140,7 +140,7 @@ export function AdminDashboard() {
         </Card>
 
         {/* System Alerts */}
-        <Card className="shadow-card bg-white border border-[#1B3C53]">
+        {/* <Card className="shadow-card bg-white border border-[#1B3C53]">
           <CardHeader>
             <CardTitle className="text-black">System Alerts</CardTitle>
             <CardDescription className="text-black">
@@ -163,7 +163,7 @@ export function AdminDashboard() {
                 </div>
 
               </CardContent>
-            </Card>
+            </Card> */}
 
           </div>
         </TabsContent>

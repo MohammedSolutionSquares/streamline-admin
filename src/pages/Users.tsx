@@ -1,7 +1,8 @@
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "@/components/ui/alert-dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -9,7 +10,7 @@ import { Badge } from "@/components/ui/badge";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { AdminLayout } from "@/components/admin/AdminLayout";
 import { User, UserRole } from "@/contexts/RoleContext";
-import { Plus } from "lucide-react";
+import { Plus, Pencil, Trash2 } from "lucide-react";
 
 const roleBadgeVariant = (role: UserRole) => {
 	if (role === "admin") return "default" as const;
@@ -27,6 +28,8 @@ export default function Users() {
 	]);
 
 	const [open, setOpen] = useState(false);
+	const [isEditing, setIsEditing] = useState(false);
+	const [editingUserId, setEditingUserId] = useState<string | null>(null);
 	const [name, setName] = useState("");
 	const [email, setEmail] = useState("");
 	const [role, setRole] = useState<UserRole>("staff");
@@ -34,26 +37,71 @@ export default function Users() {
 
 	const canHaveCompany = useMemo(() => role !== "admin", [role]);
 
+	// Load users from localStorage on mount
+	useEffect(() => {
+		try {
+			const raw = localStorage.getItem("users");
+			if (raw) {
+				const parsed = JSON.parse(raw) as User[];
+				if (Array.isArray(parsed)) setUsers(parsed);
+			}
+		} catch {}
+	}, []);
+
+	// Persist users to localStorage whenever they change
+	useEffect(() => {
+		try {
+			localStorage.setItem("users", JSON.stringify(users));
+		} catch {}
+	}, [users]);
+
 	const resetForm = () => {
 		setName("");
 		setEmail("");
 		setRole("staff");
 		setCompanyName("");
+		setIsEditing(false);
+		setEditingUserId(null);
 	};
 
-	const handleAddUser = () => {
+	const handleSaveUser = () => {
 		if (!name.trim() || !email.trim()) return;
-		const newUser: User = {
-			id: String(Date.now()),
-			name: name.trim(),
-			email: email.trim(),
-			role,
-			companyName: canHaveCompany && companyName.trim() ? companyName.trim() : undefined,
-			companyId: canHaveCompany && companyName.trim() ? `c_${Math.random().toString(36).slice(2, 8)}` : undefined,
-		};
-		setUsers(prev => [newUser, ...prev]);
+		if (isEditing && editingUserId) {
+			setUsers(prev => prev.map(u => u.id === editingUserId ? {
+				...u,
+				name: name.trim(),
+				email: email.trim(),
+				role,
+				companyName: canHaveCompany && companyName.trim() ? companyName.trim() : undefined,
+				companyId: canHaveCompany && companyName.trim() ? (u.companyId ?? `c_${Math.random().toString(36).slice(2, 8)}`) : undefined,
+			} : u));
+		} else {
+			const newUser: User = {
+				id: String(Date.now()),
+				name: name.trim(),
+				email: email.trim(),
+				role,
+				companyName: canHaveCompany && companyName.trim() ? companyName.trim() : undefined,
+				companyId: canHaveCompany && companyName.trim() ? `c_${Math.random().toString(36).slice(2, 8)}` : undefined,
+			};
+			setUsers(prev => [newUser, ...prev]);
+		}
 		setOpen(false);
 		resetForm();
+	};
+
+	const startEditUser = (user: User) => {
+		setIsEditing(true);
+		setEditingUserId(user.id);
+		setName(user.name);
+		setEmail(user.email);
+		setRole(user.role);
+		setCompanyName(user.companyName || "");
+		setOpen(true);
+	};
+
+	const deleteUser = (id: string) => {
+		setUsers(prev => prev.filter(u => u.id !== id));
 	};
 
 	return (
@@ -72,8 +120,8 @@ export default function Users() {
 						</DialogTrigger>
 						<DialogContent className="sm:max-w-[520px]">
 							<DialogHeader>
-								<DialogTitle>Add User</DialogTitle>
-								<DialogDescription>Create a new test user with a specific role.</DialogDescription>
+								<DialogTitle>{isEditing ? "Edit User" : "Add User"}</DialogTitle>
+								<DialogDescription>{isEditing ? "Update the user details." : "Create a new test user with a specific role."}</DialogDescription>
 							</DialogHeader>
 							<div className="grid gap-4 py-4">
 								<div className="grid grid-cols-4 items-center gap-4">
@@ -108,8 +156,8 @@ export default function Users() {
 								)}
 							</div>
 							<DialogFooter>
-								<Button variant="outline" onClick={() => setOpen(false)}>Cancel</Button>
-								<Button className="bg-[#1B3C53] hover:bg-[#2D5A77] text-white" onClick={handleAddUser}>Save</Button>
+								<Button variant="outline" onClick={() => { setOpen(false); resetForm(); }}>Cancel</Button>
+								<Button className="bg-[#1B3C53] hover:bg-[#2D5A77] text-white" onClick={handleSaveUser}>{isEditing ? "Update" : "Save"}</Button>
 							</DialogFooter>
 						</DialogContent>
 					</Dialog>
@@ -129,6 +177,7 @@ export default function Users() {
 										<TableHead>Email</TableHead>
 										<TableHead>Role</TableHead>
 										<TableHead>Company</TableHead>
+										<TableHead className="w-[140px] text-right">Actions</TableHead>
 									</TableRow>
 								</TableHeader>
 								<TableBody>
@@ -141,7 +190,31 @@ export default function Users() {
 													{u.role.replace("_", " ")}
 												</Badge>
 											</TableCell>
-											<TableCell>{u.companyName || "-"}</TableCell>
+										<TableCell>{u.companyName || "-"}</TableCell>
+										<TableCell className="text-right space-x-2">
+											<Button variant="outline" size="sm" onClick={() => startEditUser(u)}>
+												<Pencil className="h-4 w-4 mr-1" /> Edit
+											</Button>
+											<AlertDialog>
+												<AlertDialogTrigger asChild>
+													<Button variant="destructive" size="sm">
+														<Trash2 className="h-4 w-4 mr-1" /> Delete
+													</Button>
+												</AlertDialogTrigger>
+												<AlertDialogContent>
+													<AlertDialogHeader>
+														<AlertDialogTitle>Delete user?</AlertDialogTitle>
+														<AlertDialogDescription>
+															This action cannot be undone. This will permanently remove the user.
+														</AlertDialogDescription>
+													</AlertDialogHeader>
+													<AlertDialogFooter>
+														<AlertDialogCancel>Cancel</AlertDialogCancel>
+														<AlertDialogAction onClick={() => deleteUser(u.id)}>Delete</AlertDialogAction>
+													</AlertDialogFooter>
+												</AlertDialogContent>
+											</AlertDialog>
+										</TableCell>
 										</TableRow>
 									))}
 								</TableBody>

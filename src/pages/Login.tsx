@@ -32,10 +32,10 @@ export default function Login() {
       });
 
       // Check if it's admin login
-    if(formData){
-      navigate("/dashboard");
-    }
-    },1500);
+      if (formData) {
+        navigate("/dashboard");
+      }
+    }, 1500);
   };
 
   const handleChange = (field: string, value: string | boolean) => {
@@ -43,7 +43,13 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-subtle px-4 bg-white">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-subtle px-4 bg-white"
+      style={{
+        backgroundImage: "url('/Water.png')",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
+    >
       <Card className="w-full max-w-md border border-[#1B3C53] bg-[#1B3C53]">
         <CardHeader className="text-center">
           <div className="flex justify-center mb-4">
@@ -140,7 +146,7 @@ export default function Login() {
             </div>
             <div className="grid grid-cols-2 gap-2 text-xs">
               <Button
-              className="border border-white bg-transparent text-white"
+                className="border border-white bg-transparent text-white"
                 size="sm"
                 onClick={() => setFormData({
                   email: "admin@WaterSquares.com",
@@ -151,7 +157,7 @@ export default function Login() {
                 Admin Login
               </Button>
               <Button
-              className="border border-white bg-transparent text-white"
+                className="border border-white bg-transparent text-white"
                 size="sm"
                 onClick={() => setFormData({
                   email: "customer@example.com",

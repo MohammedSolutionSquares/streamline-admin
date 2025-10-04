@@ -58,37 +58,37 @@ export default function Users() {
 
 	return (
 		<AdminLayout>
-			<div className="space-y-6">
+			<div className="space-y-6 ">
 				<div className="flex items-center justify-between">
 					<div>
 						<h2 className="text-3xl font-bold tracking-tight text-[#1B3C53]">All Users</h2>
-						<p className="text-muted-foreground">Manage test users across roles for QA</p>
+						<p className="text-black/50">Manage test users across roles for QA</p>
 					</div>
 					<Dialog open={open} onOpenChange={setOpen}>
 						<DialogTrigger asChild>
-							<Button className="bg-[#1B3C53] hover:bg-[#2D5A77] text-white">
+							<Button className="bg-[#1B3C53] text-white">
 								<Plus className="h-4 w-4 mr-2" /> Add User
 							</Button>
 						</DialogTrigger>
-						<DialogContent className="sm:max-w-[520px]">
+						<DialogContent className="sm:max-w-[520px] bg-[#2D5A77]">
 							<DialogHeader>
 								<DialogTitle>Add User</DialogTitle>
-								<DialogDescription>Create a new test user with a specific role.</DialogDescription>
+								<DialogDescription className="text-white/50">Create a new test user with a specific role.</DialogDescription>
 							</DialogHeader>
 							<div className="grid gap-4 py-4">
 								<div className="grid grid-cols-4 items-center gap-4">
 									<Label htmlFor="name" className="text-right">Name</Label>
-									<Input id="name" value={name} onChange={e => setName(e.target.value)} className="col-span-3" />
+									<Input id="name" value={name} onChange={e => setName(e.target.value)} className="col-span-3 bg-white text-black" />
 								</div>
 								<div className="grid grid-cols-4 items-center gap-4">
 									<Label htmlFor="email" className="text-right">Email</Label>
-									<Input id="email" type="email" value={email} onChange={e => setEmail(e.target.value)} className="col-span-3" />
+									<Input id="email" type="email" value={email} onChange={e => setEmail(e.target.value)} className="col-span-3 bg-white text-black" />
 								</div>
 								<div className="grid grid-cols-4 items-center gap-4">
 									<Label className="text-right">Role</Label>
 									<div className="col-span-3">
 										<Select value={role} onValueChange={(v) => setRole(v as UserRole)}>
-											<SelectTrigger>
+											<SelectTrigger className="bg-white text-black">
 												<SelectValue placeholder="Select a role" />
 											</SelectTrigger>
 											<SelectContent>
@@ -103,21 +103,21 @@ export default function Users() {
 								{canHaveCompany && (
 									<div className="grid grid-cols-4 items-center gap-4">
 										<Label htmlFor="company" className="text-right">Company</Label>
-										<Input id="company" value={companyName} onChange={e => setCompanyName(e.target.value)} className="col-span-3" placeholder="Optional" />
+										<Input id="company" value={companyName} onChange={e => setCompanyName(e.target.value)} className="col-span-3 text-black bg-white" placeholder="Optional" />
 									</div>
 								)}
 							</div>
 							<DialogFooter>
-								<Button variant="outline" onClick={() => setOpen(false)}>Cancel</Button>
-								<Button className="bg-[#1B3C53] hover:bg-[#2D5A77] text-white" onClick={handleAddUser}>Save</Button>
+								<Button variant="outline" onClick={() => setOpen(false)} className="text-black bg-white">Cancel</Button>
+								<Button className="text-black bg-white" onClick={handleAddUser}>Save</Button>
 							</DialogFooter>
 						</DialogContent>
 					</Dialog>
 				</div>
 
-				<Card className="shadow-card">
+				<Card className="shadow-card bg-[#1B3C53]">
 					<CardHeader>
-						<CardTitle>Users</CardTitle>
+						<CardTitle className="text-white">Users</CardTitle>
 						<CardDescription>All roles are visible here for admins only</CardDescription>
 					</CardHeader>
 					<CardContent>
@@ -137,7 +137,7 @@ export default function Users() {
 											<TableCell className="font-medium">{u.name}</TableCell>
 											<TableCell>{u.email}</TableCell>
 											<TableCell>
-												<Badge variant={roleBadgeVariant(u.role)} className="bg-[#1B3C53] text-white border-0">
+												<Badge variant={roleBadgeVariant(u.role)} className="bg-white text-[#1B3C53] border-0">
 													{u.role.replace("_", " ")}
 												</Badge>
 											</TableCell>

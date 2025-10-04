@@ -177,14 +177,14 @@ export function AnalyticsDashboard() {
   const pieChartOptions = { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'right' as const } } };
 
   const StatCard = ({ title, value, change, icon: Icon, color }: { title: string; value: string; change: string; icon: any; color: string; }) => (
-    <Card className="card border border-[#1B3C53]   bg-white">
+    <Card className="card bg-[#1B3C53]">
       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-        <CardTitle className="text-sm font-medium text-gray-600">{title}</CardTitle>
+        <CardTitle className="text-sm font-medium text-white">{title}</CardTitle>
         <Icon className={`h-4 w-4 ${color}`} />
       </CardHeader>
       <CardContent>
-        <div className="text-2xl font-bold text-gray-900">{value}</div>
-        <p className="text-xs text-gray-500 mt-1">{change}</p>
+        <div className="text-2xl font-bold text-white">{value}</div>
+        <p className="text-xs mt-1 text-white/50">{change}</p>
       </CardContent>
     </Card>
   );
@@ -198,25 +198,25 @@ export function AnalyticsDashboard() {
         </div>
         <div className="flex items-center space-x-2">
           <Select value={selectedTimeRange} onValueChange={setSelectedTimeRange}>
-            <SelectTrigger className="w-[180px] bg-white text-black"><SelectValue placeholder="Select time range" /></SelectTrigger>
-            <SelectContent>
-              {timeRangeOptions.map((option) => (
-                <SelectItem key={option.value} value={option.value}>{option.label}</SelectItem>
-              ))}
-            </SelectContent>
+            <SelectTrigger className="w-[180px] bg-[#1B3C53] text-white"><SelectValue placeholder="Select time range"/></SelectTrigger>
+              <SelectContent className="w-[180px] bg-[#1B3C53] text-white">
+                {timeRangeOptions.map((option) => (
+                  <SelectItem key={option.value} value={option.value}>{option.label}</SelectItem>
+                ))}
+              </SelectContent>
           </Select>
         </div>
       </div>
 
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-        <StatCard title="Total Revenue" value={formatCurrency(metrics.totalRevenue)} change={formatPercentage(0)} icon={DollarSign} color="text-green-600" />
+        <StatCard title="Total Revenue" value={formatCurrency(metrics.totalRevenue)} change={formatPercentage(0)} icon={DollarSign} color="text-green-600"/>
         <StatCard title="Total Users" value={formatNumber(metrics.totalUsers)} change={formatPercentage(0)} icon={Users} color="text-blue-600" />
         <StatCard title="Total Companies" value={formatNumber(metrics.totalCompanies)} change={`+0 this month`} icon={Building2} color="text-purple-600" />
         <StatCard title="Total Orders" value={formatNumber(metrics.totalOrders)} change={`${formatPercentage(0)} from last month`} icon={Package} color="text-orange-600" />
       </div>
 
       <Tabs defaultValue="overview" className="space-y-6">
-        <TabsList className="grid w-full grid-cols-4">
+        <TabsList className="grid w-full grid-cols-4 bg-[#1B3C53] text-white">
           <TabsTrigger value="overview">Overview</TabsTrigger>
           <TabsTrigger value="revenue">Revenue</TabsTrigger>
           <TabsTrigger value="users">Users</TabsTrigger>
@@ -227,7 +227,7 @@ export function AnalyticsDashboard() {
           <div className="grid gap-6 md:grid-cols-2">
             <Card className="shadow-card bg-white">
               <CardHeader>
-                <CardTitle className="flex items-center gap-2"><LineChart className="h-5 w-5 text-black"/>Revenue Trend</CardTitle>
+                <CardTitle className="flex items-center gap-2 text-[#1B3C53]"><LineChart className="h-5 w-5 text-black"/>Revenue Trend</CardTitle>
                 <CardDescription>Monthly revenue and order trends over time</CardDescription>
               </CardHeader>
               <CardContent>
@@ -237,7 +237,7 @@ export function AnalyticsDashboard() {
 
             <Card className="shadow-card bg-white">
               <CardHeader>
-                <CardTitle className="flex items-center gap-2"><PieChart className="h-5 w-5 text-[#1B3C53]" />Revenue Distribution</CardTitle>
+                <CardTitle className="flex items-center gap-2 text-[#1B3C53]"><PieChart className="h-5 w-5 text-[#1B3C53]" />Revenue Distribution</CardTitle>
                 <CardDescription>Revenue share by company</CardDescription>
               </CardHeader>
               <CardContent>
@@ -248,7 +248,7 @@ export function AnalyticsDashboard() {
 
           <Card className="shadow-card bg-white">
             <CardHeader>
-              <CardTitle className="flex items-center gap-2"><BarChart3 className="h-5 w-5 text-[#1B3C53]" />Company Performance</CardTitle>
+              <CardTitle className="flex items-center gap-2 text-[#1B3C53]"><BarChart3 className="h-5 w-5 text-[#1B3C53]" />Company Performance</CardTitle>
               <CardDescription>Revenue comparison across all companies</CardDescription>
             </CardHeader>
             <CardContent>
@@ -261,7 +261,7 @@ export function AnalyticsDashboard() {
           <div className="grid gap-6">
             <Card className="shadow-card bg-white">
               <CardHeader>
-                <CardTitle>Revenue Analytics</CardTitle>
+                <CardTitle className='text-[#1B3C53]'>Revenue Analytics</CardTitle>
                 <CardDescription>Detailed revenue analysis and trends</CardDescription>
               </CardHeader>
               <CardContent>
@@ -275,7 +275,7 @@ export function AnalyticsDashboard() {
           <div className="grid gap-6">
             <Card className="shadow-card bg-white">
               <CardHeader>
-                <CardTitle>User Growth Analytics</CardTitle>
+                <CardTitle className="text-[#1B3C53]">User Growth Analytics</CardTitle>
                 <CardDescription>User acquisition and engagement trends</CardDescription>
               </CardHeader>
               <CardContent>
@@ -289,18 +289,18 @@ export function AnalyticsDashboard() {
           <div className="grid gap-6">
             <Card className="shadow-card bg-white">
               <CardHeader>
-                <CardTitle>Company Performance</CardTitle>
+                <CardTitle className='text-[#1B3C53]'>Company Performance</CardTitle>
                 <CardDescription>Performance metrics for all companies</CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
                   <div className="h-[300px]"><Bar data={companyPerformanceChartData} options={barChartOptions} /></div>
                   <div className="mt-6">
-                    <h3 className="text-lg text-black font-semibold mb-4">Company Details</h3>
+                    <h3 className="text-lg text-[#1B3C53] font-semibold mb-4">Company Details</h3>
                     <div className="overflow-x-auto">
                       <table className="w-full border-collapse">
                         <thead>
-                          <tr className="border-b text-black">
+                          <tr className="border-b text-[#1B3C53]">
                             <th className="text-left p-2">Company</th>
                             <th className="text-left p-2">Users</th>
                             <th className="text-left p-2">Revenue</th>
@@ -312,11 +312,11 @@ export function AnalyticsDashboard() {
                         <tbody>
                           {companies.map((company) => (
                             <tr key={company.id} className="border-b">
-                              <td className="p-2 font-medium text-black">{company.name}</td>
-                              <td className="p-2 text-black">{formatNumber(company.users)}</td>
-                              <td className="p-2 text-black">{formatCurrency(company.totalRevenue || 0)}</td>
-                              <td className="p-2 text-black">{formatNumber(company.orders)}</td>
-                              <td className="p-2 text-black">
+                              <td className="p-2 font-medium text-[#1B3C53]">{company.name}</td>
+                              <td className="p-2 text-[#1B3C53]">{formatNumber(company.users)}</td>
+                              <td className="p-2 text-[#1B3C53]">{formatCurrency(company.totalRevenue || 0)}</td>
+                              <td className="p-2 text-[#1B3C53]">{formatNumber(company.orders)}</td>
+                              <td className="p-2 text-[#1B3C53]">
                                 <Badge 
                                   variant={
                                     company.status === 'active' ? 'default' : 
@@ -328,7 +328,7 @@ export function AnalyticsDashboard() {
                                 </Badge>
                               </td>
                               <td className="p-2">
-                                <span className={`flex items-center gap-1 text-green-600`}>
+                                <span className={`flex items-center gap-1 text-green-600 `}>
                                   <TrendingUp className="h-3 w-3" />
                                   {formatPercentage(5.2)}
                                 </span>

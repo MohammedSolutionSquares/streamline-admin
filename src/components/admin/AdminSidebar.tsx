@@ -141,9 +141,9 @@ export function AdminSidebar() {
         </div>
 
         <SidebarGroup>
-          <SidebarGroupLabel className={collapsed ? "sr-only text-white" : "text-white"}>
+          {/* <SidebarGroupLabel className={collapsed ? "sr-only text-white" : "text-white"}>
             Navigation
-          </SidebarGroupLabel>
+          </SidebarGroupLabel> */}
 
           <SidebarGroupContent>
             <SidebarMenu className="space-y-1">

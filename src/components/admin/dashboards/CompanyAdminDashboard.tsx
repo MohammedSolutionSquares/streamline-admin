@@ -86,11 +86,11 @@ export function CompanyAdminDashboard() {
           </p>
         </div>
         <div className="flex gap-2">
-          <Button variant="outline" size="sm" className="bg-blue-500 text-white">
+          <Button variant="outline" size="sm" className="bg-[#1B3C53] text-white">
             <MapPin className="h-4 w-4 mr-2 " />
             View Map
           </Button>
-          <Button size="sm" className="bg-gradient-primary">
+          <Button size="sm" className="bg-[#1B3C53]">
             <Package className="h-4 w-4 mr-2" />
             New Order
           </Button>

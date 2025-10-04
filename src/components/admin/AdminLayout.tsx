@@ -8,6 +8,7 @@ import { Bell, User } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { useNavigate } from "react-router-dom";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 interface AdminLayoutProps {
   children: ReactNode;
@@ -48,13 +49,13 @@ export function AdminLayout({ children }: AdminLayoutProps) {
     <SidebarProvider>
       <div className="min-h-screen flex w-full bg-background">
         <AdminSidebar />
-        
+
         <div className="flex-1 flex flex-col">
           {/* Top Header */}
           <header className="h-14 md:h-16 bg-white border-b shadow-sm flex items-center justify-between gap-4 md:gap-6 px-4 md:px-6 sticky top-0 z-40">
             {/* Left cluster: menu + title */}
             <div className="flex items-center gap-3 md:gap-4 min-w-0">
-              <SidebarTrigger className="text-zinc-600 hover:text-zinc-900" />
+              <SidebarTrigger className="text-[#1B3C53]" />
               <div className="h-6 w-px bg-zinc-200" />
               <h1 className="font-semibold text-zinc-900 text-sm md:text-base lg:text-lg truncate">
                 {user?.role === 'admin' && 'System Administration'}
@@ -63,22 +64,23 @@ export function AdminLayout({ children }: AdminLayoutProps) {
                 {user?.role === 'staff' && 'Staff Portal'}
               </h1>
             </div>
-            
+
             {/* Right cluster */}
             <div className="flex items-center gap-4 md:gap-6">
               {/* Role Switcher for Demo */}
               <div className="flex items-center gap-2">
                 <span className="text-sm text-zinc-500">Role:</span>
-                <select 
-                  value={user?.role}
-                  onChange={(e) => switchRole(e.target.value as any)}
-                  className="bg-[#1B3C53] text-white rounded-full px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#5458FF]/40"
-                >
-                  <option value="admin">Admin</option>
-                  <option value="company_admin">Company Admin</option>
-                  <option value="manager">Manager</option>
-                  <option value="staff">Staff</option>
-                </select>
+                <Select value={user?.role} onValueChange={(value) => switchRole(value as any)}>
+                  <SelectTrigger className="px-4 py-2 bg-[#16384C] text-white rounded-md focus:ring-2 focus:ring-blue-400 border-none w-48">
+                    <SelectValue placeholder="Select Role" />
+                  </SelectTrigger>
+                  <SelectContent className="bg-[#16384C] text-white rounded-lg shadow-md">
+                    <SelectItem value="admin">Admin</SelectItem>
+                    <SelectItem value="company_admin">Company Admin</SelectItem>
+                    <SelectItem value="manager">Manager</SelectItem>
+                    <SelectItem value="staff">Staff</SelectItem>
+                  </SelectContent>
+                </Select>
               </div>
 
               <Button variant="ghost" size="icon" className="relative text-zinc-600 hover:bg-zinc-100">

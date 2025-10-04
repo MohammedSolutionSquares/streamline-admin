@@ -65,7 +65,12 @@ export default function Register() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-subtle px-4 py-8 bg-white">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-subtle px-4 py-8 bg-white"
+      style={{
+        backgroundImage: "url('/Water.png')",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}>
       <Card className="w-full max-w-md border border-[#1B3C53] bg-[#1B3C53]">
         <CardHeader className="text-center">
           <div className="flex justify-center mb-4">
@@ -149,7 +154,7 @@ export default function Register() {
               <Label htmlFor="password">Password</Label>
               <div className="relative">
                 <Input
-                  className="bg-white text-black" 
+                  className="bg-white text-black"
                   id="password"
                   type={showPassword ? "text" : "password"}
                   placeholder="Create a strong password"
@@ -177,7 +182,7 @@ export default function Register() {
               <Label htmlFor="confirmPassword">Confirm Password</Label>
               <div className="relative">
                 <Input
-                className="bg-white text-black"
+                  className="bg-white text-black"
                   id="confirmPassword"
                   type={showConfirmPassword ? "text" : "password"}
                   placeholder="Confirm your password"
@@ -193,7 +198,7 @@ export default function Register() {
                   onClick={() => setShowConfirmPassword(!showConfirmPassword)}
                 >
                   {showConfirmPassword ? (
-                    <EyeOff className="h-4 w-4 text-black"/>
+                    <EyeOff className="h-4 w-4 text-black" />
                   ) : (
                     <Eye className="h-4 w-4 text-black" />
                   )}

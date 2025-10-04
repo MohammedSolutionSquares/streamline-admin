@@ -35,6 +35,7 @@ import {
   formatNumber,
   formatPercentage
 } from '../../../data/analyticsData';
+import { useUsers } from '@/contexts/UsersContext';
 
 ChartJS.register(
   CategoryScale,
@@ -51,6 +52,8 @@ ChartJS.register(
 export function AnalyticsDashboard() {
   const [selectedTimeRange, setSelectedTimeRange] = useState('30d');
   const { companies, metrics } = useCompanies();
+
+  const { metrics: userMetrics } = useUsers();
 
   const revenueChartData = useMemo(() => {
     // Create a synthetic trailing 7 months including current based on totalRevenue and orders
@@ -209,23 +212,23 @@ export function AnalyticsDashboard() {
       </div>
 
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-        <StatCard title="Total Revenue" value={formatCurrency(metrics.totalRevenue)} change={formatPercentage(0)} icon={DollarSign} color="text-green-600" />
-        <StatCard title="Total Users" value={formatNumber(metrics.totalUsers)} change={formatPercentage(0)} icon={Users} color="text-blue-600" />
+        {/* <StatCard title="Total Revenue" value={formatCurrency(metrics.totalRevenue)} change={formatPercentage(0)} icon={DollarSign} color="text-green-600" /> */}
+        <StatCard title="Total Users" value={userMetrics.totalUsers.toString()} change={formatPercentage(0)} icon={Users} color="text-blue-600" />
         <StatCard title="Total Companies" value={formatNumber(metrics.totalCompanies)} change={`+0 this month`} icon={Building2} color="text-purple-600" />
-        <StatCard title="Total Orders" value={formatNumber(metrics.totalOrders)} change={`${formatPercentage(0)} from last month`} icon={Package} color="text-orange-600" />
+        {/* <StatCard title="Total Orders" value={formatNumber(metrics.totalOrders)} change={`${formatPercentage(0)} from last month`} icon={Package} color="text-orange-600" /> */}
       </div>
 
-      <Tabs defaultValue="overview" className="space-y-6">
-        <TabsList className="grid w-full grid-cols-4">
-          <TabsTrigger value="overview">Overview</TabsTrigger>
-          <TabsTrigger value="revenue">Revenue</TabsTrigger>
-          <TabsTrigger value="users">Users</TabsTrigger>
+      <Tabs defaultValue="companies" className="space-y-6">
+        <TabsList className="grid w-full grid-cols-1">
+          {/* <TabsTrigger value="overview">Overview</TabsTrigger> */}
+          {/* <TabsTrigger value="revenue">Revenue</TabsTrigger> */}
+          {/* <TabsTrigger value="users">Users</TabsTrigger> */}
           <TabsTrigger value="companies">Companies</TabsTrigger>
         </TabsList>
 
         <TabsContent value="overview" className="space-y-6">
           <div className="grid gap-6 md:grid-cols-2">
-            <Card className="shadow-card bg-white">
+            {/* <Card className="shadow-card bg-white">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2"><LineChart className="h-5 w-5 text-black"/>Revenue Trend</CardTitle>
                 <CardDescription>Monthly revenue and order trends over time</CardDescription>
@@ -233,9 +236,9 @@ export function AnalyticsDashboard() {
               <CardContent>
                 <div className="h-[300px]"><Line data={revenueChartData} options={chartOptions} /></div>
               </CardContent>
-            </Card>
+            </Card> */}
 
-            <Card className="shadow-card bg-white">
+            {/* <Card className="shadow-card bg-white">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2"><PieChart className="h-5 w-5 text-[#1B3C53]" />Revenue Distribution</CardTitle>
                 <CardDescription>Revenue share by company</CardDescription>
@@ -243,7 +246,7 @@ export function AnalyticsDashboard() {
               <CardContent>
                 <div className="h-[300px]"><Doughnut data={revenueDistributionData} options={pieChartOptions} /></div>
               </CardContent>
-            </Card>
+            </Card> */}
           </div>
 
           <Card className="shadow-card bg-white">

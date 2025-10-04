@@ -2,6 +2,7 @@ import React, { useMemo, useState } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "@/components/ui/alert-dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -9,7 +10,9 @@ import { Badge } from "@/components/ui/badge";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { AdminLayout } from "@/components/admin/AdminLayout";
 import { User, UserRole } from "@/contexts/RoleContext";
-import { Plus } from "lucide-react";
+import { useUsers } from "@/contexts/UsersContext";
+import { useCompanies } from "@/contexts/CompaniesContext";
+import { Plus, Pencil, Trash2 } from "lucide-react";
 
 const roleBadgeVariant = (role: UserRole) => {
 	if (role === "admin") return "default" as const;
@@ -19,41 +22,69 @@ const roleBadgeVariant = (role: UserRole) => {
 };
 
 export default function Users() {
-	const [users, setUsers] = useState<User[]>([
-		{ id: "1", name: "John Doe", email: "john@watersquares.com", role: "admin" },
-		{ id: "2", name: "Emily Clark", email: "emily@purewater.com", role: "company_admin", companyId: "c1", companyName: "PureWater" },
-		{ id: "3", name: "Marcus Lee", email: "marcus@hydromax.io", role: "manager", companyId: "c2", companyName: "HydroMax" },
-		{ id: "4", name: "Sara Khan", email: "sara@bluedrop.net", role: "staff", companyId: "c3", companyName: "Blue Drop" },
-	]);
+	const { users, addUser, updateUser, removeUser } = useUsers();
+	const { companies } = useCompanies();
 
 	const [open, setOpen] = useState(false);
+	const [isEditing, setIsEditing] = useState(false);
+	const [editingUserId, setEditingUserId] = useState<string | null>(null);
 	const [name, setName] = useState("");
 	const [email, setEmail] = useState("");
 	const [role, setRole] = useState<UserRole>("staff");
-	const [companyName, setCompanyName] = useState("");
+	const [selectedCompanyId, setSelectedCompanyId] = useState("");
 
 	const canHaveCompany = useMemo(() => role !== "admin", [role]);
+
+	const selectedCompany = useMemo(() => {
+		return companies.find(c => c.id === selectedCompanyId);
+	}, [companies, selectedCompanyId]);
 
 	const resetForm = () => {
 		setName("");
 		setEmail("");
 		setRole("staff");
-		setCompanyName("");
+		setSelectedCompanyId("");
+		setIsEditing(false);
+		setEditingUserId(null);
 	};
 
-	const handleAddUser = () => {
+	const handleSaveUser = () => {
 		if (!name.trim() || !email.trim()) return;
-		const newUser: User = {
-			id: String(Date.now()),
-			name: name.trim(),
-			email: email.trim(),
-			role,
-			companyName: canHaveCompany && companyName.trim() ? companyName.trim() : undefined,
-			companyId: canHaveCompany && companyName.trim() ? `c_${Math.random().toString(36).slice(2, 8)}` : undefined,
-		};
-		setUsers(prev => [newUser, ...prev]);
+		if (isEditing && editingUserId) {
+			updateUser(editingUserId, {
+				name: name.trim(),
+				email: email.trim(),
+				role,
+				companyName: canHaveCompany && selectedCompany ? selectedCompany.name : undefined,
+				companyId: canHaveCompany && selectedCompanyId ? selectedCompanyId : undefined,
+			});
+		} else {
+			addUser({
+				name: name.trim(),
+				email: email.trim(),
+				role,
+				companyName: canHaveCompany && selectedCompany ? selectedCompany.name : undefined,
+				companyId: canHaveCompany && selectedCompanyId ? selectedCompanyId : undefined,
+			});
+		}
 		setOpen(false);
 		resetForm();
+	};
+
+	const startEditUser = (user: User) => {
+		setIsEditing(true);
+		setEditingUserId(user.id);
+		setName(user.name);
+		setEmail(user.email);
+		setRole(user.role);
+		// Find company by companyId or companyName
+		const company = companies.find(c => c.id === user.companyId || c.name === user.companyName);
+		setSelectedCompanyId(company?.id || "");
+		setOpen(true);
+	};
+
+	const deleteUser = (id: string) => {
+		removeUser(id);
 	};
 
 	return (
@@ -72,8 +103,8 @@ export default function Users() {
 						</DialogTrigger>
 						<DialogContent className="sm:max-w-[520px]">
 							<DialogHeader>
-								<DialogTitle>Add User</DialogTitle>
-								<DialogDescription>Create a new test user with a specific role.</DialogDescription>
+								<DialogTitle>{isEditing ? "Edit User" : "Add User"}</DialogTitle>
+								<DialogDescription>{isEditing ? "Update the user details." : "Create a new test user with a specific role."}</DialogDescription>
 							</DialogHeader>
 							<div className="grid gap-4 py-4">
 								<div className="grid grid-cols-4 items-center gap-4">
@@ -102,14 +133,27 @@ export default function Users() {
 								</div>
 								{canHaveCompany && (
 									<div className="grid grid-cols-4 items-center gap-4">
-										<Label htmlFor="company" className="text-right">Company</Label>
-										<Input id="company" value={companyName} onChange={e => setCompanyName(e.target.value)} className="col-span-3" placeholder="Optional" />
+										<Label className="text-right">Company</Label>
+										<div className="col-span-3">
+											<Select value={selectedCompanyId} onValueChange={setSelectedCompanyId}>
+												<SelectTrigger>
+													<SelectValue placeholder="Select a company" />
+												</SelectTrigger>
+												<SelectContent>
+													{companies.map((company) => (
+														<SelectItem key={company.id} value={company.id}>
+															{company.name}
+														</SelectItem>
+													))}
+												</SelectContent>
+											</Select>
+										</div>
 									</div>
 								)}
 							</div>
 							<DialogFooter>
-								<Button variant="outline" onClick={() => setOpen(false)}>Cancel</Button>
-								<Button className="bg-[#1B3C53] hover:bg-[#2D5A77] text-white" onClick={handleAddUser}>Save</Button>
+								<Button variant="outline" onClick={() => { setOpen(false); resetForm(); }}>Cancel</Button>
+								<Button className="bg-[#1B3C53] hover:bg-[#2D5A77] text-white" onClick={handleSaveUser}>{isEditing ? "Update" : "Save"}</Button>
 							</DialogFooter>
 						</DialogContent>
 					</Dialog>
@@ -129,6 +173,7 @@ export default function Users() {
 										<TableHead>Email</TableHead>
 										<TableHead>Role</TableHead>
 										<TableHead>Company</TableHead>
+										<TableHead className="w-[140px] text-right">Actions</TableHead>
 									</TableRow>
 								</TableHeader>
 								<TableBody>
@@ -141,7 +186,31 @@ export default function Users() {
 													{u.role.replace("_", " ")}
 												</Badge>
 											</TableCell>
-											<TableCell>{u.companyName || "-"}</TableCell>
+										<TableCell>{u.companyName || "-"}</TableCell>
+										<TableCell className="text-right space-x-2">
+											<Button variant="outline" size="sm" onClick={() => startEditUser(u)}>
+												<Pencil className="h-4 w-4 mr-1" /> Edit
+											</Button>
+											<AlertDialog>
+												<AlertDialogTrigger asChild>
+													<Button variant="destructive" size="sm">
+														<Trash2 className="h-4 w-4 mr-1" /> Delete
+													</Button>
+												</AlertDialogTrigger>
+												<AlertDialogContent>
+													<AlertDialogHeader>
+														<AlertDialogTitle>Delete user?</AlertDialogTitle>
+														<AlertDialogDescription>
+															This action cannot be undone. This will permanently remove the user.
+														</AlertDialogDescription>
+													</AlertDialogHeader>
+													<AlertDialogFooter>
+														<AlertDialogCancel>Cancel</AlertDialogCancel>
+														<AlertDialogAction onClick={() => deleteUser(u.id)}>Delete</AlertDialogAction>
+													</AlertDialogFooter>
+												</AlertDialogContent>
+											</AlertDialog>
+										</TableCell>
 										</TableRow>
 									))}
 								</TableBody>

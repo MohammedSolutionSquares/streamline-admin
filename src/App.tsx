@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { RoleProvider, useRole } from "./contexts/RoleContext";
 import { CompaniesProvider } from "./contexts/CompaniesContext";
 import { OrdersProvider } from "./contexts/OrdersContext";
+import { UsersProvider } from "./contexts/UsersContext";
 import Index from "./pages/Index";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
@@ -46,6 +47,11 @@ const App = () => (
             <Toaster />
             <Sonner />
             <BrowserRouter>
+        <UsersProvider>
+          <TooltipProvider>
+          <Toaster />
+          <Sonner />
+          <BrowserRouter>
           {/* <AdminLayout > */}
             <Routes>
               <Route path="/" element={<Home />} />
@@ -105,6 +111,7 @@ const App = () => (
           </BrowserRouter>
         </TooltipProvider>
         </OrdersProvider>
+        </UsersProvider>
       </CompaniesProvider>
     </RoleProvider>
   </QueryClientProvider>
